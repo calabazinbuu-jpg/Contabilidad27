@@ -1,0 +1,242 @@
+{
+  "activos_fijos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "almacenes": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "asiento_detalle": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "asientos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "asientos_contables": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "asientos_detalle": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "asistencia": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "auditoria": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "bancos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "cache_consultas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "caja": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "categorias": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "centros_costo": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "clientes": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "compra_detalle": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "compras": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "configuracion": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "cotizaciones": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "cuentas_contables": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "depreciaciones": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "documentos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "documentos_rag": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "embeddings_doc": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "empleados": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "empresas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "factura_detalle": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "factura_items": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "facturas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "feedback_ia": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "gastos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "guias_remision": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "ia_memory": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "kardex": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "logs_ia": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "lotes": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "marcas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "mensajes": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "mensajes_chat": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "monedas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "movimientos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "notas_credito": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "notas_debito": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "oportunidades": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "pagos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "planillas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "productos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "proveedores": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "proyectos": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "roles": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "sesiones": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "sesiones_chat": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "sucursales": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "tareas": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "tickets": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "tipo_cambio": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "unidades_medida": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "users": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "usuario_roles": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "usuarios": {
+    "tabla": null,
+    "columnas": {}
+  },
+  "ventas": {
+    "tabla": null,
+    "columnas": {}
+  }
+}

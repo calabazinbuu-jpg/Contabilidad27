@@ -1,0 +1,3459 @@
+[
+  {
+    "pregunta": "¿Cuánto he vendido este mes?",
+    "patrones": [
+      [
+        "cuanto",
+        "vend"
+      ],
+      [
+        "total",
+        "vent"
+      ],
+      [
+        "ventas",
+        "mes"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "SUM(total) WHERE fecha en rango",
+    "sql": "SELECT COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE fecha::date BETWEEN '{from}' AND '{to}'",
+    "respuesta": "💰 Ventas {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 1
+  },
+  {
+    "pregunta": "¿Cuántas ventas se hicieron hoy?",
+    "patrones": [
+      [
+        "cuantas",
+        "vent"
+      ],
+      [
+        "numero",
+        "vent"
+      ],
+      [
+        "cantidad",
+        "vent"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha"
+    ],
+    "joins": [],
+    "logica": "COUNT(*) WHERE fecha = rango",
+    "sql": "SELECT COUNT(*)::int AS valor FROM ventas WHERE fecha::date BETWEEN '{from}' AND '{to}'",
+    "respuesta": "🔢 Ventas {etiqueta}: {valor} operaciones",
+    "render": "scalar_int",
+    "date_required": "rango",
+    "date_default": "hoy",
+    "id": 2
+  },
+  {
+    "pregunta": "¿Cuál es mi mejor cliente?",
+    "patrones": [
+      [
+        "mejor",
+        "cliente"
+      ],
+      [
+        "cliente",
+        "top"
+      ],
+      [
+        "principal",
+        "cliente"
+      ],
+      [
+        "cliente",
+        "mas",
+        "compr"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "clientes"
+    ],
+    "columnas": [
+      "clientes.nombre",
+      "ventas.total"
+    ],
+    "joins": [
+      "ventas.cliente_id = clientes.id"
+    ],
+    "logica": "SUM(ventas.total) GROUP BY cliente ORDER BY DESC LIMIT 1",
+    "sql": "SELECT c.nombre, COALESCE(SUM(v.total),0)::numeric AS valor FROM ventas v JOIN clientes c ON v.cliente_id=c.id {where} GROUP BY c.nombre ORDER BY valor DESC LIMIT 1",
+    "respuesta": "🏆 Mejor cliente{etiqueta}: {nombre} con S/ {valor}",
+    "render": "kv",
+    "date_required": null,
+    "where_optional": "fecha",
+    "id": 3
+  },
+  {
+    "pregunta": "Top 5 clientes por ventas",
+    "patrones": [
+      [
+        "top",
+        "cliente"
+      ],
+      [
+        "mejores",
+        "cliente"
+      ],
+      [
+        "ranking",
+        "cliente"
+      ],
+      [
+        "cinco",
+        "mejores",
+        "cliente"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "clientes"
+    ],
+    "columnas": [
+      "clientes.nombre",
+      "ventas.total"
+    ],
+    "joins": [
+      "ventas.cliente_id = clientes.id"
+    ],
+    "logica": "SUM GROUP BY cliente ORDER BY DESC LIMIT 5",
+    "sql": "SELECT c.nombre, COALESCE(SUM(v.total),0)::numeric AS valor FROM ventas v JOIN clientes c ON v.cliente_id=c.id {where} GROUP BY c.nombre ORDER BY valor DESC LIMIT 5",
+    "respuesta": "🏆 Top 5 clientes{etiqueta}",
+    "render": "list",
+    "where_optional": "fecha",
+    "id": 4
+  },
+  {
+    "pregunta": "Top 10 productos más vendidos",
+    "patrones": [
+      [
+        "producto",
+        "mas",
+        "vend"
+      ],
+      [
+        "top",
+        "producto"
+      ],
+      [
+        "mejores",
+        "producto"
+      ],
+      [
+        "ranking",
+        "producto"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "productos"
+    ],
+    "columnas": [
+      "productos.nombre",
+      "ventas.cantidad"
+    ],
+    "joins": [
+      "ventas.producto_id = productos.id"
+    ],
+    "logica": "SUM(cantidad) GROUP BY producto",
+    "sql": "SELECT COALESCE(p.nombre, v.producto) AS nombre, COALESCE(SUM(v.cantidad),0)::int AS valor FROM ventas v LEFT JOIN productos p ON v.producto_id=p.id {where} GROUP BY 1 ORDER BY valor DESC LIMIT 10",
+    "respuesta": "📦 Top 10 productos más vendidos{etiqueta}",
+    "render": "list",
+    "where_optional": "fecha",
+    "id": 5
+  },
+  {
+    "pregunta": "Ventas por mes este año",
+    "patrones": [
+      [
+        "ventas",
+        "por",
+        "mes"
+      ],
+      [
+        "evolucion",
+        "vent"
+      ],
+      [
+        "mensuales",
+        "vent"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "GROUP BY date_trunc('month', fecha)",
+    "sql": "SELECT to_char(date_trunc('month', fecha),'YYYY-MM') AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE EXTRACT(year FROM fecha)=EXTRACT(year FROM CURRENT_DATE) GROUP BY 1 ORDER BY 1",
+    "respuesta": "📈 Ventas mensuales del año",
+    "render": "list",
+    "id": 6
+  },
+  {
+    "pregunta": "Ventas por sucursal",
+    "patrones": [
+      [
+        "ventas",
+        "sucursal"
+      ],
+      [
+        "sucursal",
+        "mas",
+        "vend"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "sucursales"
+    ],
+    "columnas": [
+      "sucursales.nombre",
+      "ventas.total"
+    ],
+    "joins": [
+      "ventas.sucursal_id = sucursales.id"
+    ],
+    "logica": "SUM GROUP BY sucursal",
+    "sql": "SELECT s.nombre, COALESCE(SUM(v.total),0)::numeric AS valor FROM ventas v JOIN sucursales s ON v.sucursal_id=s.id {where} GROUP BY s.nombre ORDER BY valor DESC LIMIT 20",
+    "respuesta": "🏬 Ventas por sucursal{etiqueta}",
+    "render": "list",
+    "where_optional": "fecha",
+    "id": 7
+  },
+  {
+    "pregunta": "Ventas del año pasado vs este año",
+    "patrones": [
+      [
+        "ventas",
+        "ano",
+        "pasado",
+        "vs"
+      ],
+      [
+        "compara",
+        "vent",
+        "ano"
+      ],
+      [
+        "comparar",
+        "vent",
+        "ano"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "SUM con dos años",
+    "sql": "SELECT EXTRACT(year FROM fecha)::int::text AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE EXTRACT(year FROM fecha) IN (EXTRACT(year FROM CURRENT_DATE), EXTRACT(year FROM CURRENT_DATE)-1) GROUP BY 1 ORDER BY 1",
+    "respuesta": "📊 Comparativo anual de ventas",
+    "render": "list",
+    "id": 8
+  },
+  {
+    "pregunta": "Ticket promedio de ventas",
+    "patrones": [
+      [
+        "ticket",
+        "promedio"
+      ],
+      [
+        "ticket",
+        "medio"
+      ],
+      [
+        "promedio",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "total"
+    ],
+    "joins": [],
+    "logica": "AVG(total)",
+    "sql": "SELECT COALESCE(AVG(total),0)::numeric AS valor FROM facturas {where_alone}",
+    "respuesta": "🎫 Ticket promedio{etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "where_optional": "fecha",
+    "id": 9
+  },
+  {
+    "pregunta": "¿Qué vendedor vendió más?",
+    "patrones": [
+      [
+        "vendedor",
+        "mas",
+        "vend"
+      ],
+      [
+        "mejor",
+        "vendedor"
+      ],
+      [
+        "top",
+        "vendedor"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "usuarios"
+    ],
+    "columnas": [
+      "usuarios.nombre",
+      "ventas.total"
+    ],
+    "joins": [
+      "ventas.vendedor_id = usuarios.id (si existe)"
+    ],
+    "logica": "SUM GROUP BY vendedor",
+    "sql": "SELECT 'Sin datos' AS nombre, 0::numeric AS valor WHERE FALSE",
+    "respuesta": "🧑‍💼 Ranking de vendedores no disponible (no hay columna vendedor_id en ventas).",
+    "render": "scalar_money",
+    "id": 10
+  },
+  {
+    "pregunta": "Facturas pendientes de cobro",
+    "patrones": [
+      [
+        "factur",
+        "pendient"
+      ],
+      [
+        "factur",
+        "por",
+        "cobrar"
+      ],
+      [
+        "factur",
+        "no",
+        "pagad"
+      ]
+    ],
+    "tablas": [
+      "facturas",
+      "clientes"
+    ],
+    "columnas": [
+      "facturas.estado",
+      "facturas.saldo",
+      "clientes.nombre"
+    ],
+    "joins": [
+      "facturas.cliente_id = clientes.id"
+    ],
+    "logica": "WHERE estado='pendiente' OR estado='parcial'",
+    "sql": "SELECT c.nombre, f.serie||'-'||f.numero AS doc, f.saldo::numeric AS valor, f.fecha FROM facturas f LEFT JOIN clientes c ON f.cliente_id=c.id WHERE f.estado IN ('pendiente','parcial') ORDER BY f.fecha ASC LIMIT 50",
+    "respuesta": "🧾 Facturas pendientes de cobro",
+    "render": "list",
+    "id": 11
+  },
+  {
+    "pregunta": "Total por cobrar",
+    "patrones": [
+      [
+        "total",
+        "por",
+        "cobrar"
+      ],
+      [
+        "cuenta",
+        "por",
+        "cobrar"
+      ],
+      [
+        "cobrar",
+        "total"
+      ],
+      [
+        "cartera",
+        "cobrar"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "saldo",
+      "estado"
+    ],
+    "joins": [],
+    "logica": "SUM(saldo) WHERE estado pendiente/parcial",
+    "sql": "SELECT COALESCE(SUM(saldo),0)::numeric AS valor FROM facturas WHERE estado IN ('pendiente','parcial')",
+    "respuesta": "💵 Total por cobrar: S/ {valor}",
+    "render": "scalar_money",
+    "id": 12
+  },
+  {
+    "pregunta": "Facturas vencidas más de 30 días",
+    "patrones": [
+      [
+        "factur",
+        "vencid"
+      ],
+      [
+        "mora",
+        "factur"
+      ],
+      [
+        "atras",
+        "factur"
+      ],
+      [
+        "antigua",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas",
+      "clientes"
+    ],
+    "columnas": [
+      "facturas.fecha",
+      "facturas.saldo"
+    ],
+    "joins": [
+      "facturas.cliente_id=clientes.id"
+    ],
+    "logica": "WHERE estado pendiente AND fecha < hoy-30",
+    "sql": "SELECT c.nombre, f.serie||'-'||f.numero AS doc, f.saldo::numeric AS valor, (CURRENT_DATE - f.fecha) AS dias FROM facturas f LEFT JOIN clientes c ON f.cliente_id=c.id WHERE f.estado IN ('pendiente','parcial') AND f.fecha < CURRENT_DATE - INTERVAL '30 days' ORDER BY f.fecha ASC LIMIT 50",
+    "respuesta": "⏰ Facturas vencidas >30 días",
+    "render": "list",
+    "id": 13
+  },
+  {
+    "pregunta": "Facturas anuladas",
+    "patrones": [
+      [
+        "factur",
+        "anulad"
+      ],
+      [
+        "anulad",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "estado"
+    ],
+    "joins": [],
+    "logica": "WHERE estado='anulada'",
+    "sql": "SELECT serie||'-'||numero AS doc, fecha, total::numeric AS valor FROM facturas WHERE estado='anulada' ORDER BY fecha DESC LIMIT 50",
+    "respuesta": "🚫 Facturas anuladas",
+    "render": "list",
+    "id": 14
+  },
+  {
+    "pregunta": "Facturas emitidas este mes",
+    "patrones": [
+      [
+        "factur",
+        "emitid"
+      ],
+      [
+        "factur",
+        "este",
+        "mes"
+      ],
+      [
+        "factur",
+        "mes"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "COUNT y SUM en rango",
+    "sql": "SELECT COUNT(*)::int AS valor FROM facturas WHERE fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "🧾 Facturas emitidas {etiqueta}: {valor}",
+    "render": "scalar_int",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 15
+  },
+  {
+    "pregunta": "Total facturado este mes",
+    "patrones": [
+      [
+        "total",
+        "factur",
+        "mes"
+      ],
+      [
+        "cuanto",
+        "factur"
+      ],
+      [
+        "monto",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "SUM(total) en rango",
+    "sql": "SELECT COALESCE(SUM(total),0)::numeric AS valor FROM facturas WHERE fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "🧾 Total facturado {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 16
+  },
+  {
+    "pregunta": "IGV cobrado este mes",
+    "patrones": [
+      [
+        "igv",
+        "mes"
+      ],
+      [
+        "iva",
+        "mes"
+      ],
+      [
+        "impuesto",
+        "mes"
+      ],
+      [
+        "cuanto",
+        "igv"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "fecha",
+      "impuesto"
+    ],
+    "joins": [],
+    "logica": "SUM(impuesto) en rango",
+    "sql": "SELECT COALESCE(SUM(impuesto),0)::numeric AS valor FROM facturas WHERE fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "🧮 IGV {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 17
+  },
+  {
+    "pregunta": "¿Cuál fue la factura más alta?",
+    "patrones": [
+      [
+        "factur",
+        "mas",
+        "alta"
+      ],
+      [
+        "factur",
+        "mayor"
+      ],
+      [
+        "mejor",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas",
+      "clientes"
+    ],
+    "columnas": [
+      "facturas.total",
+      "clientes.nombre"
+    ],
+    "joins": [
+      "facturas.cliente_id=clientes.id"
+    ],
+    "logica": "ORDER BY total DESC LIMIT 1",
+    "sql": "SELECT c.nombre, (f.serie||'-'||f.numero) AS doc, f.total::numeric AS valor FROM facturas f LEFT JOIN clientes c ON f.cliente_id=c.id ORDER BY f.total DESC LIMIT 1",
+    "respuesta": "🏅 Factura más alta: {nombre} — {doc} S/ {valor}",
+    "render": "kv",
+    "id": 18
+  },
+  {
+    "pregunta": "Facturas pagadas",
+    "patrones": [
+      [
+        "factur",
+        "pagad"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "estado",
+      "total"
+    ],
+    "joins": [],
+    "logica": "WHERE estado='pagada'",
+    "sql": "SELECT COUNT(*)::int AS valor FROM facturas WHERE estado='pagada' {and_fecha}",
+    "respuesta": "✅ Facturas pagadas{etiqueta}: {valor}",
+    "render": "scalar_int",
+    "where_optional": "fecha",
+    "id": 19
+  },
+  {
+    "pregunta": "¿Cuántos clientes tengo?",
+    "patrones": [
+      [
+        "cuantos",
+        "client"
+      ],
+      [
+        "numero",
+        "client"
+      ],
+      [
+        "cantidad",
+        "client"
+      ],
+      [
+        "total",
+        "client"
+      ]
+    ],
+    "tablas": [
+      "clientes"
+    ],
+    "columnas": [
+      "id"
+    ],
+    "joins": [],
+    "logica": "COUNT(*)",
+    "sql": "SELECT COUNT(*)::int AS valor FROM clientes",
+    "respuesta": "👥 Total de clientes: {valor}",
+    "render": "scalar_int",
+    "id": 20
+  },
+  {
+    "pregunta": "Clientes nuevos este mes",
+    "patrones": [
+      [
+        "client",
+        "nuev"
+      ],
+      [
+        "client",
+        "registr",
+        "mes"
+      ],
+      [
+        "client",
+        "creados"
+      ],
+      [
+        "client",
+        "alta"
+      ]
+    ],
+    "tablas": [
+      "clientes"
+    ],
+    "columnas": [
+      "creado_en"
+    ],
+    "joins": [],
+    "logica": "WHERE creado_en en rango",
+    "sql": "SELECT COUNT(*)::int AS valor FROM clientes WHERE creado_en::date BETWEEN '{from}' AND '{to}'",
+    "respuesta": "🆕 Clientes nuevos {etiqueta}: {valor}",
+    "render": "scalar_int",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 21
+  },
+  {
+    "pregunta": "Clientes morosos",
+    "patrones": [
+      [
+        "client",
+        "moros"
+      ],
+      [
+        "client",
+        "deud"
+      ],
+      [
+        "client",
+        "debe"
+      ]
+    ],
+    "tablas": [
+      "clientes",
+      "facturas"
+    ],
+    "columnas": [
+      "clientes.nombre",
+      "facturas.saldo"
+    ],
+    "joins": [
+      "facturas.cliente_id = clientes.id"
+    ],
+    "logica": "SUM(saldo) WHERE estado pendiente GROUP BY cliente",
+    "sql": "SELECT c.nombre, COALESCE(SUM(f.saldo),0)::numeric AS valor FROM clientes c JOIN facturas f ON f.cliente_id=c.id WHERE f.estado IN ('pendiente','parcial') GROUP BY c.nombre HAVING SUM(f.saldo) > 0 ORDER BY valor DESC LIMIT 25",
+    "respuesta": "⚠️ Clientes con deuda pendiente",
+    "render": "list",
+    "id": 22
+  },
+  {
+    "pregunta": "Clientes inactivos más de 60 días",
+    "patrones": [
+      [
+        "client",
+        "inactiv"
+      ],
+      [
+        "client",
+        "sin",
+        "compr"
+      ],
+      [
+        "client",
+        "no",
+        "han",
+        "comprado"
+      ]
+    ],
+    "tablas": [
+      "clientes",
+      "ventas"
+    ],
+    "columnas": [
+      "clientes.nombre",
+      "ventas.fecha"
+    ],
+    "joins": [
+      "ventas.cliente_id=clientes.id"
+    ],
+    "logica": "MAX(fecha) < hoy-60",
+    "sql": "SELECT c.nombre, MAX(v.fecha)::date AS ultima_compra FROM clientes c LEFT JOIN ventas v ON v.cliente_id=c.id GROUP BY c.nombre HAVING MAX(v.fecha) IS NULL OR MAX(v.fecha) < CURRENT_DATE - INTERVAL '60 days' ORDER BY ultima_compra NULLS FIRST LIMIT 25",
+    "respuesta": "😴 Clientes inactivos (>60 días)",
+    "render": "list",
+    "id": 23
+  },
+  {
+    "pregunta": "Clientes por ciudad",
+    "patrones": [
+      [
+        "client",
+        "por",
+        "ciudad"
+      ],
+      [
+        "client",
+        "ciudad"
+      ]
+    ],
+    "tablas": [
+      "clientes"
+    ],
+    "columnas": [
+      "ciudad"
+    ],
+    "joins": [],
+    "logica": "COUNT GROUP BY ciudad",
+    "sql": "SELECT COALESCE(ciudad,'(sin ciudad)') AS nombre, COUNT(*)::int AS valor FROM clientes GROUP BY 1 ORDER BY valor DESC LIMIT 25",
+    "respuesta": "🏙️ Clientes por ciudad",
+    "render": "list",
+    "id": 24
+  },
+  {
+    "pregunta": "Lista de clientes",
+    "patrones": [
+      [
+        "lista",
+        "client"
+      ],
+      [
+        "mostrar",
+        "client"
+      ],
+      [
+        "ver",
+        "client"
+      ],
+      [
+        "dame",
+        "client"
+      ]
+    ],
+    "tablas": [
+      "clientes"
+    ],
+    "columnas": [
+      "nombre",
+      "ruc",
+      "telefono",
+      "correo",
+      "ciudad",
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "SELECT *",
+    "sql": "SELECT nombre, ruc, telefono, correo, ciudad, saldo::numeric AS valor FROM clientes ORDER BY nombre LIMIT 50",
+    "respuesta": "👥 Lista de clientes",
+    "render": "list",
+    "id": 25
+  },
+  {
+    "pregunta": "Saldo total a favor de clientes",
+    "patrones": [
+      [
+        "saldo",
+        "client"
+      ],
+      [
+        "debe",
+        "client",
+        "total"
+      ]
+    ],
+    "tablas": [
+      "clientes"
+    ],
+    "columnas": [
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "SUM(saldo)",
+    "sql": "SELECT COALESCE(SUM(saldo),0)::numeric AS valor FROM clientes",
+    "respuesta": "💼 Saldo total clientes: S/ {valor}",
+    "render": "scalar_money",
+    "id": 26
+  },
+  {
+    "pregunta": "¿Cuántos proveedores tengo?",
+    "patrones": [
+      [
+        "cuantos",
+        "proveed"
+      ],
+      [
+        "numero",
+        "proveed"
+      ]
+    ],
+    "tablas": [
+      "proveedores"
+    ],
+    "columnas": [
+      "id"
+    ],
+    "joins": [],
+    "logica": "COUNT(*)",
+    "sql": "SELECT COUNT(*)::int AS valor FROM proveedores",
+    "respuesta": "🏭 Total de proveedores: {valor}",
+    "render": "scalar_int",
+    "id": 27
+  },
+  {
+    "pregunta": "Lista de proveedores",
+    "patrones": [
+      [
+        "lista",
+        "proveed"
+      ],
+      [
+        "mostrar",
+        "proveed"
+      ],
+      [
+        "ver",
+        "proveed"
+      ],
+      [
+        "dame",
+        "proveed"
+      ]
+    ],
+    "tablas": [
+      "proveedores"
+    ],
+    "columnas": [
+      "nombre",
+      "ruc",
+      "telefono",
+      "correo",
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "SELECT *",
+    "sql": "SELECT nombre, ruc, telefono, correo, saldo::numeric AS valor FROM proveedores ORDER BY nombre LIMIT 50",
+    "respuesta": "🏭 Lista de proveedores",
+    "render": "list",
+    "id": 28
+  },
+  {
+    "pregunta": "Top proveedores por compras",
+    "patrones": [
+      [
+        "top",
+        "proveed"
+      ],
+      [
+        "mejor",
+        "proveed"
+      ],
+      [
+        "mas",
+        "compr",
+        "proveed"
+      ],
+      [
+        "principal",
+        "proveed"
+      ]
+    ],
+    "tablas": [
+      "compras",
+      "proveedores"
+    ],
+    "columnas": [
+      "proveedores.nombre",
+      "compras.total"
+    ],
+    "joins": [
+      "compras.proveedor_id=proveedores.id"
+    ],
+    "logica": "SUM GROUP BY proveedor",
+    "sql": "SELECT p.nombre, COALESCE(SUM(c.total),0)::numeric AS valor FROM compras c JOIN proveedores p ON c.proveedor_id=p.id {where} GROUP BY p.nombre ORDER BY valor DESC LIMIT 10",
+    "respuesta": "🏭 Top proveedores{etiqueta}",
+    "render": "list",
+    "where_optional": "fecha",
+    "id": 29
+  },
+  {
+    "pregunta": "Total por pagar a proveedores",
+    "patrones": [
+      [
+        "total",
+        "pagar",
+        "proveed"
+      ],
+      [
+        "por",
+        "pagar",
+        "proveed"
+      ],
+      [
+        "cuenta",
+        "pagar"
+      ],
+      [
+        "deuda",
+        "proveed"
+      ]
+    ],
+    "tablas": [
+      "proveedores"
+    ],
+    "columnas": [
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "SUM(saldo)",
+    "sql": "SELECT COALESCE(SUM(saldo),0)::numeric AS valor FROM proveedores",
+    "respuesta": "📤 Total por pagar a proveedores: S/ {valor}",
+    "render": "scalar_money",
+    "id": 30
+  },
+  {
+    "pregunta": "Pagos duplicados a proveedores",
+    "patrones": [
+      [
+        "pagos",
+        "duplicad"
+      ],
+      [
+        "pago",
+        "repetid"
+      ]
+    ],
+    "tablas": [
+      "pagos"
+    ],
+    "columnas": [
+      "factura_id",
+      "monto",
+      "fecha"
+    ],
+    "joins": [],
+    "logica": "GROUP BY factura,monto,fecha HAVING COUNT>1",
+    "sql": "SELECT factura_id, monto::numeric AS valor, COUNT(*)::int AS veces FROM pagos GROUP BY factura_id, monto HAVING COUNT(*)>1 ORDER BY veces DESC LIMIT 25",
+    "respuesta": "🚨 Posibles pagos duplicados",
+    "render": "list",
+    "id": 31
+  },
+  {
+    "pregunta": "¿Cuánto compré este mes?",
+    "patrones": [
+      [
+        "cuanto",
+        "compr"
+      ],
+      [
+        "total",
+        "compr"
+      ]
+    ],
+    "tablas": [
+      "compras"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "SUM(total) en rango",
+    "sql": "SELECT COALESCE(SUM(total),0)::numeric AS valor FROM compras WHERE fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "🛒 Compras {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 32
+  },
+  {
+    "pregunta": "Compras pendientes de pago",
+    "patrones": [
+      [
+        "compr",
+        "pendient"
+      ],
+      [
+        "compr",
+        "por",
+        "pagar"
+      ]
+    ],
+    "tablas": [
+      "compras",
+      "proveedores"
+    ],
+    "columnas": [
+      "compras.estado",
+      "compras.total"
+    ],
+    "joins": [
+      "compras.proveedor_id=proveedores.id"
+    ],
+    "logica": "WHERE estado='pendiente'",
+    "sql": "SELECT p.nombre, c.fecha, c.total::numeric AS valor FROM compras c JOIN proveedores p ON c.proveedor_id=p.id WHERE c.estado='pendiente' ORDER BY c.fecha ASC LIMIT 50",
+    "respuesta": "📥 Compras pendientes de pago",
+    "render": "list",
+    "id": 33
+  },
+  {
+    "pregunta": "Producto más comprado",
+    "patrones": [
+      [
+        "producto",
+        "mas",
+        "compr"
+      ],
+      [
+        "mas",
+        "comprado"
+      ]
+    ],
+    "tablas": [
+      "compras_detalle",
+      "productos"
+    ],
+    "columnas": [
+      "productos.nombre",
+      "compras_detalle.cantidad"
+    ],
+    "joins": [
+      "compras_detalle.producto_id=productos.id"
+    ],
+    "logica": "SUM(cantidad) GROUP BY producto ORDER BY DESC",
+    "sql": "SELECT p.nombre, COALESCE(SUM(cd.cantidad),0)::int AS valor FROM compras_detalle cd JOIN productos p ON cd.producto_id=p.id GROUP BY p.nombre ORDER BY valor DESC LIMIT 10",
+    "respuesta": "📦 Productos más comprados",
+    "render": "list",
+    "id": 34
+  },
+  {
+    "pregunta": "¿Cuántos productos tengo?",
+    "patrones": [
+      [
+        "cuantos",
+        "producto"
+      ],
+      [
+        "cantidad",
+        "producto"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "id"
+    ],
+    "joins": [],
+    "logica": "COUNT(*)",
+    "sql": "SELECT COUNT(*)::int AS valor FROM productos WHERE activo=TRUE",
+    "respuesta": "📦 Productos activos: {valor}",
+    "render": "scalar_int",
+    "id": 35
+  },
+  {
+    "pregunta": "Productos con stock bajo",
+    "patrones": [
+      [
+        "stock",
+        "bajo"
+      ],
+      [
+        "bajo",
+        "stock"
+      ],
+      [
+        "productos",
+        "reponer"
+      ],
+      [
+        "reposicion"
+      ],
+      [
+        "stock",
+        "minimo"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "nombre",
+      "stock",
+      "stock_min"
+    ],
+    "joins": [],
+    "logica": "WHERE stock <= stock_min",
+    "sql": "SELECT nombre, stock::int AS valor, stock_min::int AS minimo FROM productos WHERE activo=TRUE AND stock <= stock_min ORDER BY stock ASC LIMIT 50",
+    "respuesta": "⚠️ Productos con stock bajo / por reponer",
+    "render": "list",
+    "id": 36
+  },
+  {
+    "pregunta": "Productos sin stock",
+    "patrones": [
+      [
+        "sin",
+        "stock"
+      ],
+      [
+        "agotad"
+      ],
+      [
+        "stock",
+        "cero"
+      ],
+      [
+        "stock",
+        "0"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "nombre",
+      "stock"
+    ],
+    "joins": [],
+    "logica": "WHERE stock=0",
+    "sql": "SELECT nombre, stock::int AS valor FROM productos WHERE stock<=0 AND activo=TRUE ORDER BY nombre LIMIT 50",
+    "respuesta": "❌ Productos sin stock",
+    "render": "list",
+    "id": 37
+  },
+  {
+    "pregunta": "Valor del inventario",
+    "patrones": [
+      [
+        "valor",
+        "inventario"
+      ],
+      [
+        "cuanto",
+        "vale",
+        "inventario"
+      ],
+      [
+        "valoracion",
+        "inventario"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "stock",
+      "costo"
+    ],
+    "joins": [],
+    "logica": "SUM(stock*costo)",
+    "sql": "SELECT COALESCE(SUM(stock*costo),0)::numeric AS valor FROM productos WHERE activo=TRUE",
+    "respuesta": "📦 Valor del inventario al costo: S/ {valor}",
+    "render": "scalar_money",
+    "id": 38
+  },
+  {
+    "pregunta": "Movimientos de inventario hoy",
+    "patrones": [
+      [
+        "movimientos",
+        "inventario"
+      ],
+      [
+        "kardex",
+        "hoy"
+      ],
+      [
+        "entradas",
+        "salidas"
+      ]
+    ],
+    "tablas": [
+      "movimientos_inventario",
+      "productos"
+    ],
+    "columnas": [
+      "fecha",
+      "tipo",
+      "cantidad"
+    ],
+    "joins": [
+      "movimientos_inventario.producto_id=productos.id"
+    ],
+    "logica": "WHERE fecha en rango",
+    "sql": "SELECT p.nombre, m.tipo, m.cantidad::int AS valor, m.fecha FROM movimientos_inventario m JOIN productos p ON m.producto_id=p.id WHERE m.fecha::date BETWEEN '{from}' AND '{to}' ORDER BY m.fecha DESC LIMIT 50",
+    "respuesta": "📥📤 Movimientos de inventario {etiqueta}",
+    "render": "list",
+    "date_required": "rango",
+    "date_default": "hoy",
+    "id": 39
+  },
+  {
+    "pregunta": "Productos sin movimiento últimos 90 días",
+    "patrones": [
+      [
+        "sin",
+        "movimiento"
+      ],
+      [
+        "productos",
+        "quietos"
+      ],
+      [
+        "sin",
+        "vender"
+      ]
+    ],
+    "tablas": [
+      "productos",
+      "ventas"
+    ],
+    "columnas": [
+      "productos.nombre",
+      "ventas.fecha"
+    ],
+    "joins": [
+      "ventas.producto_id=productos.id"
+    ],
+    "logica": "MAX(ventas.fecha) < hoy-90",
+    "sql": "SELECT p.nombre, MAX(v.fecha)::date AS ultima_venta FROM productos p LEFT JOIN ventas v ON v.producto_id=p.id WHERE p.activo=TRUE GROUP BY p.nombre HAVING MAX(v.fecha) IS NULL OR MAX(v.fecha) < CURRENT_DATE - INTERVAL '90 days' ORDER BY ultima_venta NULLS FIRST LIMIT 25",
+    "respuesta": "🐢 Productos sin movimiento (>90 días)",
+    "render": "list",
+    "id": 40
+  },
+  {
+    "pregunta": "Producto más caro",
+    "patrones": [
+      [
+        "producto",
+        "mas",
+        "caro"
+      ],
+      [
+        "mayor",
+        "precio"
+      ],
+      [
+        "precio",
+        "alto"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "nombre",
+      "precio"
+    ],
+    "joins": [],
+    "logica": "MAX(precio)",
+    "sql": "SELECT nombre, precio::numeric AS valor FROM productos WHERE activo=TRUE ORDER BY precio DESC LIMIT 1",
+    "respuesta": "💎 Producto más caro: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 41
+  },
+  {
+    "pregunta": "Producto más barato",
+    "patrones": [
+      [
+        "producto",
+        "mas",
+        "barato"
+      ],
+      [
+        "menor",
+        "precio"
+      ],
+      [
+        "precio",
+        "bajo"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "nombre",
+      "precio"
+    ],
+    "joins": [],
+    "logica": "MIN(precio)",
+    "sql": "SELECT nombre, precio::numeric AS valor FROM productos WHERE activo=TRUE AND precio>0 ORDER BY precio ASC LIMIT 1",
+    "respuesta": "🪙 Producto más barato: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 42
+  },
+  {
+    "pregunta": "Productos por categoría",
+    "patrones": [
+      [
+        "productos",
+        "categoria"
+      ],
+      [
+        "por",
+        "categoria"
+      ],
+      [
+        "categorias",
+        "cuantos"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "categoria"
+    ],
+    "joins": [],
+    "logica": "COUNT GROUP BY categoria",
+    "sql": "SELECT COALESCE(categoria,'(sin categoría)') AS nombre, COUNT(*)::int AS valor FROM productos GROUP BY 1 ORDER BY valor DESC LIMIT 25",
+    "respuesta": "🗂️ Productos por categoría",
+    "render": "list",
+    "id": 43
+  },
+  {
+    "pregunta": "Margen por producto",
+    "patrones": [
+      [
+        "margen",
+        "producto"
+      ],
+      [
+        "rentabilidad",
+        "producto"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [
+      "nombre",
+      "precio",
+      "costo"
+    ],
+    "joins": [],
+    "logica": "(precio-costo)/precio",
+    "sql": "SELECT nombre, ROUND(((precio-costo)/NULLIF(precio,0)*100)::numeric,2) AS valor FROM productos WHERE activo=TRUE AND precio>0 ORDER BY valor DESC LIMIT 25",
+    "respuesta": "📈 Margen % por producto",
+    "render": "list",
+    "id": 44
+  },
+  {
+    "pregunta": "Saldo en cuentas bancarias",
+    "patrones": [
+      [
+        "saldo",
+        "banco"
+      ],
+      [
+        "saldo",
+        "cuenta"
+      ],
+      [
+        "dinero",
+        "banco"
+      ],
+      [
+        "cuanto",
+        "banco"
+      ]
+    ],
+    "tablas": [
+      "cuentas_bancarias"
+    ],
+    "columnas": [
+      "nombre",
+      "saldo",
+      "moneda"
+    ],
+    "joins": [],
+    "logica": "SELECT nombre, saldo",
+    "sql": "SELECT nombre, saldo::numeric AS valor, moneda FROM cuentas_bancarias ORDER BY saldo DESC LIMIT 25",
+    "respuesta": "🏦 Saldos por cuenta bancaria",
+    "render": "list",
+    "id": 45
+  },
+  {
+    "pregunta": "Saldo total en bancos",
+    "patrones": [
+      [
+        "saldo",
+        "total",
+        "banco"
+      ],
+      [
+        "liquidez"
+      ],
+      [
+        "cuanto",
+        "tengo",
+        "banco"
+      ]
+    ],
+    "tablas": [
+      "cuentas_bancarias"
+    ],
+    "columnas": [
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "SUM(saldo)",
+    "sql": "SELECT COALESCE(SUM(saldo),0)::numeric AS valor FROM cuentas_bancarias",
+    "respuesta": "🏦 Saldo total en bancos: S/ {valor}",
+    "render": "scalar_money",
+    "id": 46
+  },
+  {
+    "pregunta": "Ingresos de tesorería este mes",
+    "patrones": [
+      [
+        "ingresos",
+        "tesoreria"
+      ],
+      [
+        "ingresos",
+        "caja"
+      ],
+      [
+        "entradas",
+        "caja"
+      ]
+    ],
+    "tablas": [
+      "movimientos_tesoreria"
+    ],
+    "columnas": [
+      "fecha",
+      "tipo",
+      "monto"
+    ],
+    "joins": [],
+    "logica": "SUM(monto) WHERE tipo='ingreso' en rango",
+    "sql": "SELECT COALESCE(SUM(monto),0)::numeric AS valor FROM movimientos_tesoreria WHERE tipo='ingreso' AND fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "💵 Ingresos {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 47
+  },
+  {
+    "pregunta": "Egresos de tesorería este mes",
+    "patrones": [
+      [
+        "egresos",
+        "tesoreria"
+      ],
+      [
+        "egresos",
+        "caja"
+      ],
+      [
+        "salidas",
+        "caja"
+      ],
+      [
+        "gastos",
+        "caja"
+      ]
+    ],
+    "tablas": [
+      "movimientos_tesoreria"
+    ],
+    "columnas": [
+      "fecha",
+      "tipo",
+      "monto"
+    ],
+    "joins": [],
+    "logica": "SUM(monto) WHERE tipo='egreso' en rango",
+    "sql": "SELECT COALESCE(SUM(monto),0)::numeric AS valor FROM movimientos_tesoreria WHERE tipo='egreso' AND fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "💸 Egresos {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 48
+  },
+  {
+    "pregunta": "Flujo de caja del mes",
+    "patrones": [
+      [
+        "flujo",
+        "caja"
+      ],
+      [
+        "cashflow"
+      ],
+      [
+        "caja",
+        "mes"
+      ]
+    ],
+    "tablas": [
+      "movimientos_tesoreria"
+    ],
+    "columnas": [
+      "tipo",
+      "monto",
+      "fecha"
+    ],
+    "joins": [],
+    "logica": "SUM ingreso - SUM egreso",
+    "sql": "SELECT tipo AS nombre, COALESCE(SUM(monto),0)::numeric AS valor FROM movimientos_tesoreria WHERE fecha BETWEEN '{from}' AND '{to}' GROUP BY tipo ORDER BY tipo",
+    "respuesta": "💹 Flujo de caja {etiqueta}",
+    "render": "list",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 49
+  },
+  {
+    "pregunta": "Pagos recibidos este mes",
+    "patrones": [
+      [
+        "pagos",
+        "recibid"
+      ],
+      [
+        "cobros",
+        "mes"
+      ],
+      [
+        "pagos",
+        "mes"
+      ]
+    ],
+    "tablas": [
+      "pagos"
+    ],
+    "columnas": [
+      "fecha",
+      "monto"
+    ],
+    "joins": [],
+    "logica": "SUM(monto) en rango",
+    "sql": "SELECT COALESCE(SUM(monto),0)::numeric AS valor FROM pagos WHERE fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "💰 Pagos recibidos {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 50
+  },
+  {
+    "pregunta": "Pagos por método",
+    "patrones": [
+      [
+        "pagos",
+        "metodo"
+      ],
+      [
+        "metodo",
+        "pago"
+      ],
+      [
+        "formas",
+        "pago"
+      ]
+    ],
+    "tablas": [
+      "pagos"
+    ],
+    "columnas": [
+      "metodo",
+      "monto"
+    ],
+    "joins": [],
+    "logica": "SUM GROUP BY metodo",
+    "sql": "SELECT COALESCE(metodo,'(sin método)') AS nombre, COALESCE(SUM(monto),0)::numeric AS valor FROM pagos GROUP BY 1 ORDER BY valor DESC",
+    "respuesta": "💳 Pagos por método",
+    "render": "list",
+    "id": 51
+  },
+  {
+    "pregunta": "Utilidad del mes",
+    "patrones": [
+      [
+        "utilidad",
+        "mes"
+      ],
+      [
+        "ganancia",
+        "mes"
+      ],
+      [
+        "beneficio",
+        "mes"
+      ],
+      [
+        "profit"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "compras"
+    ],
+    "columnas": [
+      "total",
+      "fecha"
+    ],
+    "joins": [],
+    "logica": "SUM(ventas)-SUM(compras) en rango",
+    "sql": "SELECT (SELECT COALESCE(SUM(total),0) FROM ventas WHERE fecha BETWEEN '{from}' AND '{to}') - (SELECT COALESCE(SUM(total),0) FROM compras WHERE fecha BETWEEN '{from}' AND '{to}') AS valor",
+    "respuesta": "💰 Utilidad {etiqueta}: S/ {valor}",
+    "render": "scalar_money",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 52
+  },
+  {
+    "pregunta": "Margen bruto del mes",
+    "patrones": [
+      [
+        "margen",
+        "mes"
+      ],
+      [
+        "margen",
+        "bruto"
+      ],
+      [
+        "porcentaje",
+        "ganancia"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "compras"
+    ],
+    "columnas": [
+      "total",
+      "fecha"
+    ],
+    "joins": [],
+    "logica": "(V-C)/V * 100",
+    "sql": "SELECT CASE WHEN (SELECT COALESCE(SUM(total),0) FROM ventas WHERE fecha BETWEEN '{from}' AND '{to}')=0 THEN 0 ELSE ROUND((( (SELECT COALESCE(SUM(total),0) FROM ventas WHERE fecha BETWEEN '{from}' AND '{to}') - (SELECT COALESCE(SUM(total),0) FROM compras WHERE fecha BETWEEN '{from}' AND '{to}') ) / (SELECT COALESCE(SUM(total),0) FROM ventas WHERE fecha BETWEEN '{from}' AND '{to}') * 100)::numeric,2) END AS valor",
+    "respuesta": "📈 Margen bruto {etiqueta}: {valor}%",
+    "render": "scalar_int",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 53
+  },
+  {
+    "pregunta": "KPIs financieros generales",
+    "patrones": [
+      [
+        "kpi"
+      ],
+      [
+        "indicadores"
+      ],
+      [
+        "resumen",
+        "financ"
+      ],
+      [
+        "dashboard"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "compras",
+      "facturas",
+      "clientes"
+    ],
+    "columnas": [
+      "total",
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "múltiples agregados",
+    "sql": "SELECT 'ventas_mes' AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE) UNION ALL SELECT 'compras_mes', COALESCE(SUM(total),0) FROM compras WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE) UNION ALL SELECT 'por_cobrar', COALESCE(SUM(saldo),0) FROM facturas WHERE estado IN ('pendiente','parcial') UNION ALL SELECT 'clientes', COUNT(*)::numeric FROM clientes",
+    "respuesta": "📊 KPIs financieros",
+    "render": "list",
+    "id": 54
+  },
+  {
+    "pregunta": "Balance general resumido",
+    "patrones": [
+      [
+        "balance",
+        "general"
+      ],
+      [
+        "balance",
+        "resumen"
+      ]
+    ],
+    "tablas": [
+      "asientos_detalle",
+      "cuentas_contables"
+    ],
+    "columnas": [
+      "debe",
+      "haber",
+      "tipo"
+    ],
+    "joins": [
+      "asientos_detalle.cuenta_id=cuentas_contables.id"
+    ],
+    "logica": "SUM debe-haber GROUP BY tipo",
+    "sql": "SELECT cc.tipo AS nombre, COALESCE(SUM(ad.debe-ad.haber),0)::numeric AS valor FROM asientos_detalle ad JOIN cuentas_contables cc ON ad.cuenta_id=cc.id GROUP BY cc.tipo ORDER BY cc.tipo",
+    "respuesta": "📒 Balance por tipo de cuenta",
+    "render": "list",
+    "id": 55
+  },
+  {
+    "pregunta": "Estado de resultados del mes",
+    "patrones": [
+      [
+        "estado",
+        "resultado"
+      ],
+      [
+        "pyg"
+      ],
+      [
+        "perdida",
+        "ganancia"
+      ],
+      [
+        "ingresos",
+        "gastos"
+      ]
+    ],
+    "tablas": [
+      "asientos_detalle",
+      "cuentas_contables",
+      "asientos_contables"
+    ],
+    "columnas": [
+      "debe",
+      "haber",
+      "tipo",
+      "fecha"
+    ],
+    "joins": [
+      "asientos_detalle.cuenta_id=cuentas_contables.id",
+      "asientos_detalle.asiento_id=asientos_contables.id"
+    ],
+    "logica": "SUM por tipo ingreso/gasto en rango",
+    "sql": "SELECT cc.tipo AS nombre, COALESCE(SUM(ad.haber-ad.debe),0)::numeric AS valor FROM asientos_detalle ad JOIN cuentas_contables cc ON ad.cuenta_id=cc.id JOIN asientos_contables a ON ad.asiento_id=a.id WHERE cc.tipo IN ('ingreso','gasto') AND a.fecha BETWEEN '{from}' AND '{to}' GROUP BY cc.tipo ORDER BY cc.tipo",
+    "respuesta": "📊 Estado de resultados {etiqueta}",
+    "render": "list",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 56
+  },
+  {
+    "pregunta": "Libro diario del mes",
+    "patrones": [
+      [
+        "libro",
+        "diario"
+      ],
+      [
+        "asientos",
+        "mes"
+      ],
+      [
+        "asientos",
+        "contables"
+      ]
+    ],
+    "tablas": [
+      "asientos_contables"
+    ],
+    "columnas": [
+      "fecha",
+      "glosa"
+    ],
+    "joins": [],
+    "logica": "SELECT * en rango",
+    "sql": "SELECT fecha, glosa FROM asientos_contables WHERE fecha BETWEEN '{from}' AND '{to}' ORDER BY fecha DESC LIMIT 50",
+    "respuesta": "📓 Libro diario {etiqueta}",
+    "render": "list",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 57
+  },
+  {
+    "pregunta": "Plan de cuentas",
+    "patrones": [
+      [
+        "plan",
+        "cuentas"
+      ],
+      [
+        "catalogo",
+        "cuentas"
+      ],
+      [
+        "cuentas",
+        "contables"
+      ]
+    ],
+    "tablas": [
+      "cuentas_contables"
+    ],
+    "columnas": [
+      "codigo",
+      "nombre",
+      "tipo"
+    ],
+    "joins": [],
+    "logica": "SELECT *",
+    "sql": "SELECT codigo, nombre, tipo FROM cuentas_contables ORDER BY codigo LIMIT 100",
+    "respuesta": "📚 Plan de cuentas",
+    "render": "list",
+    "id": 58
+  },
+  {
+    "pregunta": "¿Cuántos usuarios activos hay?",
+    "patrones": [
+      [
+        "cuantos",
+        "usuario"
+      ],
+      [
+        "usuarios",
+        "activ"
+      ]
+    ],
+    "tablas": [
+      "usuarios"
+    ],
+    "columnas": [
+      "activo"
+    ],
+    "joins": [],
+    "logica": "COUNT WHERE activo",
+    "sql": "SELECT COUNT(*)::int AS valor FROM usuarios WHERE activo=TRUE",
+    "respuesta": "👤 Usuarios activos: {valor}",
+    "render": "scalar_int",
+    "id": 59
+  },
+  {
+    "pregunta": "Lista de empresas",
+    "patrones": [
+      [
+        "lista",
+        "empresa"
+      ],
+      [
+        "empresas",
+        "registr"
+      ]
+    ],
+    "tablas": [
+      "empresas"
+    ],
+    "columnas": [
+      "nombre",
+      "ruc",
+      "moneda"
+    ],
+    "joins": [],
+    "logica": "SELECT *",
+    "sql": "SELECT nombre, ruc, moneda FROM empresas ORDER BY nombre LIMIT 20",
+    "respuesta": "🏢 Empresas",
+    "render": "list",
+    "id": 60
+  },
+  {
+    "pregunta": "Lista de sucursales",
+    "patrones": [
+      [
+        "lista",
+        "sucursal"
+      ],
+      [
+        "sucursales"
+      ]
+    ],
+    "tablas": [
+      "sucursales"
+    ],
+    "columnas": [
+      "nombre",
+      "direccion"
+    ],
+    "joins": [],
+    "logica": "SELECT *",
+    "sql": "SELECT nombre, direccion FROM sucursales ORDER BY nombre LIMIT 50",
+    "respuesta": "🏬 Sucursales",
+    "render": "list",
+    "id": 61
+  },
+  {
+    "pregunta": "Ventas por día último mes",
+    "patrones": [
+      [
+        "ventas",
+        "por",
+        "dia"
+      ],
+      [
+        "ventas",
+        "diarias"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "GROUP BY fecha::date",
+    "sql": "SELECT fecha::date AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE fecha >= CURRENT_DATE - INTERVAL '30 days' GROUP BY 1 ORDER BY 1",
+    "respuesta": "📅 Ventas diarias (últimos 30 días)",
+    "render": "list",
+    "id": 62
+  },
+  {
+    "pregunta": "Ventas por trimestre",
+    "patrones": [
+      [
+        "ventas",
+        "trimestre"
+      ],
+      [
+        "trimestral"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "GROUP BY trimestre",
+    "sql": "SELECT to_char(fecha,'YYYY-\"Q\"Q') AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE EXTRACT(year FROM fecha)=EXTRACT(year FROM CURRENT_DATE) GROUP BY 1 ORDER BY 1",
+    "respuesta": "📊 Ventas trimestrales",
+    "render": "list",
+    "id": 63
+  },
+  {
+    "pregunta": "Ventas por semana",
+    "patrones": [
+      [
+        "ventas",
+        "semana"
+      ],
+      [
+        "semanales",
+        "vent"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "GROUP BY semana",
+    "sql": "SELECT to_char(date_trunc('week',fecha),'IYYY-IW') AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas WHERE fecha >= CURRENT_DATE - INTERVAL '90 days' GROUP BY 1 ORDER BY 1",
+    "respuesta": "📅 Ventas semanales (últimos 90 días)",
+    "render": "list",
+    "id": 64
+  },
+  {
+    "pregunta": "Antigüedad de cuentas por cobrar",
+    "patrones": [
+      [
+        "antigüedad",
+        "cobrar"
+      ],
+      [
+        "antiguedad",
+        "saldo"
+      ],
+      [
+        "aging"
+      ],
+      [
+        "edad",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "fecha",
+      "saldo",
+      "estado"
+    ],
+    "joins": [],
+    "logica": "buckets por días",
+    "sql": "SELECT CASE WHEN CURRENT_DATE - fecha <= 30 THEN '0-30' WHEN CURRENT_DATE - fecha <= 60 THEN '31-60' WHEN CURRENT_DATE - fecha <= 90 THEN '61-90' ELSE '>90' END AS nombre, COALESCE(SUM(saldo),0)::numeric AS valor FROM facturas WHERE estado IN ('pendiente','parcial') GROUP BY 1 ORDER BY 1",
+    "respuesta": "📅 Antigüedad de saldos por cobrar",
+    "render": "list",
+    "id": 65
+  },
+  {
+    "pregunta": "Promedio de venta diaria",
+    "patrones": [
+      [
+        "promedio",
+        "venta",
+        "diaria"
+      ],
+      [
+        "promedio",
+        "diario"
+      ],
+      [
+        "venta",
+        "promedio",
+        "dia"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [
+      "fecha",
+      "total"
+    ],
+    "joins": [],
+    "logica": "SUM/COUNT distinct days",
+    "sql": "SELECT (COALESCE(SUM(total),0) / NULLIF(COUNT(DISTINCT fecha::date),0))::numeric AS valor FROM ventas WHERE fecha >= CURRENT_DATE - INTERVAL '30 days'",
+    "respuesta": "📈 Promedio de venta diaria (30d): S/ {valor}",
+    "render": "scalar_money",
+    "id": 66
+  },
+  {
+    "pregunta": "Cliente con más facturas",
+    "patrones": [
+      [
+        "cliente",
+        "mas",
+        "factur"
+      ],
+      [
+        "cliente",
+        "mayor",
+        "numero",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas",
+      "clientes"
+    ],
+    "columnas": [
+      "clientes.nombre"
+    ],
+    "joins": [
+      "facturas.cliente_id=clientes.id"
+    ],
+    "logica": "COUNT GROUP BY cliente",
+    "sql": "SELECT c.nombre, COUNT(f.id)::int AS valor FROM facturas f JOIN clientes c ON f.cliente_id=c.id GROUP BY c.nombre ORDER BY valor DESC LIMIT 1",
+    "respuesta": "🏆 Cliente con más facturas: {nombre} ({valor})",
+    "render": "kv",
+    "id": 67
+  },
+  {
+    "pregunta": "Tasa de cobro",
+    "patrones": [
+      [
+        "tasa",
+        "cobro"
+      ],
+      [
+        "porcentaje",
+        "cobrad"
+      ],
+      [
+        "eficiencia",
+        "cobranza"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "total",
+      "saldo"
+    ],
+    "joins": [],
+    "logica": "(total-saldo)/total",
+    "sql": "SELECT CASE WHEN SUM(total)=0 THEN 0 ELSE ROUND((SUM(total-saldo)/NULLIF(SUM(total),0)*100)::numeric,2) END AS valor FROM facturas",
+    "respuesta": "📈 Tasa de cobro global: {valor}%",
+    "render": "scalar_int",
+    "id": 68
+  },
+  {
+    "pregunta": "Facturas por estado",
+    "patrones": [
+      [
+        "factur",
+        "por",
+        "estado"
+      ],
+      [
+        "estado",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [
+      "estado"
+    ],
+    "joins": [],
+    "logica": "COUNT GROUP BY estado",
+    "sql": "SELECT estado AS nombre, COUNT(*)::int AS valor FROM facturas GROUP BY estado ORDER BY valor DESC",
+    "respuesta": "📊 Facturas por estado",
+    "render": "list",
+    "id": 69
+  },
+  {
+    "pregunta": "Cobros vs facturación del mes",
+    "patrones": [
+      [
+        "cobros",
+        "vs",
+        "facturacion"
+      ],
+      [
+        "compara",
+        "cobros",
+        "factur"
+      ]
+    ],
+    "tablas": [
+      "pagos",
+      "facturas"
+    ],
+    "columnas": [
+      "fecha",
+      "monto",
+      "total"
+    ],
+    "joins": [],
+    "logica": "comparar SUM pagos vs SUM facturas",
+    "sql": "SELECT 'facturado' AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM facturas WHERE fecha BETWEEN '{from}' AND '{to}' UNION ALL SELECT 'cobrado', COALESCE(SUM(monto),0) FROM pagos WHERE fecha BETWEEN '{from}' AND '{to}'",
+    "respuesta": "📊 Facturado vs cobrado {etiqueta}",
+    "render": "list",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 70
+  },
+  {
+    "pregunta": "Top productos por ingresos",
+    "patrones": [
+      [
+        "producto",
+        "mas",
+        "ingres"
+      ],
+      [
+        "producto",
+        "mejor",
+        "facturad"
+      ],
+      [
+        "top",
+        "producto",
+        "monto"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "productos"
+    ],
+    "columnas": [
+      "productos.nombre",
+      "ventas.total"
+    ],
+    "joins": [
+      "ventas.producto_id=productos.id"
+    ],
+    "logica": "SUM(total) GROUP BY producto",
+    "sql": "SELECT COALESCE(p.nombre, v.producto) AS nombre, COALESCE(SUM(v.total),0)::numeric AS valor FROM ventas v LEFT JOIN productos p ON v.producto_id=p.id {where} GROUP BY 1 ORDER BY valor DESC LIMIT 10",
+    "respuesta": "💵 Productos que más ingresos generan{etiqueta}",
+    "render": "list",
+    "where_optional": "fecha",
+    "id": 71
+  },
+  {
+    "pregunta": "Última venta registrada",
+    "patrones": [
+      [
+        "ultima",
+        "venta"
+      ],
+      [
+        "venta",
+        "reciente"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Última venta registrada",
+    "sql": "SELECT fecha::text AS nombre, total::numeric AS valor FROM ventas ORDER BY fecha DESC LIMIT 1",
+    "respuesta": "🕐 Última venta: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 72
+  },
+  {
+    "pregunta": "Última compra registrada",
+    "patrones": [
+      [
+        "ultima",
+        "compra"
+      ],
+      [
+        "compra",
+        "reciente"
+      ]
+    ],
+    "tablas": [
+      "compras"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Última compra registrada",
+    "sql": "SELECT fecha::text AS nombre, total::numeric AS valor FROM compras ORDER BY fecha DESC LIMIT 1",
+    "respuesta": "🕐 Última compra: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 73
+  },
+  {
+    "pregunta": "Última factura emitida",
+    "patrones": [
+      [
+        "ultima",
+        "factura"
+      ],
+      [
+        "factura",
+        "reciente"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Última factura emitida",
+    "sql": "SELECT (serie||'-'||numero) AS nombre, total::numeric AS valor FROM facturas ORDER BY fecha DESC, id DESC LIMIT 1",
+    "respuesta": "🧾 Última factura: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 74
+  },
+  {
+    "pregunta": "Último pago recibido",
+    "patrones": [
+      [
+        "ultimo",
+        "pago"
+      ],
+      [
+        "pago",
+        "reciente"
+      ]
+    ],
+    "tablas": [
+      "pagos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Último pago recibido",
+    "sql": "SELECT fecha::text AS nombre, monto::numeric AS valor FROM pagos ORDER BY fecha DESC, id DESC LIMIT 1",
+    "respuesta": "💰 Último pago: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 75
+  },
+  {
+    "pregunta": "Cuentas bancarias por banco",
+    "patrones": [
+      [
+        "cuentas",
+        "por",
+        "banco"
+      ],
+      [
+        "bancos",
+        "cuentas"
+      ]
+    ],
+    "tablas": [
+      "cuentas_bancarias"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Cuentas bancarias por banco",
+    "sql": "SELECT COALESCE(banco,'(sin banco)') AS nombre, COUNT(*)::int AS valor FROM cuentas_bancarias GROUP BY 1 ORDER BY valor DESC",
+    "respuesta": "🏦 Cuentas por banco",
+    "render": "list",
+    "id": 76
+  },
+  {
+    "pregunta": "Transferencias entre cuentas",
+    "patrones": [
+      [
+        "transferencias",
+        "cuenta"
+      ],
+      [
+        "movimiento",
+        "transferencia"
+      ]
+    ],
+    "tablas": [
+      "movimientos_tesoreria"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Transferencias entre cuentas",
+    "sql": "SELECT cuenta_id, fecha, monto::numeric AS valor, concepto AS nombre FROM movimientos_tesoreria WHERE tipo='transferencia' ORDER BY fecha DESC LIMIT 25",
+    "respuesta": "🔁 Transferencias recientes",
+    "render": "list",
+    "id": 77
+  },
+  {
+    "pregunta": "Egresos por concepto",
+    "patrones": [
+      [
+        "egresos",
+        "concepto"
+      ],
+      [
+        "gastos",
+        "categoria"
+      ]
+    ],
+    "tablas": [
+      "movimientos_tesoreria"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Egresos por concepto",
+    "sql": "SELECT COALESCE(concepto,'(sin concepto)') AS nombre, COALESCE(SUM(monto),0)::numeric AS valor FROM movimientos_tesoreria WHERE tipo='egreso' GROUP BY 1 ORDER BY valor DESC LIMIT 25",
+    "respuesta": "💸 Egresos por concepto",
+    "render": "list",
+    "id": 78
+  },
+  {
+    "pregunta": "Crecimiento de ventas mes a mes",
+    "patrones": [
+      [
+        "crecimiento",
+        "ventas"
+      ],
+      [
+        "variacion",
+        "ventas"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Crecimiento de ventas mes a mes",
+    "sql": "WITH m AS (SELECT date_trunc('month',fecha) AS mes, SUM(total) AS v FROM ventas WHERE fecha >= CURRENT_DATE - INTERVAL '12 months' GROUP BY 1) SELECT to_char(mes,'YYYY-MM') AS nombre, ROUND(((v - LAG(v) OVER (ORDER BY mes)) / NULLIF(LAG(v) OVER (ORDER BY mes),0) * 100)::numeric,2) AS valor FROM m ORDER BY mes",
+    "respuesta": "📈 Crecimiento mensual de ventas (%)",
+    "render": "list",
+    "id": 79
+  },
+  {
+    "pregunta": "Concentración de ventas (top vs total)",
+    "patrones": [
+      [
+        "concentracion",
+        "vent"
+      ],
+      [
+        "pareto",
+        "cliente"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "clientes"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Concentración de ventas (top vs total)",
+    "sql": "WITH t AS (SELECT c.nombre, SUM(v.total) AS s FROM ventas v JOIN clientes c ON v.cliente_id=c.id GROUP BY c.nombre), tot AS (SELECT SUM(s) AS x FROM t) SELECT t.nombre, ROUND((s/NULLIF((SELECT x FROM tot),0)*100)::numeric,2) AS valor FROM t ORDER BY s DESC LIMIT 10",
+    "respuesta": "📊 Concentración de ventas por cliente (%)",
+    "render": "list",
+    "id": 80
+  },
+  {
+    "pregunta": "Días promedio de cobro",
+    "patrones": [
+      [
+        "dias",
+        "cobro"
+      ],
+      [
+        "dso"
+      ],
+      [
+        "plazo",
+        "cobro"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Días promedio de cobro",
+    "sql": "SELECT ROUND(AVG((CURRENT_DATE - fecha))::numeric,1) AS valor FROM facturas WHERE estado IN ('pendiente','parcial')",
+    "respuesta": "⏱️ Días promedio de cobro: {valor}",
+    "render": "scalar_int",
+    "id": 81
+  },
+  {
+    "pregunta": "Clientes sin teléfono ni correo",
+    "patrones": [
+      [
+        "sin",
+        "contacto"
+      ],
+      [
+        "client",
+        "sin",
+        "telefono"
+      ],
+      [
+        "client",
+        "sin",
+        "correo"
+      ]
+    ],
+    "tablas": [
+      "clientes"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Clientes sin teléfono ni correo",
+    "sql": "SELECT nombre, COALESCE(telefono,'-') AS telefono, COALESCE(correo,'-') AS correo FROM clientes WHERE (telefono IS NULL OR telefono='') AND (correo IS NULL OR correo='') ORDER BY nombre LIMIT 50",
+    "respuesta": "📵 Clientes sin datos de contacto",
+    "render": "list",
+    "id": 82
+  },
+  {
+    "pregunta": "Detalle de una factura por número (último número)",
+    "patrones": [
+      [
+        "detalle",
+        "factura"
+      ],
+      [
+        "factura",
+        "numero"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Detalle de una factura por número (último número)",
+    "sql": "SELECT f.serie||'-'||f.numero AS nombre, f.fecha, c.nombre AS cliente, f.total::numeric AS valor, f.estado FROM facturas f LEFT JOIN clientes c ON f.cliente_id=c.id ORDER BY f.id DESC LIMIT 1",
+    "respuesta": "🧾 Última factura",
+    "render": "list",
+    "id": 83
+  },
+  {
+    "pregunta": "Productos activos vs inactivos",
+    "patrones": [
+      [
+        "activos",
+        "inactivos",
+        "producto"
+      ],
+      [
+        "productos",
+        "baja"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Productos activos vs inactivos",
+    "sql": "SELECT CASE WHEN activo THEN 'activos' ELSE 'inactivos' END AS nombre, COUNT(*)::int AS valor FROM productos GROUP BY activo",
+    "respuesta": "📦 Productos activos vs inactivos",
+    "render": "list",
+    "id": 84
+  },
+  {
+    "pregunta": "Stock total de productos",
+    "patrones": [
+      [
+        "stock",
+        "total"
+      ],
+      [
+        "total",
+        "unidades"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Stock total de productos",
+    "sql": "SELECT COALESCE(SUM(stock),0)::int AS valor FROM productos",
+    "respuesta": "📦 Unidades totales en stock: {valor}",
+    "render": "scalar_int",
+    "id": 85
+  },
+  {
+    "pregunta": "Compras por mes año actual",
+    "patrones": [
+      [
+        "compras",
+        "por",
+        "mes"
+      ],
+      [
+        "compras",
+        "mensuales"
+      ]
+    ],
+    "tablas": [
+      "compras"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Compras por mes año actual",
+    "sql": "SELECT to_char(date_trunc('month',fecha),'YYYY-MM') AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM compras WHERE EXTRACT(year FROM fecha)=EXTRACT(year FROM CURRENT_DATE) GROUP BY 1 ORDER BY 1",
+    "respuesta": "📉 Compras mensuales del año",
+    "render": "list",
+    "id": 86
+  },
+  {
+    "pregunta": "Top 5 productos rentables",
+    "patrones": [
+      [
+        "productos",
+        "rentab"
+      ],
+      [
+        "mas",
+        "rentab",
+        "producto"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Top 5 productos rentables",
+    "sql": "SELECT nombre, ROUND(((precio-costo))::numeric,2) AS valor FROM productos WHERE precio>0 ORDER BY (precio-costo) DESC LIMIT 5",
+    "respuesta": "💎 Top 5 productos rentables (utilidad unitaria)",
+    "render": "list",
+    "id": 87
+  },
+  {
+    "pregunta": "Ratio compras / ventas",
+    "patrones": [
+      [
+        "ratio",
+        "compras",
+        "ventas"
+      ],
+      [
+        "compras",
+        "sobre",
+        "ventas"
+      ]
+    ],
+    "tablas": [
+      "compras",
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Ratio compras / ventas",
+    "sql": "SELECT CASE WHEN (SELECT COALESCE(SUM(total),0) FROM ventas)=0 THEN 0 ELSE ROUND(((SELECT COALESCE(SUM(total),0) FROM compras) / NULLIF((SELECT COALESCE(SUM(total),0) FROM ventas),0) * 100)::numeric,2) END AS valor",
+    "respuesta": "📊 Compras como % de ventas: {valor}%",
+    "render": "scalar_int",
+    "id": 88
+  },
+  {
+    "pregunta": "Top 5 ciudades por ventas",
+    "patrones": [
+      [
+        "ciudad",
+        "mas",
+        "vend"
+      ],
+      [
+        "top",
+        "ciudad"
+      ],
+      [
+        "mejores",
+        "ciudad"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "clientes"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Top 5 ciudades por ventas",
+    "sql": "SELECT COALESCE(c.ciudad,'(sin ciudad)') AS nombre, COALESCE(SUM(v.total),0)::numeric AS valor FROM ventas v JOIN clientes c ON v.cliente_id=c.id GROUP BY 1 ORDER BY valor DESC LIMIT 5",
+    "respuesta": "🌆 Top 5 ciudades por ventas",
+    "render": "list",
+    "id": 89
+  },
+  {
+    "pregunta": "Cliente con mayor deuda",
+    "patrones": [
+      [
+        "cliente",
+        "mayor",
+        "deuda"
+      ],
+      [
+        "mas",
+        "debe",
+        "client"
+      ]
+    ],
+    "tablas": [
+      "clientes",
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Cliente con mayor deuda",
+    "sql": "SELECT c.nombre, COALESCE(SUM(f.saldo),0)::numeric AS valor FROM clientes c JOIN facturas f ON f.cliente_id=c.id WHERE f.estado IN ('pendiente','parcial') GROUP BY c.nombre ORDER BY valor DESC LIMIT 1",
+    "respuesta": "⚠️ Cliente con mayor deuda: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 90
+  },
+  {
+    "pregunta": "Proveedor con mayor deuda",
+    "patrones": [
+      [
+        "proveed",
+        "mayor",
+        "deuda"
+      ],
+      [
+        "mas",
+        "debe",
+        "proveed"
+      ]
+    ],
+    "tablas": [
+      "proveedores"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Proveedor con mayor deuda",
+    "sql": "SELECT nombre, saldo::numeric AS valor FROM proveedores ORDER BY saldo DESC LIMIT 1",
+    "respuesta": "⚠️ Proveedor con mayor deuda: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 91
+  },
+  {
+    "pregunta": "Recaudación por día (mes actual)",
+    "patrones": [
+      [
+        "recaudacion",
+        "dia"
+      ],
+      [
+        "pagos",
+        "por",
+        "dia"
+      ]
+    ],
+    "tablas": [
+      "pagos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Recaudación por día (mes actual)",
+    "sql": "SELECT fecha::text AS nombre, COALESCE(SUM(monto),0)::numeric AS valor FROM pagos WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE) GROUP BY fecha ORDER BY fecha",
+    "respuesta": "💰 Pagos por día (mes actual)",
+    "render": "list",
+    "id": 92
+  },
+  {
+    "pregunta": "Ventas por categoría de producto",
+    "patrones": [
+      [
+        "ventas",
+        "categoria"
+      ],
+      [
+        "categoria",
+        "vendid"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Ventas por categoría de producto",
+    "sql": "SELECT COALESCE(p.categoria,'(sin)') AS nombre, COALESCE(SUM(v.total),0)::numeric AS valor FROM ventas v JOIN productos p ON v.producto_id=p.id GROUP BY 1 ORDER BY valor DESC LIMIT 20",
+    "respuesta": "🗂️ Ventas por categoría",
+    "render": "list",
+    "id": 93
+  },
+  {
+    "pregunta": "Gasto promedio por cliente",
+    "patrones": [
+      [
+        "gasto",
+        "promedio",
+        "cliente"
+      ],
+      [
+        "promedio",
+        "compra",
+        "cliente"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Gasto promedio por cliente",
+    "sql": "SELECT ROUND((SUM(v.total)/NULLIF(COUNT(DISTINCT v.cliente_id),0))::numeric,2) AS valor FROM ventas v",
+    "respuesta": "👥 Gasto promedio por cliente: S/ {valor}",
+    "render": "scalar_money",
+    "id": 94
+  },
+  {
+    "pregunta": "Ventas por hora del día",
+    "patrones": [
+      [
+        "ventas",
+        "hora"
+      ],
+      [
+        "horario",
+        "mas",
+        "vend"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Ventas por hora del día",
+    "sql": "SELECT EXTRACT(hour FROM fecha)::int::text AS nombre, COUNT(*)::int AS valor FROM ventas WHERE fecha >= CURRENT_DATE - INTERVAL '30 days' GROUP BY 1 ORDER BY 1",
+    "respuesta": "🕐 Ventas por hora (últimos 30d)",
+    "render": "list",
+    "id": 95
+  },
+  {
+    "pregunta": "Día con más ventas",
+    "patrones": [
+      [
+        "dia",
+        "mas",
+        "vend"
+      ],
+      [
+        "mejor",
+        "dia"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Día con más ventas",
+    "sql": "SELECT fecha::date::text AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas GROUP BY fecha::date ORDER BY valor DESC LIMIT 1",
+    "respuesta": "🏆 Día con más ventas: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 96
+  },
+  {
+    "pregunta": "Mes con más ventas histórico",
+    "patrones": [
+      [
+        "mes",
+        "mas",
+        "vend"
+      ],
+      [
+        "mejor",
+        "mes",
+        "historic"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Mes con más ventas histórico",
+    "sql": "SELECT to_char(date_trunc('month',fecha),'YYYY-MM') AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas GROUP BY 1 ORDER BY valor DESC LIMIT 1",
+    "respuesta": "🏆 Mejor mes: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 97
+  },
+  {
+    "pregunta": "Año con más ventas",
+    "patrones": [
+      [
+        "ano",
+        "mas",
+        "vend"
+      ],
+      [
+        "mejor",
+        "ano"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Año con más ventas",
+    "sql": "SELECT EXTRACT(year FROM fecha)::int::text AS nombre, COALESCE(SUM(total),0)::numeric AS valor FROM ventas GROUP BY 1 ORDER BY valor DESC LIMIT 1",
+    "respuesta": "🏆 Mejor año: {nombre} — S/ {valor}",
+    "render": "kv",
+    "id": 98
+  },
+  {
+    "pregunta": "Compras por proveedor (este mes)",
+    "patrones": [
+      [
+        "compras",
+        "por",
+        "proveed"
+      ],
+      [
+        "resumen",
+        "proveed"
+      ]
+    ],
+    "tablas": [
+      "compras",
+      "proveedores"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Compras por proveedor (este mes)",
+    "sql": "SELECT p.nombre, COALESCE(SUM(c.total),0)::numeric AS valor FROM compras c JOIN proveedores p ON c.proveedor_id=p.id WHERE date_trunc('month',c.fecha)=date_trunc('month',CURRENT_DATE) GROUP BY p.nombre ORDER BY valor DESC LIMIT 20",
+    "respuesta": "🏭 Compras por proveedor (mes actual)",
+    "render": "list",
+    "id": 99
+  },
+  {
+    "pregunta": "Cuántas facturas hay en total",
+    "patrones": [
+      [
+        "cuantas",
+        "factur",
+        "total"
+      ],
+      [
+        "total",
+        "factur",
+        "hay"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Cuántas facturas hay en total",
+    "sql": "SELECT COUNT(*)::int AS valor FROM facturas",
+    "respuesta": "🧾 Total de facturas: {valor}",
+    "render": "scalar_int",
+    "id": 100
+  },
+  {
+    "pregunta": "Cuántas ventas hay en total",
+    "patrones": [
+      [
+        "cuantas",
+        "ventas",
+        "total"
+      ],
+      [
+        "total",
+        "ventas",
+        "hay"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Cuántas ventas hay en total",
+    "sql": "SELECT COUNT(*)::int AS valor FROM ventas",
+    "respuesta": "🛒 Total de ventas: {valor}",
+    "render": "scalar_int",
+    "id": 101
+  },
+  {
+    "pregunta": "Cuántas compras hay en total",
+    "patrones": [
+      [
+        "cuantas",
+        "compras",
+        "total"
+      ],
+      [
+        "total",
+        "compras",
+        "hay"
+      ]
+    ],
+    "tablas": [
+      "compras"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Cuántas compras hay en total",
+    "sql": "SELECT COUNT(*)::int AS valor FROM compras",
+    "respuesta": "🛍️ Total de compras: {valor}",
+    "render": "scalar_int",
+    "id": 102
+  },
+  {
+    "pregunta": "Saldo deudor por tipo de cuenta",
+    "patrones": [
+      [
+        "saldo",
+        "tipo",
+        "cuenta"
+      ],
+      [
+        "saldos",
+        "cuentas",
+        "contables"
+      ]
+    ],
+    "tablas": [
+      "asientos_detalle",
+      "cuentas_contables"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Saldo deudor por tipo de cuenta",
+    "sql": "SELECT cc.tipo AS nombre, COALESCE(SUM(ad.debe-ad.haber),0)::numeric AS valor FROM asientos_detalle ad JOIN cuentas_contables cc ON ad.cuenta_id=cc.id GROUP BY cc.tipo ORDER BY cc.tipo",
+    "respuesta": "📊 Saldos por tipo de cuenta",
+    "render": "list",
+    "id": 103
+  },
+  {
+    "pregunta": "Movimientos contables del día",
+    "patrones": [
+      [
+        "asientos",
+        "hoy"
+      ],
+      [
+        "contabilidad",
+        "hoy"
+      ]
+    ],
+    "tablas": [
+      "asientos_contables"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Movimientos contables del día",
+    "sql": "SELECT fecha::text AS nombre, glosa AS valor FROM asientos_contables WHERE fecha=CURRENT_DATE ORDER BY id DESC LIMIT 50",
+    "respuesta": "📓 Asientos contables de hoy",
+    "render": "list",
+    "id": 104
+  },
+  {
+    "pregunta": "Pago promedio recibido",
+    "patrones": [
+      [
+        "pago",
+        "promedio"
+      ],
+      [
+        "promedio",
+        "cobro"
+      ]
+    ],
+    "tablas": [
+      "pagos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Pago promedio recibido",
+    "sql": "SELECT COALESCE(AVG(monto),0)::numeric AS valor FROM pagos",
+    "respuesta": "💵 Pago promedio recibido: S/ {valor}",
+    "render": "scalar_money",
+    "id": 105
+  },
+  {
+    "pregunta": "Compra promedio",
+    "patrones": [
+      [
+        "compra",
+        "promedio"
+      ],
+      [
+        "promedio",
+        "compra"
+      ]
+    ],
+    "tablas": [
+      "compras"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Compra promedio",
+    "sql": "SELECT COALESCE(AVG(total),0)::numeric AS valor FROM compras",
+    "respuesta": "🛒 Compra promedio: S/ {valor}",
+    "render": "scalar_money",
+    "id": 106
+  },
+  {
+    "pregunta": "Venta promedio",
+    "patrones": [
+      [
+        "venta",
+        "promedio"
+      ],
+      [
+        "promedio",
+        "venta"
+      ]
+    ],
+    "tablas": [
+      "ventas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Venta promedio",
+    "sql": "SELECT COALESCE(AVG(total),0)::numeric AS valor FROM ventas",
+    "respuesta": "🛒 Venta promedio: S/ {valor}",
+    "render": "scalar_money",
+    "id": 107
+  },
+  {
+    "pregunta": "Días promedio de pago a proveedores",
+    "patrones": [
+      [
+        "dias",
+        "pago",
+        "proveed"
+      ],
+      [
+        "dpo"
+      ]
+    ],
+    "tablas": [
+      "compras"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Días promedio de pago a proveedores",
+    "sql": "SELECT 0::numeric AS valor",
+    "respuesta": "ℹ️ No hay columna de fecha de pago vs fecha de compra para calcular DPO con precisión.",
+    "render": "scalar_int",
+    "id": 108
+  },
+  {
+    "pregunta": "Cuentas con saldo negativo",
+    "patrones": [
+      [
+        "cuenta",
+        "saldo",
+        "negativ"
+      ],
+      [
+        "bancos",
+        "negativ"
+      ]
+    ],
+    "tablas": [
+      "cuentas_bancarias"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Cuentas con saldo negativo",
+    "sql": "SELECT nombre, saldo::numeric AS valor FROM cuentas_bancarias WHERE saldo < 0 ORDER BY saldo ASC LIMIT 20",
+    "respuesta": "⚠️ Cuentas con saldo negativo",
+    "render": "list",
+    "id": 109
+  },
+  {
+    "pregunta": "Productos por encima de stock máximo (>1000 uds)",
+    "patrones": [
+      [
+        "sobrestock"
+      ],
+      [
+        "exceso",
+        "stock"
+      ],
+      [
+        "stock",
+        "alto"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Productos por encima de stock máximo (>1000 uds)",
+    "sql": "SELECT nombre, stock::int AS valor FROM productos WHERE stock > 1000 ORDER BY stock DESC LIMIT 25",
+    "respuesta": "📦 Productos con sobre-stock (>1000 uds)",
+    "render": "list",
+    "id": 110
+  },
+  {
+    "pregunta": "Promedio de margen general",
+    "patrones": [
+      [
+        "promedio",
+        "margen"
+      ],
+      [
+        "margen",
+        "promedio"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Promedio de margen general",
+    "sql": "SELECT ROUND((AVG(CASE WHEN precio>0 THEN (precio-costo)/precio*100 ELSE 0 END))::numeric,2) AS valor FROM productos WHERE activo=TRUE",
+    "respuesta": "📈 Margen promedio: {valor}%",
+    "render": "scalar_int",
+    "id": 111
+  },
+  {
+    "pregunta": "Resumen general del negocio",
+    "patrones": [
+      [
+        "resumen",
+        "negocio"
+      ],
+      [
+        "resumen",
+        "general"
+      ],
+      [
+        "estado",
+        "negocio"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "compras",
+      "facturas",
+      "proveedores",
+      "cuentas_bancarias"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Resumen general del negocio",
+    "sql": "SELECT 'Ventas mes' AS nombre, (SELECT COALESCE(SUM(total),0) FROM ventas WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE))::numeric AS valor UNION ALL SELECT 'Compras mes', (SELECT COALESCE(SUM(total),0) FROM compras WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE)) UNION ALL SELECT 'Utilidad mes', (SELECT COALESCE(SUM(total),0) FROM ventas WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE)) - (SELECT COALESCE(SUM(total),0) FROM compras WHERE date_trunc('month',fecha)=date_trunc('month',CURRENT_DATE)) UNION ALL SELECT 'Por cobrar', (SELECT COALESCE(SUM(saldo),0) FROM facturas WHERE estado IN ('pendiente','parcial')) UNION ALL SELECT 'Por pagar', (SELECT COALESCE(SUM(saldo),0) FROM proveedores) UNION ALL SELECT 'Bancos', (SELECT COALESCE(SUM(saldo),0) FROM cuentas_bancarias)",
+    "respuesta": "📊 Resumen general del negocio",
+    "render": "list",
+    "id": 112
+  },
+  {
+    "pregunta": "Stock por sucursal",
+    "patrones": [
+      [
+        "stock",
+        "sucursal"
+      ],
+      [
+        "inventario",
+        "sucursal"
+      ]
+    ],
+    "tablas": [
+      "movimientos_inventario",
+      "sucursales"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Stock por sucursal",
+    "sql": "SELECT s.nombre, COALESCE(SUM(m.cantidad),0)::int AS valor FROM movimientos_inventario m JOIN sucursales s ON m.sucursal_id=s.id GROUP BY s.nombre ORDER BY valor DESC LIMIT 25",
+    "respuesta": "🏬 Movimiento de stock por sucursal",
+    "render": "list",
+    "id": 113
+  },
+  {
+    "pregunta": "Entradas de inventario del mes",
+    "patrones": [
+      [
+        "entradas",
+        "inventario"
+      ],
+      [
+        "ingresos",
+        "stock"
+      ]
+    ],
+    "tablas": [
+      "movimientos_inventario"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Entradas de inventario del mes",
+    "sql": "SELECT COALESCE(SUM(cantidad),0)::int AS valor FROM movimientos_inventario WHERE tipo='entrada' AND fecha::date BETWEEN '{from}' AND '{to}'",
+    "respuesta": "📥 Entradas inventario {etiqueta}: {valor} uds",
+    "render": "scalar_int",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 114
+  },
+  {
+    "pregunta": "Salidas de inventario del mes",
+    "patrones": [
+      [
+        "salidas",
+        "inventario"
+      ],
+      [
+        "egresos",
+        "stock"
+      ]
+    ],
+    "tablas": [
+      "movimientos_inventario"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Salidas de inventario del mes",
+    "sql": "SELECT COALESCE(SUM(cantidad),0)::int AS valor FROM movimientos_inventario WHERE tipo='salida' AND fecha::date BETWEEN '{from}' AND '{to}'",
+    "respuesta": "📤 Salidas inventario {etiqueta}: {valor} uds",
+    "render": "scalar_int",
+    "date_required": "rango",
+    "date_default": "mes_actual",
+    "id": 115
+  },
+  {
+    "pregunta": "Ajustes de inventario",
+    "patrones": [
+      [
+        "ajustes",
+        "inventario"
+      ]
+    ],
+    "tablas": [
+      "movimientos_inventario",
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Ajustes de inventario",
+    "sql": "SELECT p.nombre, m.cantidad::int AS valor, m.motivo, m.fecha FROM movimientos_inventario m JOIN productos p ON m.producto_id=p.id WHERE m.tipo='ajuste' ORDER BY m.fecha DESC LIMIT 25",
+    "respuesta": "⚖️ Ajustes de inventario",
+    "render": "list",
+    "id": 116
+  },
+  {
+    "pregunta": "Top categorías por margen",
+    "patrones": [
+      [
+        "categoria",
+        "mas",
+        "rentab"
+      ],
+      [
+        "mejor",
+        "categoria",
+        "margen"
+      ]
+    ],
+    "tablas": [
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Top categorías por margen",
+    "sql": "SELECT COALESCE(categoria,'(sin)') AS nombre, ROUND(AVG(CASE WHEN precio>0 THEN (precio-costo)/precio*100 ELSE 0 END)::numeric,2) AS valor FROM productos GROUP BY 1 ORDER BY valor DESC LIMIT 10",
+    "respuesta": "🏷️ Margen % por categoría",
+    "render": "list",
+    "id": 117
+  },
+  {
+    "pregunta": "Clientes con mejor pago (sin saldo)",
+    "patrones": [
+      [
+        "clientes",
+        "puntuales"
+      ],
+      [
+        "mejores",
+        "pagadores"
+      ]
+    ],
+    "tablas": [
+      "clientes",
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Clientes con mejor pago (sin saldo)",
+    "sql": "SELECT c.nombre, COUNT(f.id)::int AS valor FROM clientes c JOIN facturas f ON f.cliente_id=c.id WHERE f.estado='pagada' GROUP BY c.nombre ORDER BY valor DESC LIMIT 10",
+    "respuesta": "🌟 Clientes más puntuales (más facturas pagadas)",
+    "render": "list",
+    "id": 118
+  },
+  {
+    "pregunta": "Facturas parciales",
+    "patrones": [
+      [
+        "factur",
+        "parcial"
+      ]
+    ],
+    "tablas": [
+      "facturas"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Facturas parciales",
+    "sql": "SELECT (serie||'-'||numero) AS doc, saldo::numeric AS valor FROM facturas WHERE estado='parcial' ORDER BY fecha DESC LIMIT 50",
+    "respuesta": "🟡 Facturas con pago parcial",
+    "render": "list",
+    "id": 119
+  },
+  {
+    "pregunta": "Ranking de productos por unidades vendidas año",
+    "patrones": [
+      [
+        "ranking",
+        "producto",
+        "unidades"
+      ]
+    ],
+    "tablas": [
+      "ventas",
+      "productos"
+    ],
+    "columnas": [],
+    "joins": [],
+    "logica": "Ranking de productos por unidades vendidas año",
+    "sql": "SELECT COALESCE(p.nombre, v.producto) AS nombre, COALESCE(SUM(v.cantidad),0)::int AS valor FROM ventas v LEFT JOIN productos p ON v.producto_id=p.id WHERE EXTRACT(year FROM v.fecha)=EXTRACT(year FROM CURRENT_DATE) GROUP BY 1 ORDER BY valor DESC LIMIT 10",
+    "respuesta": "🏆 Ranking productos por unidades (año actual)",
+    "render": "list",
+    "id": 120
+  }
+]

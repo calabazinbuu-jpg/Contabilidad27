@@ -1,0 +1,245 @@
+<!doctype html>
+  <html lang="es">
+  <head>
+  <meta charset="utf-8">
+  <title>IA Empresarial · Nexus — Acceso</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#07080f; --surface:#0d0f1c; --border:#1a1f38; --border2:#222847;
+    --text:#f0f2ff; --muted:#8892b0; --dim:#4a5475;
+    --brand:#7c6bff; --brand2:#5a4de6; --danger:#ff5c7a; --green:#00e5a0;
+    --grad:linear-gradient(135deg,#7c6bff 0%,#5a4de6 45%,#00d4ff 100%);
+    --grad2:linear-gradient(135deg,#7c6bff,#a855f7);
+  }
+  html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif}
+
+  body{
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    background-image:
+      radial-gradient(ellipse 100% 60% at 20% -10%,rgba(124,107,255,.12) 0%,transparent 60%),
+      radial-gradient(ellipse 80% 50% at 80% 110%,rgba(0,212,255,.07) 0%,transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 50%,rgba(90,77,230,.05) 0%,transparent 70%);
+  }
+
+  .page{width:100%;max-width:420px;display:flex;flex-direction:column;gap:32px}
+
+  /* Hero */
+  .hero{text-align:center}
+  .logo-wrap{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:72px;height:72px;border-radius:22px;background:var(--grad);
+    box-shadow:0 12px 50px rgba(124,107,255,.4),0 0 0 1px rgba(255,255,255,.08);
+    font-size:30px;font-weight:900;color:white;margin-bottom:18px;
+    animation:glow 3s ease-in-out infinite;
+    font-family:'Inter',sans-serif;letter-spacing:-.03em;
+  }
+  @keyframes glow{
+    0%,100%{box-shadow:0 12px 50px rgba(124,107,255,.4),0 0 0 1px rgba(255,255,255,.08)}
+    50%{box-shadow:0 16px 60px rgba(124,107,255,.55),0 0 0 1px rgba(255,255,255,.14),0 0 80px rgba(124,107,255,.15)}
+  }
+  .hero-title{
+    font-size:28px;font-weight:900;letter-spacing:-.04em;margin-bottom:6px;
+    background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  .hero-sub{font-size:13px;color:var(--muted);letter-spacing:.01em}
+
+  /* Card */
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    padding:32px;
+    box-shadow:0 24px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03);
+  }
+  .card-head{margin-bottom:24px}
+  .card-title{font-size:18px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px}
+  .card-desc{font-size:12.5px;color:var(--muted)}
+
+  .field{margin-bottom:14px}
+  .field-label{
+    display:block;font-size:11.5px;font-weight:600;color:var(--muted);
+    margin-bottom:5px;letter-spacing:.01em}
+  .field-input{
+    width:100%;background:rgba(255,255,255,.04);border:1.5px solid var(--border2);
+    color:var(--text);border-radius:10px;padding:12px 14px;
+    font-size:14px;font-family:inherit;outline:none;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .field-input:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(124,107,255,.12)}
+  .field-input::placeholder{color:var(--dim)}
+
+  .btn-login{
+    width:100%;padding:14px;border:none;border-radius:11px;
+    background:var(--grad2);color:white;font-size:14.5px;font-weight:800;
+    cursor:pointer;font-family:inherit;letter-spacing:-.01em;
+    transition:transform .12s,box-shadow .2s,opacity .15s;
+    box-shadow:0 6px 28px rgba(124,107,255,.4);margin-top:6px;
+  }
+  .btn-login:hover:not(:disabled){
+    transform:translateY(-1px);
+    box-shadow:0 10px 36px rgba(124,107,255,.5);
+  }
+  .btn-login:active:not(:disabled){transform:translateY(0)}
+  .btn-login:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+  .divider{
+    display:flex;align-items:center;gap:12px;margin:20px 0;
+    font-size:11.5px;color:var(--dim);
+  }
+  .divider::before,.divider::after{content:"";flex:1;border-top:1px solid var(--border)}
+
+  .btn-guest{
+    width:100%;padding:12px;border:1.5px solid var(--border2);
+    border-radius:11px;background:rgba(255,255,255,.03);
+    color:var(--muted);font-size:13.5px;font-weight:600;
+    cursor:pointer;font-family:inherit;transition:all .2s;
+  }
+  .btn-guest:hover{
+    background:rgba(124,107,255,.06);border-color:var(--brand);
+    color:var(--text);box-shadow:0 0 0 3px rgba(124,107,255,.1);
+  }
+
+  .err-box{
+    display:flex;align-items:center;gap:8px;margin-top:14px;
+    background:rgba(255,92,122,.08);border:1px solid rgba(255,92,122,.25);
+    border-radius:9px;padding:10px 14px;font-size:12.5px;color:#fca5a5;
+    min-height:0;transition:.2s;
+  }
+  .err-box:empty{display:none}
+
+  .demo-box{
+    margin-top:20px;border-radius:12px;
+    background:rgba(124,107,255,.07);border:1px solid rgba(124,107,255,.18);
+    padding:12px 16px;
+  }
+  .demo-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--brand);margin-bottom:8px}
+  .demo-row{display:flex;align-items:center;justify-content:space-between;
+    font-size:12px;color:var(--muted);padding:3px 0}
+  .demo-val{color:var(--text);font-weight:600;font-size:13px;font-family:'JetBrains Mono','Courier New',monospace}
+  /* Note: using system monospace as JetBrains Mono not imported here — that's fine */
+
+  /* Spinner */
+  .spinner{
+    display:inline-block;width:16px;height:16px;
+    border:2px solid rgba(255,255,255,.3);border-top-color:white;
+    border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* Features strip */
+  .features{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .feat{
+    display:flex;align-items:center;gap:5px;font-size:11px;color:var(--dim);
+    background:rgba(255,255,255,.03);border:1px solid var(--border);
+    border-radius:999px;padding:5px 12px;
+  }
+  .feat-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(0,229,160,.5)}
+  </style>
+  </head>
+  <body>
+
+  <div class="page">
+    <div class="hero">
+      <div class="logo-wrap">✦</div>
+      <div class="hero-title">IA Empresarial Nexus</div>
+      <div class="hero-sub">Asistente inteligente para análisis empresarial</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Iniciar sesión</div>
+        <div class="card-desc">Accede a tu panel de análisis con IA</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="emailIn">Correo electrónico</label>
+        <input class="field-input" id="emailIn" type="email"
+          placeholder="correo@empresa.com" value="admin@saas.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label class="field-label" for="passIn">Contraseña</label>
+        <input class="field-input" id="passIn" type="password"
+          placeholder="••••••••" value="1234" autocomplete="current-password">
+      </div>
+
+      <button class="btn-login" id="btnLogin">Iniciar sesión</button>
+      <div class="err-box" id="errBox"></div>
+
+      <div class="divider">o accede sin cuenta</div>
+      <button class="btn-guest" id="btnGuest">Continuar como invitado</button>
+
+      <div class="demo-box">
+        <div class="demo-label">Credenciales de demo</div>
+        <div class="demo-row"><span>Email</span><span class="demo-val">admin@saas.com</span></div>
+        <div class="demo-row"><span>Contraseña</span><span class="demo-val">1234</span></div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feat"><span class="feat-dot"></span>Sin OpenAI requerido</div>
+      <div class="feat"><span class="feat-dot"></span>Análisis en tiempo real</div>
+      <div class="feat"><span class="feat-dot"></span>Exportación a Excel</div>
+    </div>
+  </div>
+
+  <script>
+  const emailEl = document.getElementById('emailIn');
+  const passEl  = document.getElementById('passIn');
+  const btnEl   = document.getElementById('btnLogin');
+  const errEl   = document.getElementById('errBox');
+
+  // Redirect if already logged in
+  if (localStorage.getItem('token')) location.replace('chat.html');
+
+  // Keyboard navigation
+  emailEl.addEventListener('keydown', e => { if(e.key==='Enter') passEl.focus(); });
+  passEl.addEventListener('keydown',  e => { if(e.key==='Enter') doLogin(); });
+  btnEl.addEventListener('click', doLogin);
+  document.getElementById('btnGuest').addEventListener('click', goGuest);
+
+  async function doLogin() {
+    const email = emailEl.value.trim();
+    const pass  = passEl.value;
+    if (!email || !pass) { showErr('Completa todos los campos'); return; }
+    setLoading(true); errEl.textContent = '';
+
+    try {
+      const r = await fetch('/api/auth/login', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ correo: email, password: pass })
+      });
+      const j = await r.json();
+      if (j.ok) {
+        localStorage.setItem('token', j.token);
+        btnEl.innerHTML = '✓ Accediendo…';
+        setTimeout(() => location.href = 'chat.html', 500);
+      } else {
+        showErr(j.error || 'Credenciales incorrectas. Intenta de nuevo.');
+        setLoading(false);
+      }
+    } catch(_) {
+      showErr('No se pudo conectar al servidor. Verifica que esté corriendo.');
+      setLoading(false);
+    }
+  }
+
+  function goGuest() {
+    localStorage.removeItem('token');
+    location.href = 'chat.html';
+  }
+
+  function setLoading(on) {
+    btnEl.disabled = on;
+    btnEl.innerHTML = on ? '<span class="spinner"></span>Verificando…' : 'Iniciar sesión';
+  }
+
+  function showErr(msg) {
+    errEl.textContent = '⚠ ' + msg;
+  }
+  </script>
+  </body>
+  </html>

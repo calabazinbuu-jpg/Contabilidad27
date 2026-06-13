@@ -1,0 +1,82 @@
+{
+  "account": [
+    "cuentas_contables",
+    "activos_fijos",
+    "auditoria",
+    "bancos",
+    "cache_consultas",
+    "caja",
+    "categorias",
+    "configuracion",
+    "documentos",
+    "feedback_ia",
+    "ia_memory",
+    "logs_ia",
+    "marcas",
+    "mensajes_chat",
+    "proyectos",
+    "roles",
+    "sesiones_chat",
+    "tareas",
+    "users",
+    "usuario_roles",
+    "usuarios"
+  ],
+  "inventory": [
+    "kardex",
+    "almacenes",
+    "lotes"
+  ],
+  "journal": [
+    "movimientos",
+    "asiento_detalle",
+    "asientos",
+    "asientos_detalle",
+    "asientos_contables"
+  ],
+  "employee": [
+    "empleados",
+    "planillas",
+    "asistencia"
+  ],
+  "product": [
+    "productos",
+    "factura_items",
+    "centros_costo",
+    "monedas",
+    "unidades_medida"
+  ],
+  "customer": [
+    "clientes",
+    "empresas",
+    "guias_remision",
+    "tickets"
+  ],
+  "purchase": [
+    "compras",
+    "compra_detalle",
+    "oportunidades",
+    "tipo_cambio"
+  ],
+  "order": [
+    "cotizaciones"
+  ],
+  "expense": [
+    "gastos",
+    "depreciaciones"
+  ],
+  "invoice": [
+    "facturas",
+    "ventas",
+    "factura_detalle",
+    "sucursales"
+  ],
+  "payment": [
+    "pagos",
+    "notas_credito",
+    "notas_debito"
+  ],
+  "supplier": [
+    "proveedores"
+  ]
+}

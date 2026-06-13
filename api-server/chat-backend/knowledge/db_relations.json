@@ -1,0 +1,1154 @@
+[
+  {
+    "origen": {
+      "tabla": "activos_fijos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "activos_fijos_empresa_id_fkey",
+    "join": "activos_fijos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "activos_fijos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "activos_fijos_empresa_fk",
+    "join": "activos_fijos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "almacenes",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "almacenes_empresa_id_fkey",
+    "join": "almacenes.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "almacenes",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "almacenes_empresa_fk",
+    "join": "almacenes.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "almacenes",
+      "columna": "sucursal_id"
+    },
+    "destino": {
+      "tabla": "sucursales",
+      "columna": "id"
+    },
+    "constraint": "almacenes_sucursal_id_fkey",
+    "join": "almacenes.sucursal_id = sucursales.id"
+  },
+  {
+    "origen": {
+      "tabla": "asiento_detalle",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "asiento_detalle_empresa_fk",
+    "join": "asiento_detalle.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "asiento_detalle",
+      "columna": "cuenta_id"
+    },
+    "destino": {
+      "tabla": "cuentas_contables",
+      "columna": "id"
+    },
+    "constraint": "asiento_detalle_cuenta_id_fkey",
+    "join": "asiento_detalle.cuenta_id = cuentas_contables.id"
+  },
+  {
+    "origen": {
+      "tabla": "asiento_detalle",
+      "columna": "asiento_id"
+    },
+    "destino": {
+      "tabla": "asientos",
+      "columna": "id"
+    },
+    "constraint": "asiento_detalle_asiento_id_fkey",
+    "join": "asiento_detalle.asiento_id = asientos.id"
+  },
+  {
+    "origen": {
+      "tabla": "asientos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "asientos_empresa_fk",
+    "join": "asientos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "asientos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "asientos_empresa_id_fkey",
+    "join": "asientos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "asientos_detalle",
+      "columna": "asiento_id"
+    },
+    "destino": {
+      "tabla": "asientos_contables",
+      "columna": "id"
+    },
+    "constraint": "fk_asiento",
+    "join": "asientos_detalle.asiento_id = asientos_contables.id"
+  },
+  {
+    "origen": {
+      "tabla": "asistencia",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "asistencia_empresa_fk",
+    "join": "asistencia.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "asistencia",
+      "columna": "empleado_id"
+    },
+    "destino": {
+      "tabla": "empleados",
+      "columna": "id"
+    },
+    "constraint": "asistencia_empleado_id_fkey",
+    "join": "asistencia.empleado_id = empleados.id"
+  },
+  {
+    "origen": {
+      "tabla": "auditoria",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "auditoria_empresa_fk",
+    "join": "auditoria.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "bancos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "bancos_empresa_fk",
+    "join": "bancos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "bancos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "bancos_empresa_id_fkey",
+    "join": "bancos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "cache_consultas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "cache_consultas_empresa_fk",
+    "join": "cache_consultas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "caja",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "caja_empresa_fk",
+    "join": "caja.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "caja",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "caja_empresa_id_fkey",
+    "join": "caja.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "categorias",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "categorias_empresa_id_fkey",
+    "join": "categorias.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "categorias",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "categorias_empresa_fk",
+    "join": "categorias.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "centros_costo",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "centros_costo_empresa_fk",
+    "join": "centros_costo.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "clientes",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "clientes_empresa_fk",
+    "join": "clientes.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "compra_detalle",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "compra_detalle_empresa_fk",
+    "join": "compra_detalle.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "compra_detalle",
+      "columna": "compra_id"
+    },
+    "destino": {
+      "tabla": "compras",
+      "columna": "id"
+    },
+    "constraint": "compra_detalle_compra_id_fkey",
+    "join": "compra_detalle.compra_id = compras.id"
+  },
+  {
+    "origen": {
+      "tabla": "compra_detalle",
+      "columna": "producto_id"
+    },
+    "destino": {
+      "tabla": "productos",
+      "columna": "id"
+    },
+    "constraint": "compra_detalle_producto_id_fkey",
+    "join": "compra_detalle.producto_id = productos.id"
+  },
+  {
+    "origen": {
+      "tabla": "compras",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "compras_empresa_fk",
+    "join": "compras.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "compras",
+      "columna": "proveedor_id"
+    },
+    "destino": {
+      "tabla": "proveedores",
+      "columna": "id"
+    },
+    "constraint": "compras_proveedor_id_fkey",
+    "join": "compras.proveedor_id = proveedores.id"
+  },
+  {
+    "origen": {
+      "tabla": "configuracion",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "configuracion_empresa_id_fkey",
+    "join": "configuracion.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "configuracion",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "configuracion_empresa_fk",
+    "join": "configuracion.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "cotizaciones",
+      "columna": "cliente_id"
+    },
+    "destino": {
+      "tabla": "clientes",
+      "columna": "id"
+    },
+    "constraint": "cotizaciones_cliente_id_fkey",
+    "join": "cotizaciones.cliente_id = clientes.id"
+  },
+  {
+    "origen": {
+      "tabla": "cotizaciones",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "cotizaciones_empresa_fk",
+    "join": "cotizaciones.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "cuentas_contables",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "cuentas_contables_empresa_fk",
+    "join": "cuentas_contables.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "cuentas_contables",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "cuentas_contables_empresa_id_fkey",
+    "join": "cuentas_contables.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "depreciaciones",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "depreciaciones_empresa_fk",
+    "join": "depreciaciones.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "depreciaciones",
+      "columna": "activo_id"
+    },
+    "destino": {
+      "tabla": "activos_fijos",
+      "columna": "id"
+    },
+    "constraint": "depreciaciones_activo_id_fkey",
+    "join": "depreciaciones.activo_id = activos_fijos.id"
+  },
+  {
+    "origen": {
+      "tabla": "documentos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "documentos_empresa_id_fkey",
+    "join": "documentos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "documentos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "documentos_empresa_fk",
+    "join": "documentos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "embeddings_doc",
+      "columna": "documento_id"
+    },
+    "destino": {
+      "tabla": "documentos_rag",
+      "columna": "id"
+    },
+    "constraint": "embeddings_doc_documento_id_fkey",
+    "join": "embeddings_doc.documento_id = documentos_rag.id"
+  },
+  {
+    "origen": {
+      "tabla": "empleados",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "empleados_empresa_fk",
+    "join": "empleados.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "empleados",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "empleados_empresa_id_fkey",
+    "join": "empleados.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "empresas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "empresas_empresa_fk",
+    "join": "empresas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "factura_detalle",
+      "columna": "producto_id"
+    },
+    "destino": {
+      "tabla": "productos",
+      "columna": "id"
+    },
+    "constraint": "factura_detalle_producto_id_fkey",
+    "join": "factura_detalle.producto_id = productos.id"
+  },
+  {
+    "origen": {
+      "tabla": "factura_detalle",
+      "columna": "factura_id"
+    },
+    "destino": {
+      "tabla": "facturas",
+      "columna": "id"
+    },
+    "constraint": "factura_detalle_factura_id_fkey",
+    "join": "factura_detalle.factura_id = facturas.id"
+  },
+  {
+    "origen": {
+      "tabla": "factura_detalle",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "factura_detalle_empresa_fk",
+    "join": "factura_detalle.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "factura_items",
+      "columna": "factura_id"
+    },
+    "destino": {
+      "tabla": "facturas",
+      "columna": "id"
+    },
+    "constraint": "factura_items_factura_id_fkey",
+    "join": "factura_items.factura_id = facturas.id"
+  },
+  {
+    "origen": {
+      "tabla": "factura_items",
+      "columna": "producto_id"
+    },
+    "destino": {
+      "tabla": "productos",
+      "columna": "id"
+    },
+    "constraint": "factura_items_producto_id_fkey",
+    "join": "factura_items.producto_id = productos.id"
+  },
+  {
+    "origen": {
+      "tabla": "factura_items",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "factura_items_empresa_fk",
+    "join": "factura_items.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "facturas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "facturas_empresa_fk",
+    "join": "facturas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "facturas",
+      "columna": "cliente_id"
+    },
+    "destino": {
+      "tabla": "clientes",
+      "columna": "id"
+    },
+    "constraint": "facturas_cliente_id_fkey",
+    "join": "facturas.cliente_id = clientes.id"
+  },
+  {
+    "origen": {
+      "tabla": "feedback_ia",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "feedback_ia_empresa_fk",
+    "join": "feedback_ia.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "feedback_ia",
+      "columna": "log_id"
+    },
+    "destino": {
+      "tabla": "logs_ia",
+      "columna": "id"
+    },
+    "constraint": "feedback_ia_log_id_fkey",
+    "join": "feedback_ia.log_id = logs_ia.id"
+  },
+  {
+    "origen": {
+      "tabla": "gastos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "gastos_empresa_fk",
+    "join": "gastos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "guias_remision",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "guias_remision_empresa_fk",
+    "join": "guias_remision.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "guias_remision",
+      "columna": "cliente_id"
+    },
+    "destino": {
+      "tabla": "clientes",
+      "columna": "id"
+    },
+    "constraint": "guias_remision_cliente_id_fkey",
+    "join": "guias_remision.cliente_id = clientes.id"
+  },
+  {
+    "origen": {
+      "tabla": "ia_memory",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "ia_memory_empresa_fk",
+    "join": "ia_memory.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "kardex",
+      "columna": "producto_id"
+    },
+    "destino": {
+      "tabla": "productos",
+      "columna": "id"
+    },
+    "constraint": "kardex_producto_id_fkey",
+    "join": "kardex.producto_id = productos.id"
+  },
+  {
+    "origen": {
+      "tabla": "kardex",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "kardex_empresa_fk",
+    "join": "kardex.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "logs_ia",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "logs_ia_empresa_fk",
+    "join": "logs_ia.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "lotes",
+      "columna": "producto_id"
+    },
+    "destino": {
+      "tabla": "productos",
+      "columna": "id"
+    },
+    "constraint": "lotes_producto_id_fkey",
+    "join": "lotes.producto_id = productos.id"
+  },
+  {
+    "origen": {
+      "tabla": "lotes",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "lotes_empresa_fk",
+    "join": "lotes.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "marcas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "marcas_empresa_fk",
+    "join": "marcas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "mensajes_chat",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "mensajes_chat_empresa_fk",
+    "join": "mensajes_chat.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "mensajes_chat",
+      "columna": "sesion_id"
+    },
+    "destino": {
+      "tabla": "sesiones_chat",
+      "columna": "id"
+    },
+    "constraint": "mensajes_chat_sesion_id_fkey",
+    "join": "mensajes_chat.sesion_id = sesiones_chat.id"
+  },
+  {
+    "origen": {
+      "tabla": "monedas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "monedas_empresa_fk",
+    "join": "monedas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "notas_credito",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "notas_credito_empresa_fk",
+    "join": "notas_credito.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "notas_credito",
+      "columna": "factura_id"
+    },
+    "destino": {
+      "tabla": "facturas",
+      "columna": "id"
+    },
+    "constraint": "notas_credito_factura_id_fkey",
+    "join": "notas_credito.factura_id = facturas.id"
+  },
+  {
+    "origen": {
+      "tabla": "notas_debito",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "notas_debito_empresa_fk",
+    "join": "notas_debito.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "notas_debito",
+      "columna": "factura_id"
+    },
+    "destino": {
+      "tabla": "facturas",
+      "columna": "id"
+    },
+    "constraint": "notas_debito_factura_id_fkey",
+    "join": "notas_debito.factura_id = facturas.id"
+  },
+  {
+    "origen": {
+      "tabla": "oportunidades",
+      "columna": "cliente_id"
+    },
+    "destino": {
+      "tabla": "clientes",
+      "columna": "id"
+    },
+    "constraint": "oportunidades_cliente_id_fkey",
+    "join": "oportunidades.cliente_id = clientes.id"
+  },
+  {
+    "origen": {
+      "tabla": "oportunidades",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "oportunidades_empresa_fk",
+    "join": "oportunidades.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "pagos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "pagos_empresa_fk",
+    "join": "pagos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "pagos",
+      "columna": "factura_id"
+    },
+    "destino": {
+      "tabla": "facturas",
+      "columna": "id"
+    },
+    "constraint": "pagos_factura_id_fkey",
+    "join": "pagos.factura_id = facturas.id"
+  },
+  {
+    "origen": {
+      "tabla": "planillas",
+      "columna": "empleado_id"
+    },
+    "destino": {
+      "tabla": "empleados",
+      "columna": "id"
+    },
+    "constraint": "planillas_empleado_id_fkey",
+    "join": "planillas.empleado_id = empleados.id"
+  },
+  {
+    "origen": {
+      "tabla": "planillas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "planillas_empresa_fk",
+    "join": "planillas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "productos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "productos_empresa_fk",
+    "join": "productos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "proveedores",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "proveedores_empresa_fk",
+    "join": "proveedores.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "proyectos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "proyectos_empresa_fk",
+    "join": "proyectos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "proyectos",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "proyectos_empresa_id_fkey",
+    "join": "proyectos.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "roles",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "roles_empresa_fk",
+    "join": "roles.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "sesiones_chat",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "sesiones_chat_empresa_fk",
+    "join": "sesiones_chat.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "sesiones_chat",
+      "columna": "usuario_id"
+    },
+    "destino": {
+      "tabla": "usuarios",
+      "columna": "id"
+    },
+    "constraint": "sesiones_chat_usuario_id_fkey",
+    "join": "sesiones_chat.usuario_id = usuarios.id"
+  },
+  {
+    "origen": {
+      "tabla": "sucursales",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "sucursales_empresa_id_fkey",
+    "join": "sucursales.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "sucursales",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "sucursales_empresa_fk",
+    "join": "sucursales.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "tareas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "tareas_empresa_fk",
+    "join": "tareas.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "tareas",
+      "columna": "proyecto_id"
+    },
+    "destino": {
+      "tabla": "proyectos",
+      "columna": "id"
+    },
+    "constraint": "tareas_proyecto_id_fkey",
+    "join": "tareas.proyecto_id = proyectos.id"
+  },
+  {
+    "origen": {
+      "tabla": "tickets",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "tickets_empresa_fk",
+    "join": "tickets.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "tickets",
+      "columna": "cliente_id"
+    },
+    "destino": {
+      "tabla": "clientes",
+      "columna": "id"
+    },
+    "constraint": "tickets_cliente_id_fkey",
+    "join": "tickets.cliente_id = clientes.id"
+  },
+  {
+    "origen": {
+      "tabla": "tipo_cambio",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "tipo_cambio_empresa_fk",
+    "join": "tipo_cambio.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "unidades_medida",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "unidades_medida_empresa_fk",
+    "join": "unidades_medida.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "users",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "users_empresa_fk",
+    "join": "users.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "usuario_roles",
+      "columna": "rol_id"
+    },
+    "destino": {
+      "tabla": "roles",
+      "columna": "id"
+    },
+    "constraint": "usuario_roles_rol_id_fkey",
+    "join": "usuario_roles.rol_id = roles.id"
+  },
+  {
+    "origen": {
+      "tabla": "usuario_roles",
+      "columna": "usuario_id"
+    },
+    "destino": {
+      "tabla": "usuarios",
+      "columna": "id"
+    },
+    "constraint": "usuario_roles_usuario_id_fkey",
+    "join": "usuario_roles.usuario_id = usuarios.id"
+  },
+  {
+    "origen": {
+      "tabla": "usuario_roles",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "usuario_roles_empresa_fk",
+    "join": "usuario_roles.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "usuarios",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "usuarios_empresa_fk",
+    "join": "usuarios.empresa_id = empresas.id"
+  },
+  {
+    "origen": {
+      "tabla": "ventas",
+      "columna": "empresa_id"
+    },
+    "destino": {
+      "tabla": "empresas",
+      "columna": "id"
+    },
+    "constraint": "ventas_empresa_fk",
+    "join": "ventas.empresa_id = empresas.id"
+  }
+]

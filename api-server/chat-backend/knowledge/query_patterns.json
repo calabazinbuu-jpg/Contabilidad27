@@ -1,0 +1,37 @@
+[
+  {
+    "id": "compras_por_proveedor",
+    "pregunta_ejemplo": "Muéstrame las compras del proveedor ABC",
+    "sql": "SELECT c.* FROM compras c JOIN proveedores p ON compras.proveedor_id = proveedores.id WHERE p.nombre ILIKE '%ABC%' ORDER BY c.fecha DESC",
+    "tablas": [
+      "compras",
+      "proveedores"
+    ]
+  },
+  {
+    "id": "facturas_por_cliente",
+    "pregunta_ejemplo": "Facturas del cliente X",
+    "sql": "SELECT f.* FROM facturas f JOIN clientes c ON facturas.cliente_id = clientes.id WHERE c.nombre ILIKE '%X%' ORDER BY f.fecha DESC",
+    "tablas": [
+      "facturas",
+      "clientes"
+    ]
+  },
+  {
+    "id": "productos_mas_comprados",
+    "pregunta_ejemplo": "Productos más comprados",
+    "sql": "SELECT p.nombre, SUM(d.cantidad) AS total FROM compra_detalle d JOIN productos p ON compra_detalle.producto_id = productos.id GROUP BY p.nombre ORDER BY total DESC LIMIT 20",
+    "tablas": [
+      "compra_detalle",
+      "productos"
+    ]
+  },
+  {
+    "id": "ventas_por_mes",
+    "pregunta_ejemplo": "Ventas por mes",
+    "sql": "SELECT DATE_TRUNC('month', fecha) AS mes, COUNT(*) AS n, SUM(total) AS total FROM ventas GROUP BY 1 ORDER BY 1 DESC",
+    "tablas": [
+      "ventas"
+    ]
+  }
+]

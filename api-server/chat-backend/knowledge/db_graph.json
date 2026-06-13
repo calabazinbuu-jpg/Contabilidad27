@@ -1,0 +1,286 @@
+{
+  "activos_fijos": [
+    "empresas",
+    "depreciaciones"
+  ],
+  "almacenes": [
+    "empresas",
+    "sucursales"
+  ],
+  "asiento_detalle": [
+    "empresas",
+    "cuentas_contables",
+    "asientos"
+  ],
+  "asientos": [
+    "asiento_detalle",
+    "empresas"
+  ],
+  "asientos_contables": [
+    "asientos_detalle"
+  ],
+  "asientos_detalle": [
+    "asientos_contables"
+  ],
+  "asistencia": [
+    "empresas",
+    "empleados"
+  ],
+  "auditoria": [
+    "empresas"
+  ],
+  "bancos": [
+    "empresas"
+  ],
+  "cache_consultas": [
+    "empresas"
+  ],
+  "caja": [
+    "empresas"
+  ],
+  "categorias": [
+    "empresas"
+  ],
+  "centros_costo": [
+    "empresas"
+  ],
+  "clientes": [
+    "empresas",
+    "cotizaciones",
+    "facturas",
+    "guias_remision",
+    "oportunidades",
+    "tickets"
+  ],
+  "compra_detalle": [
+    "empresas",
+    "compras",
+    "productos"
+  ],
+  "compras": [
+    "compra_detalle",
+    "empresas",
+    "proveedores"
+  ],
+  "configuracion": [
+    "empresas"
+  ],
+  "cotizaciones": [
+    "clientes",
+    "empresas"
+  ],
+  "cuentas_contables": [
+    "asiento_detalle",
+    "empresas"
+  ],
+  "depreciaciones": [
+    "empresas",
+    "activos_fijos"
+  ],
+  "documentos": [
+    "empresas"
+  ],
+  "documentos_rag": [
+    "embeddings_doc"
+  ],
+  "embeddings_doc": [
+    "documentos_rag"
+  ],
+  "empleados": [
+    "asistencia",
+    "empresas",
+    "planillas"
+  ],
+  "empresas": [
+    "activos_fijos",
+    "almacenes",
+    "asiento_detalle",
+    "asientos",
+    "asistencia",
+    "auditoria",
+    "bancos",
+    "cache_consultas",
+    "caja",
+    "categorias",
+    "centros_costo",
+    "clientes",
+    "compra_detalle",
+    "compras",
+    "configuracion",
+    "cotizaciones",
+    "cuentas_contables",
+    "depreciaciones",
+    "documentos",
+    "empleados",
+    "empresas",
+    "factura_detalle",
+    "factura_items",
+    "facturas",
+    "feedback_ia",
+    "gastos",
+    "guias_remision",
+    "ia_memory",
+    "kardex",
+    "logs_ia",
+    "lotes",
+    "marcas",
+    "mensajes_chat",
+    "monedas",
+    "notas_credito",
+    "notas_debito",
+    "oportunidades",
+    "pagos",
+    "planillas",
+    "productos",
+    "proveedores",
+    "proyectos",
+    "roles",
+    "sesiones_chat",
+    "sucursales",
+    "tareas",
+    "tickets",
+    "tipo_cambio",
+    "unidades_medida",
+    "users",
+    "usuario_roles",
+    "usuarios",
+    "ventas"
+  ],
+  "factura_detalle": [
+    "productos",
+    "facturas",
+    "empresas"
+  ],
+  "factura_items": [
+    "facturas",
+    "productos",
+    "empresas"
+  ],
+  "facturas": [
+    "factura_detalle",
+    "factura_items",
+    "empresas",
+    "clientes",
+    "notas_credito",
+    "notas_debito",
+    "pagos"
+  ],
+  "feedback_ia": [
+    "empresas",
+    "logs_ia"
+  ],
+  "gastos": [
+    "empresas"
+  ],
+  "guias_remision": [
+    "empresas",
+    "clientes"
+  ],
+  "ia_memory": [
+    "empresas"
+  ],
+  "kardex": [
+    "productos",
+    "empresas"
+  ],
+  "logs_ia": [
+    "feedback_ia",
+    "empresas"
+  ],
+  "lotes": [
+    "productos",
+    "empresas"
+  ],
+  "marcas": [
+    "empresas"
+  ],
+  "mensajes": [],
+  "mensajes_chat": [
+    "empresas",
+    "sesiones_chat"
+  ],
+  "monedas": [
+    "empresas"
+  ],
+  "movimientos": [],
+  "notas_credito": [
+    "empresas",
+    "facturas"
+  ],
+  "notas_debito": [
+    "empresas",
+    "facturas"
+  ],
+  "oportunidades": [
+    "clientes",
+    "empresas"
+  ],
+  "pagos": [
+    "empresas",
+    "facturas"
+  ],
+  "planillas": [
+    "empleados",
+    "empresas"
+  ],
+  "productos": [
+    "compra_detalle",
+    "factura_detalle",
+    "factura_items",
+    "kardex",
+    "lotes",
+    "empresas"
+  ],
+  "proveedores": [
+    "compras",
+    "empresas"
+  ],
+  "proyectos": [
+    "empresas",
+    "tareas"
+  ],
+  "roles": [
+    "empresas",
+    "usuario_roles"
+  ],
+  "sesiones": [],
+  "sesiones_chat": [
+    "mensajes_chat",
+    "empresas",
+    "usuarios"
+  ],
+  "sucursales": [
+    "almacenes",
+    "empresas"
+  ],
+  "tareas": [
+    "empresas",
+    "proyectos"
+  ],
+  "tickets": [
+    "empresas",
+    "clientes"
+  ],
+  "tipo_cambio": [
+    "empresas"
+  ],
+  "unidades_medida": [
+    "empresas"
+  ],
+  "users": [
+    "empresas"
+  ],
+  "usuario_roles": [
+    "roles",
+    "usuarios",
+    "empresas"
+  ],
+  "usuarios": [
+    "sesiones_chat",
+    "usuario_roles",
+    "empresas"
+  ],
+  "ventas": [
+    "empresas"
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "account": {
+    "tipo": "master_data",
+    "tablas": [
+      "cuentas_contables",
+      "activos_fijos",
+      "auditoria",
+      "bancos",
+      "cache_consultas",
+      "caja",
+      "categorias",
+      "configuracion",
+      "documentos",
+      "feedback_ia",
+      "ia_memory",
+      "logs_ia",
+      "marcas",
+      "mensajes_chat",
+      "proyectos",
+      "roles",
+      "sesiones_chat",
+      "tareas",
+      "users",
+      "usuario_roles",
+      "usuarios"
+    ],
+    "detalle": [
+      {
+        "tabla": "cuentas_contables",
+        "confidence": 0.75,
+        "motivo": [
+          "nombre de tabla coincide con 'account'",
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "activos_fijos",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "auditoria",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "bancos",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "cache_consultas",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "caja",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "categorias",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "configuracion",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "documentos",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "feedback_ia",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "ia_memory",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "logs_ia",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "marcas",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "mensajes_chat",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "proyectos",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "roles",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "sesiones_chat",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "tareas",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "users",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "usuario_roles",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      },
+      {
+        "tabla": "usuarios",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: saldo"
+        ]
+      }
+    ]
+  },
+  "inventory": {
+    "tipo": "transactional",
+    "tablas": [
+      "kardex",
+      "almacenes",
+      "lotes"
+    ],
+    "detalle": [
+      {
+        "tabla": "kardex",
+        "confidence": 0.9,
+        "motivo": [
+          "nombre de tabla coincide con 'inventory'",
+          "columnas señal: producto_id, cantidad"
+        ]
+      },
+      {
+        "tabla": "almacenes",
+        "confidence": 0.6,
+        "motivo": [
+          "nombre de tabla coincide con 'inventory'"
+        ]
+      },
+      {
+        "tabla": "lotes",
+        "confidence": 0.3,
+        "motivo": [
+          "columnas señal: producto_id, stock"
+        ]
+      }
+    ]
+  },
+  "journal": {
+    "tipo": "transactional",
+    "tablas": [
+      "movimientos",
+      "asiento_detalle",
+      "asientos",
+      "asientos_detalle",
+      "asientos_contables"
+    ],
+    "detalle": [
+      {
+        "tabla": "movimientos",
+        "confidence": 1,
+        "motivo": [
+          "nombre de tabla coincide con 'journal'",
+          "columnas señal: cuenta_id, debe, haber, fecha"
+        ]
+      },
+      {
+        "tabla": "asiento_detalle",
+        "confidence": 0.75,
+        "motivo": [
+          "nombre de tabla similar a 'journal'",
+          "columnas señal: asiento_id, cuenta_id, debe, haber"
+        ]
+      },
+      {
+        "tabla": "asientos",
+        "confidence": 0.75,
+        "motivo": [
+          "nombre de tabla coincide con 'journal'",
+          "columnas señal: fecha"
+        ]
+      },
+      {
+        "tabla": "asientos_detalle",
+        "confidence": 0.75,
+        "motivo": [
+          "nombre de tabla similar a 'journal'",
+          "columnas señal: asiento_id, debe, haber"
+        ]
+      },
+      {
+        "tabla": "asientos_contables",
+        "confidence": 0.5,
+        "motivo": [
+          "nombre de tabla similar a 'journal'",
+          "columnas señal: fecha"
+        ]
+      }
+    ]
+  },
+  "employee": {
+    "tipo": "master_data",
+    "tablas": [
+      "empleados",
+      "planillas",
+      "asistencia"
+    ],
+    "detalle": [
+      {
+        "tabla": "empleados",
+        "confidence": 1,
+        "motivo": [
+          "nombre de tabla coincide con 'employee'",
+          "columnas señal: sueldo, cargo, apellidos, fecha_ingreso"
+        ]
+      },
+      {
+        "tabla": "planillas",
+        "confidence": 0.3,
+        "motivo": [
+          "columnas señal: empleado_id, sueldo"
+        ]
+      },
+      {
+        "tabla": "asistencia",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: empleado_id"
+        ]
+      }
+    ]
+  },
+  "product": {
+    "tipo": "master_data",
+    "tablas": [
+      "productos",
+      "factura_items",
+      "centros_costo",
+      "monedas",
+      "unidades_medida"
+    ],
+    "detalle": [
+      {
+        "tabla": "productos",
+        "confidence": 0.75,
+        "motivo": [
+          "nombre de tabla coincide con 'product'",
+          "columnas señal: precio"
+        ]
+      },
+      {
+        "tabla": "factura_items",
+        "confidence": 0.65,
+        "motivo": [
+          "nombre de tabla similar a 'product'",
+          "columnas señal: producto_id, precio"
+        ]
+      },
+      {
+        "tabla": "centros_costo",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: codigo"
+        ]
+      },
+      {
+        "tabla": "monedas",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: codigo"
+        ]
+      },
+      {
+        "tabla": "unidades_medida",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: codigo"
+        ]
+      }
+    ]
+  },
+  "customer": {
+    "tipo": "master_data",
+    "tablas": [
+      "clientes",
+      "empresas",
+      "guias_remision",
+      "tickets"
+    ],
+    "detalle": [
+      {
+        "tabla": "clientes",
+        "confidence": 0.6,
+        "motivo": [
+          "nombre de tabla coincide con 'customer'"
+        ]
+      },
+      {
+        "tabla": "empresas",
+        "confidence": 0.3,
+        "motivo": [
+          "columnas señal: ruc, razon_social"
+        ]
+      },
+      {
+        "tabla": "guias_remision",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: cliente_id"
+        ]
+      },
+      {
+        "tabla": "tickets",
+        "confidence": 0.15,
+        "motivo": [
+          "columnas señal: cliente_id"
+        ]
+      }
+    ]
+  },
+  "purchase": {
+    "tipo": "transactional",
+    "tablas": [
+      "compras",
+      "compra_detalle",
+      "oportunidades",
+      "tipo_cambio"
+    ],
+    "detalle": [
+      {
+        "tabla": "compras",
+        "confidence": 0.9,
+        "motivo": [
+          "nombre de tabla coincide con 'purchase'",
+          "columnas señal: proveedor_id, total"
+        ]
+      },
+      {
+        "tabla": "compra_detalle",
+        "confidence": 0.5,
+        "motivo": [
+          "nombre de tabla similar a 'purchase'",
+          "columnas señal: compra_id"
+        ]
+      },
+      {
+        "tabla": "oportunidades",
+        "confidence": 0.35,
+        "motivo": [
+          "nombre de tabla similar a 'purchase'"
+        ]
+      },
+      {
+        "tabla": "tipo_cambio",
+        "confidence": 0.35,
+        "motivo": [
+          "nombre de tabla similar a 'purchase'"
+        ]
+      }
+    ]
+  },
+  "order": {
+    "tipo": "transactional",
+    "tablas": [
+      "cotizaciones"
+    ],
+    "detalle": [
+      {
+        "tabla": "cotizaciones",
+        "confidence": 0.9,
+        "motivo": [
+          "nombre de tabla coincide con 'order'",
+          "columnas señal: cliente_id, total"
+        ]
+      }
+    ]
+  },
+  "expense": {
+    "tipo": "transactional",
+    "tablas": [
+      "gastos",
+      "depreciaciones"
+    ],
+    "detalle": [
+      {
+        "tabla": "gastos",
+        "confidence": 1,
+        "motivo": [
+          "nombre de tabla coincide con 'expense'",
+          "columnas señal: monto, fecha, categoria"
+        ]
+      },
+      {
+        "tabla": "depreciaciones",
+        "confidence": 0.3,
+        "motivo": [
+          "columnas señal: monto, fecha"
+        ]
+      }
+    ]
+  },
+  "invoice": {
+    "tipo": "transactional",
+    "tablas": [
+      "facturas",
+      "ventas",
+      "factura_detalle",
+      "sucursales"
+    ],
+    "detalle": [
+      {
+        "tabla": "facturas",
+        "confidence": 1,
+        "motivo": [
+          "nombre de tabla coincide con 'invoice'",
+          "columnas señal: cliente_id, total, numero"
+        ]
+      },
+      {
+        "tabla": "ventas",
+        "confidence": 0.9,
+        "motivo": [
+          "nombre de tabla coincide con 'invoice'",
+          "columnas señal: cliente_id, total"
+        ]
+      },
+      {
+        "tabla": "factura_detalle",
+        "confidence": 0.5,
+        "motivo": [
+          "nombre de tabla similar a 'invoice'",
+          "columnas señal: factura_id"
+        ]
+      },
+      {
+        "tabla": "sucursales",
+        "confidence": 0.35,
+        "motivo": [
+          "nombre de tabla similar a 'invoice'"
+        ]
+      }
+    ]
+  },
+  "payment": {
+    "tipo": "transactional",
+    "tablas": [
+      "pagos",
+      "notas_credito",
+      "notas_debito"
+    ],
+    "detalle": [
+      {
+        "tabla": "pagos",
+        "confidence": 0.9,
+        "motivo": [
+          "nombre de tabla coincide con 'payment'",
+          "columnas señal: factura_id, monto"
+        ]
+      },
+      {
+        "tabla": "notas_credito",
+        "confidence": 0.3,
+        "motivo": [
+          "columnas señal: factura_id, monto"
+        ]
+      },
+      {
+        "tabla": "notas_debito",
+        "confidence": 0.3,
+        "motivo": [
+          "columnas señal: factura_id, monto"
+        ]
+      }
+    ]
+  },
+  "supplier": {
+    "tipo": "master_data",
+    "tablas": [
+      "proveedores"
+    ],
+    "detalle": [
+      {
+        "tabla": "proveedores",
+        "confidence": 0.6,
+        "motivo": [
+          "nombre de tabla coincide con 'supplier'"
+        ]
+      }
+    ]
+  }
+}

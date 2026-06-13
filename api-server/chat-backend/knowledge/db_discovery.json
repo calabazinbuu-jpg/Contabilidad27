@@ -1,0 +1,6985 @@
+{
+  "generado_en": "2026-06-13T22:40:40.888Z",
+  "base_datos": "contabilidad",
+  "schema_hash": "a2b692736431fad236f4ce377f780d7e6d87f4c11c17984937b4bc5ad08d6623",
+  "resumen": {
+    "tablas": 60,
+    "relaciones": 96,
+    "indices": 67,
+    "vistas": 0,
+    "tablas_vacias": 21,
+    "tablas_con_datos": 39,
+    "maestras": 18,
+    "transaccionales": 15,
+    "detalle": 5
+  },
+  "tipos": {
+    "maestra": [
+      "almacenes",
+      "bancos",
+      "categorias",
+      "clientes",
+      "documentos_rag",
+      "empleados",
+      "empresas",
+      "mensajes",
+      "monedas",
+      "productos",
+      "proveedores",
+      "roles",
+      "sesiones",
+      "sucursales",
+      "unidades_medida",
+      "users",
+      "usuario_roles",
+      "usuarios"
+    ],
+    "transaccional": [
+      "asientos",
+      "asientos_contables",
+      "asistencia",
+      "compras",
+      "cotizaciones",
+      "depreciaciones",
+      "facturas",
+      "guias_remision",
+      "kardex",
+      "lotes",
+      "movimientos",
+      "notas_credito",
+      "notas_debito",
+      "pagos",
+      "ventas"
+    ],
+    "detalle": [
+      "asiento_detalle",
+      "asientos_detalle",
+      "compra_detalle",
+      "factura_detalle",
+      "factura_items"
+    ],
+    "auxiliar": [
+      "activos_fijos",
+      "auditoria",
+      "cache_consultas",
+      "caja",
+      "centros_costo",
+      "configuracion",
+      "cuentas_contables",
+      "documentos",
+      "embeddings_doc",
+      "feedback_ia",
+      "gastos",
+      "ia_memory",
+      "logs_ia",
+      "marcas",
+      "mensajes_chat",
+      "oportunidades",
+      "planillas",
+      "proyectos",
+      "sesiones_chat",
+      "tareas",
+      "tickets",
+      "tipo_cambio"
+    ]
+  },
+  "tablas_vacias": [
+    "almacenes",
+    "asistencia",
+    "bancos",
+    "cache_consultas",
+    "categorias",
+    "centros_costo",
+    "configuracion",
+    "cotizaciones",
+    "documentos_rag",
+    "embeddings_doc",
+    "feedback_ia",
+    "guias_remision",
+    "marcas",
+    "mensajes",
+    "monedas",
+    "notas_credito",
+    "notas_debito",
+    "sesiones",
+    "sucursales",
+    "tipo_cambio",
+    "unidades_medida"
+  ],
+  "tablas": {
+    "activos_fijos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('activos_fijos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "valor",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha_compra",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "activos_fijos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "depreciaciones": "depreciaciones.activo_id = activos_fijos.id"
+      },
+      "indices": [
+        {
+          "nombre": "activos_fijos_pkey",
+          "def": "CREATE UNIQUE INDEX activos_fijos_pkey ON public.activos_fijos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 50,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 2,
+          "descripcion": "Activo Fijo 1",
+          "valor": "35965.54",
+          "fecha_compra": "2025-10-19T05:00:00.000Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 3,
+          "descripcion": "Activo Fijo 2",
+          "valor": "32890.61",
+          "fecha_compra": "2025-02-19T05:00:00.000Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 4,
+          "descripcion": "Activo Fijo 3",
+          "valor": "45876.85",
+          "fecha_compra": "2025-12-11T05:00:00.000Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "almacenes": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('almacenes_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "sucursal_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "direccion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "almacenes.empresa_id = empresas.id",
+        "sucursal_id": "almacenes.sucursal_id = sucursales.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "almacenes_pkey",
+          "def": "CREATE UNIQUE INDEX almacenes_pkey ON public.almacenes USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "asiento_detalle": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('asiento_detalle_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "asiento_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cuenta_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "debe",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "haber",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "asiento_detalle.empresa_id = empresas.id",
+        "cuenta_id": "asiento_detalle.cuenta_id = cuentas_contables.id",
+        "asiento_id": "asiento_detalle.asiento_id = asientos.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "asiento_detalle_pkey",
+          "def": "CREATE UNIQUE INDEX asiento_detalle_pkey ON public.asiento_detalle USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 8401,
+      "muestra": [
+        {
+          "id": 2001,
+          "asiento_id": 52,
+          "cuenta_id": 9,
+          "debe": "983.20",
+          "haber": "0.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2002,
+          "asiento_id": 52,
+          "cuenta_id": 7,
+          "debe": "502.16",
+          "haber": "0.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2003,
+          "asiento_id": 52,
+          "cuenta_id": 1,
+          "debe": "199.86",
+          "haber": "0.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "asientos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('asientos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": "CURRENT_DATE",
+          "longitud": null
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "asientos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "asiento_detalle": "asiento_detalle.asiento_id = asientos.id"
+      },
+      "indices": [
+        {
+          "nombre": "asientos_pkey",
+          "def": "CREATE UNIQUE INDEX asientos_pkey ON public.asientos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 100,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 1,
+          "fecha": "2026-05-22T05:00:00.000Z",
+          "descripcion": "Asiento contable 1",
+          "saldo": "0",
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 1,
+          "fecha": "2026-04-18T05:00:00.000Z",
+          "descripcion": "Asiento contable 2",
+          "saldo": "0",
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 1,
+          "fecha": "2025-08-07T05:00:00.000Z",
+          "descripcion": "Asiento contable 3",
+          "saldo": "0",
+          "stock_min": 0,
+          "subtotal": "0"
+        }
+      ]
+    },
+    "asientos_contables": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('asientos_contables_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "total_debe",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "total_haber",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": "'BORRADOR'::character varying",
+          "longitud": 20
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {},
+      "referenciada_por": {
+        "asientos_detalle": "asientos_detalle.asiento_id = asientos_contables.id"
+      },
+      "indices": [
+        {
+          "nombre": "asientos_contables_pkey",
+          "def": "CREATE UNIQUE INDEX asientos_contables_pkey ON public.asientos_contables USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1,
+      "muestra": [
+        {
+          "id": 1,
+          "fecha": "2026-06-12T05:00:00.000Z",
+          "descripcion": "Compra de mercadería",
+          "total_debe": "1000.00",
+          "total_haber": "1000.00",
+          "estado": "BORRADOR",
+          "creado_en": "2026-06-12T22:24:32.323Z"
+        }
+      ]
+    },
+    "asientos_detalle": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('asientos_detalle_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "asiento_id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cuenta",
+          "tipo": "character varying",
+          "nullable": false,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "debe",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "haber",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "asiento_id": "asientos_detalle.asiento_id = asientos_contables.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "asientos_detalle_pkey",
+          "def": "CREATE UNIQUE INDEX asientos_detalle_pkey ON public.asientos_detalle USING btree (id)"
+        },
+        {
+          "nombre": "idx_asientos_detalle_asiento_id",
+          "def": "CREATE INDEX idx_asientos_detalle_asiento_id ON public.asientos_detalle USING btree (asiento_id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 2,
+      "muestra": [
+        {
+          "id": 1,
+          "asiento_id": 1,
+          "cuenta": "Mercaderías",
+          "descripcion": "Compra",
+          "debe": "1000.00",
+          "haber": "0.00",
+          "creado_en": "2026-06-12T22:24:41.931Z"
+        },
+        {
+          "id": 2,
+          "asiento_id": 1,
+          "cuenta": "Caja",
+          "descripcion": "Pago",
+          "debe": "0.00",
+          "haber": "1000.00",
+          "creado_en": "2026-06-12T22:24:41.931Z"
+        }
+      ]
+    },
+    "asistencia": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('asistencia_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empleado_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "hora_entrada",
+          "tipo": "time without time zone",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "hora_salida",
+          "tipo": "time without time zone",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "asistencia.empresa_id = empresas.id",
+        "empleado_id": "asistencia.empleado_id = empleados.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "asistencia_pkey",
+          "def": "CREATE UNIQUE INDEX asistencia_pkey ON public.asistencia USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "auditoria": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "bigint",
+          "nullable": false,
+          "default": "nextval('auditoria_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "usuario_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "tabla",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "accion",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "auditoria.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "auditoria_pkey",
+          "def": "CREATE UNIQUE INDEX auditoria_pkey ON public.auditoria USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 2000,
+      "muestra": [
+        {
+          "id": "1",
+          "usuario_id": 2,
+          "tabla": "facturas",
+          "accion": "DELETE",
+          "fecha": "2025-12-12T02:23:15.867Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": "2",
+          "usuario_id": 1,
+          "tabla": "productos",
+          "accion": "INSERT",
+          "fecha": "2025-07-23T02:23:15.867Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": "3",
+          "usuario_id": 2,
+          "tabla": "clientes",
+          "accion": "DELETE",
+          "fecha": "2024-12-27T02:23:15.867Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "bancos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('bancos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "banco",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "numero_cuenta",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "moneda",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 10
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "bancos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "bancos_pkey",
+          "def": "CREATE UNIQUE INDEX bancos_pkey ON public.bancos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "cache_consultas": {
+      "columnas": [
+        {
+          "nombre": "clave",
+          "tipo": "character varying",
+          "nullable": false,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "resultado",
+          "tipo": "jsonb",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "hits",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "expira_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "clave"
+      ],
+      "relaciones": {
+        "empresa_id": "cache_consultas.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "cache_consultas_pkey",
+          "def": "CREATE UNIQUE INDEX cache_consultas_pkey ON public.cache_consultas USING btree (clave)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "caja": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('caja_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "concepto",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "ingreso",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "egreso",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "caja.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "caja_pkey",
+          "def": "CREATE UNIQUE INDEX caja_pkey ON public.caja USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 3000,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 2,
+          "fecha": "2024-05-02T05:00:00.000Z",
+          "concepto": "Movimiento Caja 1",
+          "ingreso": "2947.28",
+          "egreso": "1446.95",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 3,
+          "fecha": "2026-04-05T05:00:00.000Z",
+          "concepto": "Movimiento Caja 2",
+          "ingreso": "3137.54",
+          "egreso": "2292.44",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 4,
+          "fecha": "2024-01-02T05:00:00.000Z",
+          "concepto": "Movimiento Caja 3",
+          "ingreso": "29.92",
+          "egreso": "2890.68",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "categorias": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('categorias_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": false,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "categorias.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "categorias_pkey",
+          "def": "CREATE UNIQUE INDEX categorias_pkey ON public.categorias USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "centros_costo": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('centros_costo_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "codigo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "centros_costo.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "centros_costo_pkey",
+          "def": "CREATE UNIQUE INDEX centros_costo_pkey ON public.centros_costo USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "clientes": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('clientes_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "documento",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "email",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "telefono",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "clientes.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "cotizaciones": "cotizaciones.cliente_id = clientes.id",
+        "facturas": "facturas.cliente_id = clientes.id",
+        "guias_remision": "guias_remision.cliente_id = clientes.id",
+        "oportunidades": "oportunidades.cliente_id = clientes.id",
+        "tickets": "tickets.cliente_id = clientes.id"
+      },
+      "indices": [
+        {
+          "nombre": "clientes_pkey",
+          "def": "CREATE UNIQUE INDEX clientes_pkey ON public.clientes USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 110,
+      "muestra": [
+        {
+          "id": 1,
+          "nombre": "Comercial Andina SAS",
+          "documento": "9001112223",
+          "email": "andina@x.com",
+          "telefono": null,
+          "creado_en": "2026-06-11T23:57:05.287Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "nombre": "Distribuciones Norte",
+          "documento": "9002223334",
+          "email": "norte@x.com",
+          "telefono": null,
+          "creado_en": "2026-06-11T23:57:05.287Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "nombre": "TecnoFacil Ltda",
+          "documento": "9003334445",
+          "email": "tecno@x.com",
+          "telefono": null,
+          "creado_en": "2026-06-11T23:57:05.287Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "compra_detalle": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('compra_detalle_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "compra_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "producto_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cantidad",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "costo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "compra_detalle.empresa_id = empresas.id",
+        "compra_id": "compra_detalle.compra_id = compras.id",
+        "producto_id": "compra_detalle.producto_id = productos.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "compra_detalle_pkey",
+          "def": "CREATE UNIQUE INDEX compra_detalle_pkey ON public.compra_detalle USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 5000,
+      "muestra": [
+        {
+          "id": 1,
+          "compra_id": 2,
+          "producto_id": 2,
+          "cantidad": "21.00",
+          "costo": "1499.00",
+          "subtotal": "2764.22",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0"
+        },
+        {
+          "id": 2,
+          "compra_id": 3,
+          "producto_id": 3,
+          "cantidad": "22.00",
+          "costo": "969.08",
+          "subtotal": "22439.18",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0"
+        },
+        {
+          "id": 3,
+          "compra_id": 4,
+          "producto_id": 4,
+          "cantidad": "15.00",
+          "costo": "1282.31",
+          "subtotal": "2107.06",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0"
+        }
+      ]
+    },
+    "compras": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('compras_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "proveedor_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": false,
+          "default": "CURRENT_DATE",
+          "longitud": null
+        },
+        {
+          "nombre": "total",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "text",
+          "nullable": true,
+          "default": "'pagada'::text",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "compras.empresa_id = empresas.id",
+        "proveedor_id": "compras.proveedor_id = proveedores.id"
+      },
+      "referenciada_por": {
+        "compra_detalle": "compra_detalle.compra_id = compras.id"
+      },
+      "indices": [
+        {
+          "nombre": "compras_fecha_idx",
+          "def": "CREATE INDEX compras_fecha_idx ON public.compras USING btree (fecha)"
+        },
+        {
+          "nombre": "compras_pkey",
+          "def": "CREATE UNIQUE INDEX compras_pkey ON public.compras USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 2260,
+      "muestra": [
+        {
+          "id": 42,
+          "proveedor_id": 1,
+          "fecha": "2026-02-05T05:00:00.000Z",
+          "total": "1466000.00",
+          "estado": "pagada",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 43,
+          "proveedor_id": 2,
+          "fecha": "2026-02-02T05:00:00.000Z",
+          "total": "1489000.00",
+          "estado": "pagada",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 44,
+          "proveedor_id": 3,
+          "fecha": "2026-01-30T05:00:00.000Z",
+          "total": "1512000.00",
+          "estado": "pagada",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "configuracion": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('configuracion_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "clave",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "valor",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "configuracion.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "configuracion_pkey",
+          "def": "CREATE UNIQUE INDEX configuracion_pkey ON public.configuracion USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "cotizaciones": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('cotizaciones_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "cliente_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": "CURRENT_DATE",
+          "longitud": null
+        },
+        {
+          "nombre": "total",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "cliente_id": "cotizaciones.cliente_id = clientes.id",
+        "empresa_id": "cotizaciones.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "cotizaciones_pkey",
+          "def": "CREATE UNIQUE INDEX cotizaciones_pkey ON public.cotizaciones USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "cuentas_contables": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('cuentas_contables_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "codigo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "tipo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "cuentas_contables.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "asiento_detalle": "asiento_detalle.cuenta_id = cuentas_contables.id"
+      },
+      "indices": [
+        {
+          "nombre": "cuentas_contables_pkey",
+          "def": "CREATE UNIQUE INDEX cuentas_contables_pkey ON public.cuentas_contables USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 100,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 2,
+          "codigo": "10001",
+          "nombre": "Cuenta Contable 1",
+          "tipo": "ACTIVO",
+          "saldo": "0",
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 3,
+          "codigo": "10002",
+          "nombre": "Cuenta Contable 2",
+          "tipo": "ACTIVO",
+          "saldo": "0",
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 4,
+          "codigo": "10003",
+          "nombre": "Cuenta Contable 3",
+          "tipo": "ACTIVO",
+          "saldo": "0",
+          "stock_min": 0,
+          "subtotal": "0"
+        }
+      ]
+    },
+    "depreciaciones": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('depreciaciones_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "activo_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "monto",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "depreciaciones.empresa_id = empresas.id",
+        "activo_id": "depreciaciones.activo_id = activos_fijos.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "depreciaciones_pkey",
+          "def": "CREATE UNIQUE INDEX depreciaciones_pkey ON public.depreciaciones USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 300,
+      "muestra": [
+        {
+          "id": 1,
+          "activo_id": 2,
+          "fecha": "2025-09-16T05:00:00.000Z",
+          "monto": "522.97",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "activo_id": 3,
+          "fecha": "2025-12-19T05:00:00.000Z",
+          "monto": "480.15",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "activo_id": 4,
+          "fecha": "2024-12-05T05:00:00.000Z",
+          "monto": "204.81",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "documentos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('documentos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "ruta",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "documentos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "documentos_pkey",
+          "def": "CREATE UNIQUE INDEX documentos_pkey ON public.documentos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 500,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 2,
+          "nombre": "Documento 1",
+          "ruta": "/documentos/doc_1.pdf",
+          "fecha": "2024-08-29T02:23:09.757Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 3,
+          "nombre": "Documento 2",
+          "ruta": "/documentos/doc_2.pdf",
+          "fecha": "2025-02-01T02:23:09.757Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 4,
+          "nombre": "Documento 3",
+          "ruta": "/documentos/doc_3.pdf",
+          "fecha": "2026-02-25T02:23:09.757Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "documentos_rag": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('documentos_rag_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "titulo",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fuente",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "contenido",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "tags",
+          "tipo": "ARRAY",
+          "nullable": true,
+          "default": "'{}'::text[]",
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {},
+      "referenciada_por": {
+        "embeddings_doc": "embeddings_doc.documento_id = documentos_rag.id"
+      },
+      "indices": [
+        {
+          "nombre": "documentos_rag_pkey",
+          "def": "CREATE UNIQUE INDEX documentos_rag_pkey ON public.documentos_rag USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "embeddings_doc": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('embeddings_doc_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "documento_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "chunk",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "vector",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "documento_id": "embeddings_doc.documento_id = documentos_rag.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "embeddings_doc_pkey",
+          "def": "CREATE UNIQUE INDEX embeddings_doc_pkey ON public.embeddings_doc USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "empleados": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('empleados_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombres",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "apellidos",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "dni",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "cargo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "sueldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha_ingreso",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "empleados.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "asistencia": "asistencia.empleado_id = empleados.id",
+        "planillas": "planillas.empleado_id = empleados.id"
+      },
+      "indices": [
+        {
+          "nombre": "empleados_pkey",
+          "def": "CREATE UNIQUE INDEX empleados_pkey ON public.empleados USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 4,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 1,
+          "nombres": "Luis",
+          "apellidos": "Garcia",
+          "dni": "70000001",
+          "cargo": "Contador",
+          "sueldo": "3500.00",
+          "fecha_ingreso": "2024-01-01T05:00:00.000Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 1,
+          "nombres": "Miguel",
+          "apellidos": "Torres",
+          "dni": "70000002",
+          "cargo": "Vendedor",
+          "sueldo": "2200.00",
+          "fecha_ingreso": "2024-03-01T05:00:00.000Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 2,
+          "nombres": "Jose",
+          "apellidos": "Perez",
+          "dni": "70000003",
+          "cargo": "Administrador",
+          "sueldo": "4500.00",
+          "fecha_ingreso": "2025-01-01T05:00:00.000Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "empresas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('empresas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "ruc",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "moneda",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": "'USD'::character varying",
+          "longitud": 10
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "razon_social",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "nombre_comercial",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "direccion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "telefono",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "email",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 150
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "empresas.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "activos_fijos": "activos_fijos.empresa_id = empresas.id",
+        "almacenes": "almacenes.empresa_id = empresas.id",
+        "asiento_detalle": "asiento_detalle.empresa_id = empresas.id",
+        "asientos": "asientos.empresa_id = empresas.id",
+        "asistencia": "asistencia.empresa_id = empresas.id",
+        "auditoria": "auditoria.empresa_id = empresas.id",
+        "bancos": "bancos.empresa_id = empresas.id",
+        "cache_consultas": "cache_consultas.empresa_id = empresas.id",
+        "caja": "caja.empresa_id = empresas.id",
+        "categorias": "categorias.empresa_id = empresas.id",
+        "centros_costo": "centros_costo.empresa_id = empresas.id",
+        "clientes": "clientes.empresa_id = empresas.id",
+        "compra_detalle": "compra_detalle.empresa_id = empresas.id",
+        "compras": "compras.empresa_id = empresas.id",
+        "configuracion": "configuracion.empresa_id = empresas.id",
+        "cotizaciones": "cotizaciones.empresa_id = empresas.id",
+        "cuentas_contables": "cuentas_contables.empresa_id = empresas.id",
+        "depreciaciones": "depreciaciones.empresa_id = empresas.id",
+        "documentos": "documentos.empresa_id = empresas.id",
+        "empleados": "empleados.empresa_id = empresas.id",
+        "empresas": "empresas.empresa_id = empresas.id",
+        "factura_detalle": "factura_detalle.empresa_id = empresas.id",
+        "factura_items": "factura_items.empresa_id = empresas.id",
+        "facturas": "facturas.empresa_id = empresas.id",
+        "feedback_ia": "feedback_ia.empresa_id = empresas.id",
+        "gastos": "gastos.empresa_id = empresas.id",
+        "guias_remision": "guias_remision.empresa_id = empresas.id",
+        "ia_memory": "ia_memory.empresa_id = empresas.id",
+        "kardex": "kardex.empresa_id = empresas.id",
+        "logs_ia": "logs_ia.empresa_id = empresas.id",
+        "lotes": "lotes.empresa_id = empresas.id",
+        "marcas": "marcas.empresa_id = empresas.id",
+        "mensajes_chat": "mensajes_chat.empresa_id = empresas.id",
+        "monedas": "monedas.empresa_id = empresas.id",
+        "notas_credito": "notas_credito.empresa_id = empresas.id",
+        "notas_debito": "notas_debito.empresa_id = empresas.id",
+        "oportunidades": "oportunidades.empresa_id = empresas.id",
+        "pagos": "pagos.empresa_id = empresas.id",
+        "planillas": "planillas.empresa_id = empresas.id",
+        "productos": "productos.empresa_id = empresas.id",
+        "proveedores": "proveedores.empresa_id = empresas.id",
+        "proyectos": "proyectos.empresa_id = empresas.id",
+        "roles": "roles.empresa_id = empresas.id",
+        "sesiones_chat": "sesiones_chat.empresa_id = empresas.id",
+        "sucursales": "sucursales.empresa_id = empresas.id",
+        "tareas": "tareas.empresa_id = empresas.id",
+        "tickets": "tickets.empresa_id = empresas.id",
+        "tipo_cambio": "tipo_cambio.empresa_id = empresas.id",
+        "unidades_medida": "unidades_medida.empresa_id = empresas.id",
+        "users": "users.empresa_id = empresas.id",
+        "usuario_roles": "usuario_roles.empresa_id = empresas.id",
+        "usuarios": "usuarios.empresa_id = empresas.id",
+        "ventas": "ventas.empresa_id = empresas.id"
+      },
+      "indices": [
+        {
+          "nombre": "empresas_pkey",
+          "def": "CREATE UNIQUE INDEX empresas_pkey ON public.empresas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 6,
+      "muestra": [
+        {
+          "id": 1,
+          "nombre": "Mi Empresa SAC",
+          "ruc": "20123456789",
+          "moneda": "USD",
+          "creado_en": "2026-06-10T21:55:20.138Z",
+          "razon_social": null,
+          "nombre_comercial": null,
+          "direccion": null,
+          "telefono": null,
+          "email": null,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "nombre": null,
+          "ruc": "20123456789",
+          "moneda": "USD",
+          "creado_en": "2026-06-12T01:56:47.172Z",
+          "razon_social": "Mi Empresa SAC",
+          "nombre_comercial": "Mi Empresa",
+          "direccion": null,
+          "telefono": null,
+          "email": null,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "nombre": null,
+          "ruc": "20123456789",
+          "moneda": "USD",
+          "creado_en": "2026-06-12T02:00:07.372Z",
+          "razon_social": "EMPRESA DEMO SAC",
+          "nombre_comercial": "EMPRESA DEMO",
+          "direccion": null,
+          "telefono": null,
+          "email": null,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "factura_detalle": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('factura_detalle_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "factura_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "producto_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cantidad",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "precio",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "text",
+          "nullable": true,
+          "default": "''::text",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "producto_id": "factura_detalle.producto_id = productos.id",
+        "factura_id": "factura_detalle.factura_id = facturas.id",
+        "empresa_id": "factura_detalle.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "factura_detalle_pkey",
+          "def": "CREATE UNIQUE INDEX factura_detalle_pkey ON public.factura_detalle USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 5000,
+      "muestra": [
+        {
+          "id": 1,
+          "factura_id": 2,
+          "producto_id": 2,
+          "cantidad": "11.00",
+          "precio": "774.43",
+          "subtotal": "17943.88",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "nombre": ""
+        },
+        {
+          "id": 2,
+          "factura_id": 3,
+          "producto_id": 3,
+          "cantidad": "11.00",
+          "precio": "1413.49",
+          "subtotal": "5232.19",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "nombre": ""
+        },
+        {
+          "id": 3,
+          "factura_id": 4,
+          "producto_id": 4,
+          "cantidad": "1.00",
+          "precio": "1497.24",
+          "subtotal": "6758.90",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "nombre": ""
+        }
+      ]
+    },
+    "factura_items": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('factura_items_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "factura_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "producto_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cantidad",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "precio",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "factura_id": "factura_items.factura_id = facturas.id",
+        "producto_id": "factura_items.producto_id = productos.id",
+        "empresa_id": "factura_items.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "factura_items_pkey",
+          "def": "CREATE UNIQUE INDEX factura_items_pkey ON public.factura_items USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 180,
+      "muestra": [
+        {
+          "id": 1,
+          "factura_id": 1,
+          "producto_id": 3,
+          "cantidad": "2.00",
+          "precio": "89999.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "factura_id": 2,
+          "producto_id": 5,
+          "cantidad": "3.00",
+          "precio": "99998.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "factura_id": 3,
+          "producto_id": 2,
+          "cantidad": "4.00",
+          "precio": "109997.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "facturas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('facturas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "numero",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cliente_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": false,
+          "default": "CURRENT_DATE",
+          "longitud": null
+        },
+        {
+          "nombre": "total",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "text",
+          "nullable": false,
+          "default": "'pendiente'::text",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "cantidad",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "costo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "facturas.empresa_id = empresas.id",
+        "cliente_id": "facturas.cliente_id = clientes.id"
+      },
+      "referenciada_por": {
+        "factura_detalle": "factura_detalle.factura_id = facturas.id",
+        "factura_items": "factura_items.factura_id = facturas.id",
+        "notas_credito": "notas_credito.factura_id = facturas.id",
+        "notas_debito": "notas_debito.factura_id = facturas.id",
+        "pagos": "pagos.factura_id = facturas.id"
+      },
+      "indices": [
+        {
+          "nombre": "facturas_cliente_id_idx",
+          "def": "CREATE INDEX facturas_cliente_id_idx ON public.facturas USING btree (cliente_id)"
+        },
+        {
+          "nombre": "facturas_estado_idx",
+          "def": "CREATE INDEX facturas_estado_idx ON public.facturas USING btree (estado)"
+        },
+        {
+          "nombre": "facturas_fecha_idx",
+          "def": "CREATE INDEX facturas_fecha_idx ON public.facturas USING btree (fecha)"
+        },
+        {
+          "nombre": "facturas_pkey",
+          "def": "CREATE UNIQUE INDEX facturas_pkey ON public.facturas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1185,
+      "muestra": [
+        {
+          "id": 13,
+          "numero": "F-0013",
+          "cliente_id": 4,
+          "fecha": "2026-05-29T05:00:00.000Z",
+          "total": "378750.00",
+          "estado": "pendiente",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0",
+          "cantidad": 0,
+          "costo": "0.00"
+        },
+        {
+          "id": 14,
+          "numero": "F-0014",
+          "cliente_id": 5,
+          "fecha": "2026-05-28T05:00:00.000Z",
+          "total": "392500.00",
+          "estado": "anulada",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0",
+          "cantidad": 0,
+          "costo": "0.00"
+        },
+        {
+          "id": 15,
+          "numero": "F-0015",
+          "cliente_id": 1,
+          "fecha": "2026-05-27T05:00:00.000Z",
+          "total": "406250.00",
+          "estado": "pagada",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0",
+          "cantidad": 0,
+          "costo": "0.00"
+        }
+      ]
+    },
+    "feedback_ia": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "bigint",
+          "nullable": false,
+          "default": "nextval('feedback_ia_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "log_id",
+          "tipo": "bigint",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "util",
+          "tipo": "boolean",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "comentario",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "feedback_ia.empresa_id = empresas.id",
+        "log_id": "feedback_ia.log_id = logs_ia.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "feedback_ia_pkey",
+          "def": "CREATE UNIQUE INDEX feedback_ia_pkey ON public.feedback_ia USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "gastos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('gastos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": false,
+          "default": "CURRENT_DATE",
+          "longitud": null
+        },
+        {
+          "nombre": "categoria",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "monto",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "gastos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "gastos_fecha_idx",
+          "def": "CREATE INDEX gastos_fecha_idx ON public.gastos USING btree (fecha)"
+        },
+        {
+          "nombre": "gastos_pkey",
+          "def": "CREATE UNIQUE INDEX gastos_pkey ON public.gastos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 2315,
+      "muestra": [
+        {
+          "id": 1,
+          "fecha": "2026-06-06T05:00:00.000Z",
+          "categoria": "Renta",
+          "descripcion": "Oficina mensual",
+          "monto": "2800000.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "fecha": "2026-05-30T05:00:00.000Z",
+          "categoria": "Servicios",
+          "descripcion": "Energia",
+          "monto": "420000.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "fecha": "2026-05-24T05:00:00.000Z",
+          "categoria": "Servicios",
+          "descripcion": "Internet",
+          "monto": "180000.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "guias_remision": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('guias_remision_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "cliente_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "direccion_partida",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "direccion_llegada",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "guias_remision.empresa_id = empresas.id",
+        "cliente_id": "guias_remision.cliente_id = clientes.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "guias_remision_pkey",
+          "def": "CREATE UNIQUE INDEX guias_remision_pkey ON public.guias_remision USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "ia_memory": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('ia_memory_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "pregunta",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "respuesta",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "created_at",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "ia_memory.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "ia_memory_pkey",
+          "def": "CREATE UNIQUE INDEX ia_memory_pkey ON public.ia_memory USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 300,
+      "muestra": [
+        {
+          "id": 1,
+          "pregunta": "Pregunta automática 1",
+          "respuesta": "Respuesta automática 1",
+          "created_at": "2025-08-25T02:10:08.673Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "pregunta": "Pregunta automática 2",
+          "respuesta": "Respuesta automática 2",
+          "created_at": "2026-03-12T02:10:08.673Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "pregunta": "Pregunta automática 3",
+          "respuesta": "Respuesta automática 3",
+          "created_at": "2025-04-03T02:10:08.673Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "kardex": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('kardex_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "producto_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "tipo_movimiento",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "cantidad",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "producto_id": "kardex.producto_id = productos.id",
+        "empresa_id": "kardex.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "kardex_pkey",
+          "def": "CREATE UNIQUE INDEX kardex_pkey ON public.kardex USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1000,
+      "muestra": [
+        {
+          "id": 1,
+          "producto_id": 2,
+          "fecha": "2024-12-06T05:00:00.000Z",
+          "tipo_movimiento": "ENTRADA",
+          "cantidad": "36.26",
+          "saldo": "279.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "producto_id": 3,
+          "fecha": "2025-12-28T05:00:00.000Z",
+          "tipo_movimiento": "SALIDA",
+          "cantidad": "5.91",
+          "saldo": "466.58",
+          "empresa_id": null,
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "producto_id": 4,
+          "fecha": "2024-06-16T05:00:00.000Z",
+          "tipo_movimiento": "ENTRADA",
+          "cantidad": "16.98",
+          "saldo": "157.45",
+          "empresa_id": null,
+          "stock_min": 0,
+          "subtotal": "0"
+        }
+      ]
+    },
+    "logs_ia": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('logs_ia_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "pregunta",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "respuesta",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "usuario_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "created_at",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        },
+        {
+          "nombre": "latencia_ms",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "sesion_id",
+          "tipo": "uuid",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "intent",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 80
+        },
+        {
+          "nombre": "agente",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "sql_generado",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "filas",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "modo_ia",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "error",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "logs_ia.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "feedback_ia": "feedback_ia.log_id = logs_ia.id"
+      },
+      "indices": [
+        {
+          "nombre": "logs_ia_pkey",
+          "def": "CREATE UNIQUE INDEX logs_ia_pkey ON public.logs_ia USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 561,
+      "muestra": [
+        {
+          "id": 1,
+          "pregunta": "¿Cuánto vendí este mes?",
+          "respuesta": null,
+          "usuario_id": 1,
+          "created_at": "2026-06-10T19:31:15.335Z",
+          "latencia_ms": 19,
+          "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+          "intent": "error",
+          "agente": "ventas",
+          "sql_generado": null,
+          "filas": 0,
+          "modo_ia": "offline",
+          "error": null,
+          "creado_en": "2026-06-10T19:31:15.335Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "pregunta": "¿Cómo voy respecto al mes pasado?",
+          "respuesta": null,
+          "usuario_id": 1,
+          "created_at": "2026-06-10T19:33:21.625Z",
+          "latencia_ms": 62,
+          "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+          "intent": "error",
+          "agente": "reportes",
+          "sql_generado": null,
+          "filas": 0,
+          "modo_ia": "offline",
+          "error": null,
+          "creado_en": "2026-06-10T19:33:21.625Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "pregunta": "¿Qué cliente me compra más?",
+          "respuesta": null,
+          "usuario_id": 1,
+          "created_at": "2026-06-10T19:33:24.434Z",
+          "latencia_ms": 40,
+          "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+          "intent": "ranking_clientes_top",
+          "agente": "clientes",
+          "sql_generado": null,
+          "filas": 4,
+          "modo_ia": "offline",
+          "error": null,
+          "creado_en": "2026-06-10T19:33:24.434Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "lotes": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('lotes_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "producto_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "lote",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "fecha_vencimiento",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "producto_id": "lotes.producto_id = productos.id",
+        "empresa_id": "lotes.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "lotes_pkey",
+          "def": "CREATE UNIQUE INDEX lotes_pkey ON public.lotes USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 300,
+      "muestra": [
+        {
+          "id": 1,
+          "producto_id": 2,
+          "lote": "LOT-1",
+          "fecha_vencimiento": "2028-08-26T05:00:00.000Z",
+          "stock": "117.37",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "producto_id": 3,
+          "lote": "LOT-2",
+          "fecha_vencimiento": "2027-08-26T05:00:00.000Z",
+          "stock": "235.29",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "producto_id": 4,
+          "lote": "LOT-3",
+          "fecha_vencimiento": "2027-12-09T05:00:00.000Z",
+          "stock": "24.81",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "marcas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('marcas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": false,
+          "default": null,
+          "longitud": 150
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "marcas.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "marcas_pkey",
+          "def": "CREATE UNIQUE INDEX marcas_pkey ON public.marcas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "mensajes": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('mensajes_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "sesion_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "rol",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "contenido",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "agente",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "datos",
+          "tipo": "jsonb",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {},
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "mensajes_pkey",
+          "def": "CREATE UNIQUE INDEX mensajes_pkey ON public.mensajes USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "mensajes_chat": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "bigint",
+          "nullable": false,
+          "default": "nextval('mensajes_chat_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "sesion_id",
+          "tipo": "uuid",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "rol",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "agente",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "contenido",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "datos",
+          "tipo": "jsonb",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "mensajes_chat.empresa_id = empresas.id",
+        "sesion_id": "mensajes_chat.sesion_id = sesiones_chat.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "mensajes_chat_pkey",
+          "def": "CREATE UNIQUE INDEX mensajes_chat_pkey ON public.mensajes_chat USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1131,
+      "muestra": [
+        {
+          "id": "1",
+          "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+          "rol": "user",
+          "agente": null,
+          "contenido": "¿Cuánto vendí este mes?",
+          "datos": null,
+          "creado_en": "2026-06-10T19:31:15.319Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": "2",
+          "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+          "rol": "assistant",
+          "agente": "ventas",
+          "contenido": "❌ no existe la columna «empresa_id»",
+          "datos": null,
+          "creado_en": "2026-06-10T19:31:15.332Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": "3",
+          "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+          "rol": "user",
+          "agente": null,
+          "contenido": "¿Cómo voy respecto al mes pasado?",
+          "datos": null,
+          "creado_en": "2026-06-10T19:33:21.562Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "monedas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('monedas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "codigo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 10
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "simbolo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 10
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "monedas.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "monedas_pkey",
+          "def": "CREATE UNIQUE INDEX monedas_pkey ON public.monedas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "movimientos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('movimientos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "cuenta_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "debe",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "haber",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {},
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "movimientos_pkey",
+          "def": "CREATE UNIQUE INDEX movimientos_pkey ON public.movimientos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 200,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 1,
+          "cuenta_id": 2,
+          "debe": "767.89",
+          "haber": "682.06",
+          "saldo": "0",
+          "fecha": "2025-12-31T02:34:32.581Z",
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 1,
+          "cuenta_id": 3,
+          "debe": "596.05",
+          "haber": "423.93",
+          "saldo": "0",
+          "fecha": "2026-04-27T02:34:32.581Z",
+          "stock_min": 0,
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 1,
+          "cuenta_id": 4,
+          "debe": "25.27",
+          "haber": "802.42",
+          "saldo": "0",
+          "fecha": "2026-02-14T02:34:32.581Z",
+          "stock_min": 0,
+          "subtotal": "0"
+        }
+      ]
+    },
+    "notas_credito": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('notas_credito_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "factura_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "motivo",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "monto",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "notas_credito.empresa_id = empresas.id",
+        "factura_id": "notas_credito.factura_id = facturas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "notas_credito_pkey",
+          "def": "CREATE UNIQUE INDEX notas_credito_pkey ON public.notas_credito USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "notas_debito": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('notas_debito_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "factura_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "motivo",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "monto",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "notas_debito.empresa_id = empresas.id",
+        "factura_id": "notas_debito.factura_id = facturas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "notas_debito_pkey",
+          "def": "CREATE UNIQUE INDEX notas_debito_pkey ON public.notas_debito USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "oportunidades": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('oportunidades_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "cliente_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "monto_estimado",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "cliente_id": "oportunidades.cliente_id = clientes.id",
+        "empresa_id": "oportunidades.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "oportunidades_pkey",
+          "def": "CREATE UNIQUE INDEX oportunidades_pkey ON public.oportunidades USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 200,
+      "muestra": [
+        {
+          "id": 1,
+          "cliente_id": 2,
+          "descripcion": "Negocio potencial 1",
+          "monto_estimado": "10528.82",
+          "estado": "ABIERTA",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "cliente_id": 3,
+          "descripcion": "Negocio potencial 2",
+          "monto_estimado": "13416.92",
+          "estado": "GANADA",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "cliente_id": 4,
+          "descripcion": "Negocio potencial 3",
+          "monto_estimado": "7558.98",
+          "estado": "ABIERTA",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "pagos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('pagos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "factura_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "metodo_pago",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "monto",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "total",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "pagos.empresa_id = empresas.id",
+        "factura_id": "pagos.factura_id = facturas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "pagos_pkey",
+          "def": "CREATE UNIQUE INDEX pagos_pkey ON public.pagos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1004,
+      "muestra": [
+        {
+          "id": 18,
+          "factura_id": 15,
+          "fecha": "2025-04-08T05:00:00.000Z",
+          "metodo_pago": "YAPE",
+          "monto": "11611.46",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0",
+          "total": "0.00"
+        },
+        {
+          "id": 19,
+          "factura_id": 16,
+          "fecha": "2025-01-04T05:00:00.000Z",
+          "metodo_pago": "YAPE",
+          "monto": "6526.11",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0",
+          "total": "0.00"
+        },
+        {
+          "id": 20,
+          "factura_id": 17,
+          "fecha": "2024-12-04T05:00:00.000Z",
+          "metodo_pago": "YAPE",
+          "monto": "4238.10",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0",
+          "total": "0.00"
+        }
+      ]
+    },
+    "planillas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('planillas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empleado_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "periodo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "sueldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "descuentos",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "neto",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empleado_id": "planillas.empleado_id = empleados.id",
+        "empresa_id": "planillas.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "planillas_pkey",
+          "def": "CREATE UNIQUE INDEX planillas_pkey ON public.planillas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 5,
+      "muestra": [
+        {
+          "id": 1,
+          "empleado_id": 1,
+          "periodo": "2024-01",
+          "sueldo": "3500.00",
+          "descuentos": "250.00",
+          "neto": "3250.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empleado_id": 1,
+          "periodo": "2024-02",
+          "sueldo": "3500.00",
+          "descuentos": "250.00",
+          "neto": "3250.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empleado_id": 2,
+          "periodo": "2024-03",
+          "sueldo": "2200.00",
+          "descuentos": "150.00",
+          "neto": "2050.00",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "productos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('productos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "precio",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "costo",
+          "tipo": "numeric",
+          "nullable": false,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "stock",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "productos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "compra_detalle": "compra_detalle.producto_id = productos.id",
+        "factura_detalle": "factura_detalle.producto_id = productos.id",
+        "factura_items": "factura_items.producto_id = productos.id",
+        "kardex": "kardex.producto_id = productos.id",
+        "lotes": "lotes.producto_id = productos.id"
+      },
+      "indices": [
+        {
+          "nombre": "productos_pkey",
+          "def": "CREATE UNIQUE INDEX productos_pkey ON public.productos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 215,
+      "muestra": [
+        {
+          "id": 1,
+          "nombre": "Laptop Pro 14",
+          "precio": "4500000.00",
+          "costo": "3200000.00",
+          "stock": 15,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "nombre": "Mouse Inalambrico",
+          "precio": "85000.00",
+          "costo": "40000.00",
+          "stock": 120,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "nombre": "Monitor 27",
+          "precio": "1200000.00",
+          "costo": "800000.00",
+          "stock": 30,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "proveedores": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('proveedores_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "documento",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "email",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "proveedores.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "compras": "compras.proveedor_id = proveedores.id"
+      },
+      "indices": [
+        {
+          "nombre": "proveedores_pkey",
+          "def": "CREATE UNIQUE INDEX proveedores_pkey ON public.proveedores USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 56,
+      "muestra": [
+        {
+          "id": 1,
+          "nombre": "Insumos Pro",
+          "documento": "8001112223",
+          "email": null,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "nombre": "Logistica Express",
+          "documento": "8002223334",
+          "email": null,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "nombre": "Papeleria Central",
+          "documento": "8003334445",
+          "email": null,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "proyectos": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('proyectos_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "proyectos.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "tareas": "tareas.proyecto_id = proyectos.id"
+      },
+      "indices": [
+        {
+          "nombre": "proyectos_pkey",
+          "def": "CREATE UNIQUE INDEX proyectos_pkey ON public.proyectos USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 100,
+      "muestra": [
+        {
+          "id": 1,
+          "empresa_id": 2,
+          "nombre": "Proyecto 1",
+          "descripcion": "Proyecto generado automáticamente",
+          "estado": "EN PROCESO",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "empresa_id": 3,
+          "nombre": "Proyecto 2",
+          "descripcion": "Proyecto generado automáticamente",
+          "estado": "PENDIENTE",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "empresa_id": 4,
+          "nombre": "Proyecto 3",
+          "descripcion": "Proyecto generado automáticamente",
+          "estado": "PENDIENTE",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "roles": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('roles_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "roles.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "usuario_roles": "usuario_roles.rol_id = roles.id"
+      },
+      "indices": [
+        {
+          "nombre": "roles_pkey",
+          "def": "CREATE UNIQUE INDEX roles_pkey ON public.roles USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1,
+      "muestra": [
+        {
+          "id": 1,
+          "nombre": "admin",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "sesiones": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('sesiones_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "usuario_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "titulo",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {},
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "sesiones_pkey",
+          "def": "CREATE UNIQUE INDEX sesiones_pkey ON public.sesiones USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "sesiones_chat": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "uuid",
+          "nullable": false,
+          "default": "gen_random_uuid()",
+          "longitud": null
+        },
+        {
+          "nombre": "usuario_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "titulo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "actualizado",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "sesiones_chat.empresa_id = empresas.id",
+        "usuario_id": "sesiones_chat.usuario_id = usuarios.id"
+      },
+      "referenciada_por": {
+        "mensajes_chat": "mensajes_chat.sesion_id = sesiones_chat.id"
+      },
+      "indices": [
+        {
+          "nombre": "sesiones_chat_pkey",
+          "def": "CREATE UNIQUE INDEX sesiones_chat_pkey ON public.sesiones_chat USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 224,
+      "muestra": [
+        {
+          "id": "ebdccce4-9a2d-47b3-a98d-eaeed1394a7f",
+          "usuario_id": 1,
+          "titulo": "¿Cuánto vendí este mes?",
+          "creado_en": "2026-06-10T21:32:21.306Z",
+          "actualizado": "2026-06-10T21:33:13.145Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": "a2b391da-3f56-4383-a52d-a4944c42e753",
+          "usuario_id": 1,
+          "titulo": "dame la lista de productos",
+          "creado_en": "2026-06-11T00:12:19.858Z",
+          "actualizado": "2026-06-11T00:12:37.519Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": "67368c8f-5872-4734-a87c-ec249df9bf80",
+          "usuario_id": 1,
+          "titulo": "que productos tengo registrados",
+          "creado_en": "2026-06-10T21:37:16.291Z",
+          "actualizado": "2026-06-10T21:37:16.318Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "sucursales": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('sucursales_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": false,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "direccion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "telefono",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "activo",
+          "tipo": "boolean",
+          "nullable": true,
+          "default": "true",
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "sucursales.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "almacenes": "almacenes.sucursal_id = sucursales.id"
+      },
+      "indices": [
+        {
+          "nombre": "sucursales_pkey",
+          "def": "CREATE UNIQUE INDEX sucursales_pkey ON public.sucursales USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "tareas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('tareas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "proyecto_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "titulo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "tareas.empresa_id = empresas.id",
+        "proyecto_id": "tareas.proyecto_id = proyectos.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "tareas_pkey",
+          "def": "CREATE UNIQUE INDEX tareas_pkey ON public.tareas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 500,
+      "muestra": [
+        {
+          "id": 1,
+          "proyecto_id": 2,
+          "titulo": "Tarea 1",
+          "descripcion": "Descripción tarea 1",
+          "estado": "COMPLETADA",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "proyecto_id": 3,
+          "titulo": "Tarea 2",
+          "descripcion": "Descripción tarea 2",
+          "estado": "COMPLETADA",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "proyecto_id": 4,
+          "titulo": "Tarea 3",
+          "descripcion": "Descripción tarea 3",
+          "estado": "COMPLETADA",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "tickets": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('tickets_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "cliente_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "asunto",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "estado",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "tickets.empresa_id = empresas.id",
+        "cliente_id": "tickets.cliente_id = clientes.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "tickets_pkey",
+          "def": "CREATE UNIQUE INDEX tickets_pkey ON public.tickets USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 100,
+      "muestra": [
+        {
+          "id": 1,
+          "cliente_id": 2,
+          "asunto": "Ticket #1",
+          "descripcion": "Consulta automática",
+          "estado": "EN PROCESO",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "cliente_id": 3,
+          "asunto": "Ticket #2",
+          "descripcion": "Consulta automática",
+          "estado": "EN PROCESO",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "cliente_id": 4,
+          "asunto": "Ticket #3",
+          "descripcion": "Consulta automática",
+          "estado": "EN PROCESO",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "tipo_cambio": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('tipo_cambio_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "date",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "compra",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "venta",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "tipo_cambio.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "tipo_cambio_pkey",
+          "def": "CREATE UNIQUE INDEX tipo_cambio_pkey ON public.tipo_cambio USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "unidades_medida": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('unidades_medida_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "codigo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 20
+        },
+        {
+          "nombre": "descripcion",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 150
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "unidades_medida.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "unidades_medida_pkey",
+          "def": "CREATE UNIQUE INDEX unidades_medida_pkey ON public.unidades_medida USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 0
+    },
+    "users": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('users_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "email",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "password_hash",
+          "tipo": "text",
+          "nullable": false,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "rol",
+          "tipo": "text",
+          "nullable": true,
+          "default": "'admin'::text",
+          "longitud": null
+        },
+        {
+          "nombre": "creado_en",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "now()",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "users.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "users_email_key",
+          "def": "CREATE UNIQUE INDEX users_email_key ON public.users USING btree (email)"
+        },
+        {
+          "nombre": "users_pkey",
+          "def": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1,
+      "muestra": [
+        {
+          "id": 1,
+          "email": "admin@demo.com",
+          "password_hash": "$2a$10$9Nx9KUH060Hg54h27yeDJOX1kbbqNO7m9TzIruA7x3h1t.rzs.0Au",
+          "nombre": "Administrador",
+          "rol": "admin",
+          "creado_en": "2026-06-11T23:57:05.287Z",
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "usuario_roles": {
+      "columnas": [
+        {
+          "nombre": "usuario_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "rol_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [],
+      "relaciones": {
+        "rol_id": "usuario_roles.rol_id = roles.id",
+        "usuario_id": "usuario_roles.usuario_id = usuarios.id",
+        "empresa_id": "usuario_roles.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 1,
+      "muestra": [
+        {
+          "usuario_id": 1,
+          "rol_id": 1,
+          "empresa_id": null,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "usuarios": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('usuarios_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "nombre",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 100
+        },
+        {
+          "nombre": "correo",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 150
+        },
+        {
+          "nombre": "password",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 255
+        },
+        {
+          "nombre": "activo",
+          "tipo": "boolean",
+          "nullable": true,
+          "default": "true",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "email",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 150
+        },
+        {
+          "nombre": "password_hash",
+          "tipo": "text",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "rol",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 50
+        },
+        {
+          "nombre": "estado",
+          "tipo": "boolean",
+          "nullable": true,
+          "default": "true",
+          "longitud": null
+        },
+        {
+          "nombre": "fecha_creacion",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "usuarios.empresa_id = empresas.id"
+      },
+      "referenciada_por": {
+        "sesiones_chat": "sesiones_chat.usuario_id = usuarios.id",
+        "usuario_roles": "usuario_roles.usuario_id = usuarios.id"
+      },
+      "indices": [
+        {
+          "nombre": "usuarios_correo_key",
+          "def": "CREATE UNIQUE INDEX usuarios_correo_key ON public.usuarios USING btree (correo)"
+        },
+        {
+          "nombre": "usuarios_pkey",
+          "def": "CREATE UNIQUE INDEX usuarios_pkey ON public.usuarios USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 3,
+      "muestra": [
+        {
+          "id": 1,
+          "nombre": "Administrador",
+          "correo": "admin@empresa.com",
+          "password": "demo",
+          "activo": true,
+          "empresa_id": 1,
+          "email": null,
+          "password_hash": null,
+          "rol": null,
+          "estado": true,
+          "fecha_creacion": "2026-06-12T01:58:19.807Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "nombre": "Administrador",
+          "correo": null,
+          "password": null,
+          "activo": true,
+          "empresa_id": 1,
+          "email": "admin@empresa.com",
+          "password_hash": "123456",
+          "rol": "admin",
+          "estado": true,
+          "fecha_creacion": "2026-06-12T01:58:32.079Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "nombre": "Admin",
+          "correo": "admin@saas.com",
+          "password": "$2b$10$placeholder",
+          "activo": true,
+          "empresa_id": null,
+          "email": null,
+          "password_hash": null,
+          "rol": null,
+          "estado": true,
+          "fecha_creacion": "2026-06-13T01:11:40.644Z",
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    },
+    "ventas": {
+      "columnas": [
+        {
+          "nombre": "id",
+          "tipo": "integer",
+          "nullable": false,
+          "default": "nextval('ventas_id_seq'::regclass)",
+          "longitud": null
+        },
+        {
+          "nombre": "cliente_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "producto",
+          "tipo": "character varying",
+          "nullable": true,
+          "default": null,
+          "longitud": 200
+        },
+        {
+          "nombre": "cantidad",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "1",
+          "longitud": null
+        },
+        {
+          "nombre": "precio",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "total",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "fecha",
+          "tipo": "timestamp without time zone",
+          "nullable": true,
+          "default": "CURRENT_TIMESTAMP",
+          "longitud": null
+        },
+        {
+          "nombre": "empresa_id",
+          "tipo": "integer",
+          "nullable": true,
+          "default": null,
+          "longitud": null
+        },
+        {
+          "nombre": "stock_min",
+          "tipo": "integer",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "saldo",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        },
+        {
+          "nombre": "subtotal",
+          "tipo": "numeric",
+          "nullable": true,
+          "default": "0",
+          "longitud": null
+        }
+      ],
+      "pk": [
+        "id"
+      ],
+      "relaciones": {
+        "empresa_id": "ventas.empresa_id = empresas.id"
+      },
+      "referenciada_por": {},
+      "indices": [
+        {
+          "nombre": "ventas_pkey",
+          "def": "CREATE UNIQUE INDEX ventas_pkey ON public.ventas USING btree (id)"
+        }
+      ],
+      "comentario": null,
+      "comentarios_columnas": {},
+      "filas": 515,
+      "muestra": [
+        {
+          "id": 1,
+          "cliente_id": 1,
+          "producto": "Cerveza Corona",
+          "cantidad": 4,
+          "precio": "15.00",
+          "total": "60.00",
+          "fecha": "2026-06-09T16:23:32.492Z",
+          "empresa_id": 1,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 2,
+          "cliente_id": 2,
+          "producto": "Whisky Black Label",
+          "cantidad": 1,
+          "precio": "250.00",
+          "total": "250.00",
+          "fecha": "2026-06-09T16:23:32.492Z",
+          "empresa_id": 1,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        },
+        {
+          "id": 3,
+          "cliente_id": 1,
+          "producto": "Pizza Familiar",
+          "cantidad": 1,
+          "precio": "60.00",
+          "total": "60.00",
+          "fecha": "2026-06-09T16:23:32.492Z",
+          "empresa_id": 1,
+          "stock_min": 0,
+          "saldo": "0",
+          "subtotal": "0"
+        }
+      ]
+    }
+  },
+  "vistas": {},
+  "estadisticas": [
+    {
+      "tabla": "activos_fijos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "guias_remision",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "ia_memory",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "notas_credito",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "categorias",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "sesiones",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "logs_ia",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "centros_costo",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "clientes",
+      "registros": 0,
+      "seq_scan": 313,
+      "idx_scan": 16,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "proyectos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "marcas",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "proveedores",
+      "registros": 0,
+      "seq_scan": 8,
+      "idx_scan": 4,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "productos",
+      "registros": 0,
+      "seq_scan": 312,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "tareas",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "mensajes_chat",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "depreciaciones",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "almacenes",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "asientos_detalle",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "asiento_detalle",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "cache_consultas",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "compras",
+      "registros": 0,
+      "seq_scan": 7,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "feedback_ia",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "configuracion",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "cuentas_contables",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "roles",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "sucursales",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "empleados",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "empresas",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "embeddings_doc",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "usuario_roles",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "notas_debito",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "movimientos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "factura_detalle",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "auditoria",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "unidades_medida",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "compra_detalle",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "oportunidades",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "documentos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "kardex",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "factura_items",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "facturas",
+      "registros": 0,
+      "seq_scan": 904,
+      "idx_scan": 302,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "sesiones_chat",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "usuarios",
+      "registros": 0,
+      "seq_scan": 6,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "monedas",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "tipo_cambio",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "planillas",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "asientos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "documentos_rag",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "bancos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "gastos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "ventas",
+      "registros": 0,
+      "seq_scan": 19,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "asientos_contables",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "mensajes",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "tickets",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "pagos",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "users",
+      "registros": 0,
+      "seq_scan": 6,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "cotizaciones",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "lotes",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "caja",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    },
+    {
+      "tabla": "asistencia",
+      "registros": 0,
+      "seq_scan": 5,
+      "idx_scan": 0,
+      "inserts": 0,
+      "updates": 0,
+      "deletes": 0
+    }
+  ]
+}

@@ -1,0 +1,2432 @@
+{
+  "activos_fijos": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "descripcion",
+      "valor",
+      "fecha_compra",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "descripcion": "text",
+      "valor": "numeric",
+      "fecha_compra": "date",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "activos_fijos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "depreciaciones": "depreciaciones.activo_id = activos_fijos.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 50,
+    "comentario": null
+  },
+  "almacenes": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "ubicacion",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "sucursal_id",
+      "nombre",
+      "direccion",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "sucursal_id": "integer",
+      "nombre": "character varying",
+      "direccion": "text",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "almacenes.empresa_id = empresas.id",
+      "sucursal_id": "almacenes.sucursal_id = sucursales.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "asiento_detalle": {
+    "tipo": "detalle",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "asiento_id",
+      "cuenta_id",
+      "debe",
+      "haber",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "asiento_id": "integer",
+      "cuenta_id": "integer",
+      "debe": "numeric",
+      "haber": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "asiento_detalle.empresa_id = empresas.id",
+      "cuenta_id": "asiento_detalle.cuenta_id = cuentas_contables.id",
+      "asiento_id": "asiento_detalle.asiento_id = asientos.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 8401,
+    "comentario": null
+  },
+  "asientos": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "fecha",
+      "descripcion",
+      "saldo",
+      "stock_min",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "fecha": "date",
+      "descripcion": "text",
+      "saldo": "numeric",
+      "stock_min": "integer",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "asientos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "asiento_detalle": "asiento_detalle.asiento_id = asientos.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 100,
+    "comentario": null
+  },
+  "asientos_contables": {
+    "tipo": "transaccional",
+    "entidades": [
+      "temporal",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "fecha",
+      "descripcion",
+      "total_debe",
+      "total_haber",
+      "estado",
+      "creado_en"
+    ],
+    "tipos": {
+      "id": "integer",
+      "fecha": "date",
+      "descripcion": "text",
+      "total_debe": "numeric",
+      "total_haber": "numeric",
+      "estado": "character varying",
+      "creado_en": "timestamp without time zone"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {},
+    "referenciada_por": {
+      "asientos_detalle": "asientos_detalle.asiento_id = asientos_contables.id"
+    },
+    "tiene_empresa_id": false,
+    "filas": 1,
+    "comentario": null
+  },
+  "asientos_detalle": {
+    "tipo": "detalle",
+    "entidades": [],
+    "columnas": [
+      "id",
+      "asiento_id",
+      "cuenta",
+      "descripcion",
+      "debe",
+      "haber",
+      "creado_en"
+    ],
+    "tipos": {
+      "id": "integer",
+      "asiento_id": "integer",
+      "cuenta": "character varying",
+      "descripcion": "text",
+      "debe": "numeric",
+      "haber": "numeric",
+      "creado_en": "timestamp without time zone"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "asiento_id": "asientos_detalle.asiento_id = asientos_contables.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": false,
+    "filas": 2,
+    "comentario": null
+  },
+  "asistencia": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empleado_id",
+      "fecha",
+      "hora_entrada",
+      "hora_salida",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empleado_id": "integer",
+      "fecha": "date",
+      "hora_entrada": "time without time zone",
+      "hora_salida": "time without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "asistencia.empresa_id = empresas.id",
+      "empleado_id": "asistencia.empleado_id = empleados.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "auditoria": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "usuario_id",
+      "tabla",
+      "accion",
+      "fecha",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "bigint",
+      "usuario_id": "integer",
+      "tabla": "character varying",
+      "accion": "character varying",
+      "fecha": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "auditoria.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 2000,
+    "comentario": null
+  },
+  "bancos": {
+    "tipo": "maestra",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "banco",
+      "numero_cuenta",
+      "moneda",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "banco": "character varying",
+      "numero_cuenta": "character varying",
+      "moneda": "character varying",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "bancos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "cache_consultas": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "clave",
+      "resultado",
+      "hits",
+      "expira_en",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "clave": "character varying",
+      "resultado": "jsonb",
+      "hits": "integer",
+      "expira_en": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "clave"
+    ],
+    "relaciones": {
+      "empresa_id": "cache_consultas.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "caja": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "fecha",
+      "concepto",
+      "ingreso",
+      "egreso",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "fecha": "timestamp without time zone",
+      "concepto": "text",
+      "ingreso": "numeric",
+      "egreso": "numeric",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "caja.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 3000,
+    "comentario": null
+  },
+  "categorias": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "nombre",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "nombre": "character varying",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "categorias.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "centros_costo": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "codigo",
+      "nombre",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "codigo": "character varying",
+      "nombre": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "centros_costo.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "clientes": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "documento_identidad",
+      "contacto_email",
+      "contacto_telefono",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "documento",
+      "email",
+      "telefono",
+      "creado_en",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "text",
+      "documento": "text",
+      "email": "text",
+      "telefono": "text",
+      "creado_en": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "clientes.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "cotizaciones": "cotizaciones.cliente_id = clientes.id",
+      "facturas": "facturas.cliente_id = clientes.id",
+      "guias_remision": "guias_remision.cliente_id = clientes.id",
+      "oportunidades": "oportunidades.cliente_id = clientes.id",
+      "tickets": "tickets.cliente_id = clientes.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 110,
+    "comentario": null
+  },
+  "compra_detalle": {
+    "tipo": "detalle",
+    "entidades": [
+      "monetario",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "compra_id",
+      "producto_id",
+      "cantidad",
+      "costo",
+      "subtotal",
+      "empresa_id",
+      "stock_min",
+      "saldo"
+    ],
+    "tipos": {
+      "id": "integer",
+      "compra_id": "integer",
+      "producto_id": "integer",
+      "cantidad": "numeric",
+      "costo": "numeric",
+      "subtotal": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "compra_detalle.empresa_id = empresas.id",
+      "compra_id": "compra_detalle.compra_id = compras.id",
+      "producto_id": "compra_detalle.producto_id = productos.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 5000,
+    "comentario": null
+  },
+  "compras": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "proveedor_id",
+      "fecha",
+      "total",
+      "estado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "proveedor_id": "integer",
+      "fecha": "date",
+      "total": "numeric",
+      "estado": "text",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "compras.empresa_id = empresas.id",
+      "proveedor_id": "compras.proveedor_id = proveedores.id"
+    },
+    "referenciada_por": {
+      "compra_detalle": "compra_detalle.compra_id = compras.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 2260,
+    "comentario": null
+  },
+  "configuracion": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "clave",
+      "valor",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "clave": "character varying",
+      "valor": "text",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "configuracion.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "cotizaciones": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "cliente_id",
+      "fecha",
+      "total",
+      "estado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "cliente_id": "integer",
+      "fecha": "date",
+      "total": "numeric",
+      "estado": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "cliente_id": "cotizaciones.cliente_id = clientes.id",
+      "empresa_id": "cotizaciones.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "cuentas_contables": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "codigo",
+      "nombre",
+      "tipo",
+      "saldo",
+      "stock_min",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "codigo": "character varying",
+      "nombre": "character varying",
+      "tipo": "character varying",
+      "saldo": "numeric",
+      "stock_min": "integer",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "cuentas_contables.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "asiento_detalle": "asiento_detalle.cuenta_id = cuentas_contables.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 100,
+    "comentario": null
+  },
+  "depreciaciones": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "activo_id",
+      "fecha",
+      "monto",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "activo_id": "integer",
+      "fecha": "date",
+      "monto": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "depreciaciones.empresa_id = empresas.id",
+      "activo_id": "depreciaciones.activo_id = activos_fijos.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 300,
+    "comentario": null
+  },
+  "documentos": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "nombre",
+      "ruta",
+      "fecha",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "nombre": "character varying",
+      "ruta": "text",
+      "fecha": "timestamp without time zone",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "documentos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 500,
+    "comentario": null
+  },
+  "documentos_rag": {
+    "tipo": "maestra",
+    "entidades": [],
+    "columnas": [
+      "id",
+      "titulo",
+      "fuente",
+      "contenido",
+      "tags",
+      "creado_en"
+    ],
+    "tipos": {
+      "id": "integer",
+      "titulo": "text",
+      "fuente": "text",
+      "contenido": "text",
+      "tags": "ARRAY",
+      "creado_en": "timestamp without time zone"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {},
+    "referenciada_por": {
+      "embeddings_doc": "embeddings_doc.documento_id = documentos_rag.id"
+    },
+    "tiene_empresa_id": false,
+    "filas": 0,
+    "comentario": null
+  },
+  "embeddings_doc": {
+    "tipo": "auxiliar",
+    "entidades": [],
+    "columnas": [
+      "id",
+      "documento_id",
+      "chunk",
+      "vector"
+    ],
+    "tipos": {
+      "id": "integer",
+      "documento_id": "integer",
+      "chunk": "text",
+      "vector": "text"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "documento_id": "embeddings_doc.documento_id = documentos_rag.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": false,
+    "filas": 0,
+    "comentario": null
+  },
+  "empleados": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "documento_identidad",
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "nombres",
+      "apellidos",
+      "dni",
+      "cargo",
+      "sueldo",
+      "fecha_ingreso",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "nombres": "character varying",
+      "apellidos": "character varying",
+      "dni": "character varying",
+      "cargo": "character varying",
+      "sueldo": "numeric",
+      "fecha_ingreso": "date",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "empleados.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "asistencia": "asistencia.empleado_id = empleados.id",
+      "planillas": "planillas.empleado_id = empleados.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 4,
+    "comentario": null
+  },
+  "empresas": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "documento_identidad",
+      "contacto_email",
+      "contacto_telefono",
+      "ubicacion",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "ruc",
+      "moneda",
+      "creado_en",
+      "razon_social",
+      "nombre_comercial",
+      "direccion",
+      "telefono",
+      "email",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "character varying",
+      "ruc": "character varying",
+      "moneda": "character varying",
+      "creado_en": "timestamp without time zone",
+      "razon_social": "character varying",
+      "nombre_comercial": "character varying",
+      "direccion": "text",
+      "telefono": "character varying",
+      "email": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "empresas.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "activos_fijos": "activos_fijos.empresa_id = empresas.id",
+      "almacenes": "almacenes.empresa_id = empresas.id",
+      "asiento_detalle": "asiento_detalle.empresa_id = empresas.id",
+      "asientos": "asientos.empresa_id = empresas.id",
+      "asistencia": "asistencia.empresa_id = empresas.id",
+      "auditoria": "auditoria.empresa_id = empresas.id",
+      "bancos": "bancos.empresa_id = empresas.id",
+      "cache_consultas": "cache_consultas.empresa_id = empresas.id",
+      "caja": "caja.empresa_id = empresas.id",
+      "categorias": "categorias.empresa_id = empresas.id",
+      "centros_costo": "centros_costo.empresa_id = empresas.id",
+      "clientes": "clientes.empresa_id = empresas.id",
+      "compra_detalle": "compra_detalle.empresa_id = empresas.id",
+      "compras": "compras.empresa_id = empresas.id",
+      "configuracion": "configuracion.empresa_id = empresas.id",
+      "cotizaciones": "cotizaciones.empresa_id = empresas.id",
+      "cuentas_contables": "cuentas_contables.empresa_id = empresas.id",
+      "depreciaciones": "depreciaciones.empresa_id = empresas.id",
+      "documentos": "documentos.empresa_id = empresas.id",
+      "empleados": "empleados.empresa_id = empresas.id",
+      "empresas": "empresas.empresa_id = empresas.id",
+      "factura_detalle": "factura_detalle.empresa_id = empresas.id",
+      "factura_items": "factura_items.empresa_id = empresas.id",
+      "facturas": "facturas.empresa_id = empresas.id",
+      "feedback_ia": "feedback_ia.empresa_id = empresas.id",
+      "gastos": "gastos.empresa_id = empresas.id",
+      "guias_remision": "guias_remision.empresa_id = empresas.id",
+      "ia_memory": "ia_memory.empresa_id = empresas.id",
+      "kardex": "kardex.empresa_id = empresas.id",
+      "logs_ia": "logs_ia.empresa_id = empresas.id",
+      "lotes": "lotes.empresa_id = empresas.id",
+      "marcas": "marcas.empresa_id = empresas.id",
+      "mensajes_chat": "mensajes_chat.empresa_id = empresas.id",
+      "monedas": "monedas.empresa_id = empresas.id",
+      "notas_credito": "notas_credito.empresa_id = empresas.id",
+      "notas_debito": "notas_debito.empresa_id = empresas.id",
+      "oportunidades": "oportunidades.empresa_id = empresas.id",
+      "pagos": "pagos.empresa_id = empresas.id",
+      "planillas": "planillas.empresa_id = empresas.id",
+      "productos": "productos.empresa_id = empresas.id",
+      "proveedores": "proveedores.empresa_id = empresas.id",
+      "proyectos": "proyectos.empresa_id = empresas.id",
+      "roles": "roles.empresa_id = empresas.id",
+      "sesiones_chat": "sesiones_chat.empresa_id = empresas.id",
+      "sucursales": "sucursales.empresa_id = empresas.id",
+      "tareas": "tareas.empresa_id = empresas.id",
+      "tickets": "tickets.empresa_id = empresas.id",
+      "tipo_cambio": "tipo_cambio.empresa_id = empresas.id",
+      "unidades_medida": "unidades_medida.empresa_id = empresas.id",
+      "users": "users.empresa_id = empresas.id",
+      "usuario_roles": "usuario_roles.empresa_id = empresas.id",
+      "usuarios": "usuarios.empresa_id = empresas.id",
+      "ventas": "ventas.empresa_id = empresas.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 6,
+    "comentario": null
+  },
+  "factura_detalle": {
+    "tipo": "detalle",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "factura_id",
+      "producto_id",
+      "cantidad",
+      "precio",
+      "subtotal",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "nombre"
+    ],
+    "tipos": {
+      "id": "integer",
+      "factura_id": "integer",
+      "producto_id": "integer",
+      "cantidad": "numeric",
+      "precio": "numeric",
+      "subtotal": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "nombre": "text"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "producto_id": "factura_detalle.producto_id = productos.id",
+      "factura_id": "factura_detalle.factura_id = facturas.id",
+      "empresa_id": "factura_detalle.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 5000,
+    "comentario": null
+  },
+  "factura_items": {
+    "tipo": "detalle",
+    "entidades": [
+      "monetario",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "factura_id",
+      "producto_id",
+      "cantidad",
+      "precio",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "factura_id": "integer",
+      "producto_id": "integer",
+      "cantidad": "numeric",
+      "precio": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "factura_id": "factura_items.factura_id = facturas.id",
+      "producto_id": "factura_items.producto_id = productos.id",
+      "empresa_id": "factura_items.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 180,
+    "comentario": null
+  },
+  "facturas": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal",
+      "inventario",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "numero",
+      "cliente_id",
+      "fecha",
+      "total",
+      "estado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal",
+      "cantidad",
+      "costo"
+    ],
+    "tipos": {
+      "id": "integer",
+      "numero": "text",
+      "cliente_id": "integer",
+      "fecha": "date",
+      "total": "numeric",
+      "estado": "text",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric",
+      "cantidad": "integer",
+      "costo": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "facturas.empresa_id = empresas.id",
+      "cliente_id": "facturas.cliente_id = clientes.id"
+    },
+    "referenciada_por": {
+      "factura_detalle": "factura_detalle.factura_id = facturas.id",
+      "factura_items": "factura_items.factura_id = facturas.id",
+      "notas_credito": "notas_credito.factura_id = facturas.id",
+      "notas_debito": "notas_debito.factura_id = facturas.id",
+      "pagos": "pagos.factura_id = facturas.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 1185,
+    "comentario": null
+  },
+  "feedback_ia": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "log_id",
+      "util",
+      "comentario",
+      "creado_en",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "bigint",
+      "log_id": "bigint",
+      "util": "boolean",
+      "comentario": "text",
+      "creado_en": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "feedback_ia.empresa_id = empresas.id",
+      "log_id": "feedback_ia.log_id = logs_ia.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "gastos": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "fecha",
+      "categoria",
+      "descripcion",
+      "monto",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "fecha": "date",
+      "categoria": "text",
+      "descripcion": "text",
+      "monto": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "gastos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 2315,
+    "comentario": null
+  },
+  "guias_remision": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "cliente_id",
+      "fecha",
+      "direccion_partida",
+      "direccion_llegada",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "cliente_id": "integer",
+      "fecha": "date",
+      "direccion_partida": "text",
+      "direccion_llegada": "text",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "guias_remision.empresa_id = empresas.id",
+      "cliente_id": "guias_remision.cliente_id = clientes.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "ia_memory": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "pregunta",
+      "respuesta",
+      "created_at",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "pregunta": "text",
+      "respuesta": "text",
+      "created_at": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "ia_memory.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 300,
+    "comentario": null
+  },
+  "kardex": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "producto_id",
+      "fecha",
+      "tipo_movimiento",
+      "cantidad",
+      "saldo",
+      "empresa_id",
+      "stock_min",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "producto_id": "integer",
+      "fecha": "timestamp without time zone",
+      "tipo_movimiento": "character varying",
+      "cantidad": "numeric",
+      "saldo": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "producto_id": "kardex.producto_id = productos.id",
+      "empresa_id": "kardex.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 1000,
+    "comentario": null
+  },
+  "logs_ia": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "pregunta",
+      "respuesta",
+      "usuario_id",
+      "created_at",
+      "latencia_ms",
+      "sesion_id",
+      "intent",
+      "agente",
+      "sql_generado",
+      "filas",
+      "modo_ia",
+      "error",
+      "creado_en",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "pregunta": "text",
+      "respuesta": "text",
+      "usuario_id": "integer",
+      "created_at": "timestamp without time zone",
+      "latencia_ms": "integer",
+      "sesion_id": "uuid",
+      "intent": "character varying",
+      "agente": "character varying",
+      "sql_generado": "text",
+      "filas": "integer",
+      "modo_ia": "character varying",
+      "error": "text",
+      "creado_en": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "logs_ia.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "feedback_ia": "feedback_ia.log_id = logs_ia.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 561,
+    "comentario": null
+  },
+  "lotes": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "producto_id",
+      "lote",
+      "fecha_vencimiento",
+      "stock",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "producto_id": "integer",
+      "lote": "character varying",
+      "fecha_vencimiento": "date",
+      "stock": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "producto_id": "lotes.producto_id = productos.id",
+      "empresa_id": "lotes.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 300,
+    "comentario": null
+  },
+  "marcas": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "marcas.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "mensajes": {
+    "tipo": "maestra",
+    "entidades": [],
+    "columnas": [
+      "id",
+      "sesion_id",
+      "rol",
+      "contenido",
+      "agente",
+      "datos",
+      "creado_en"
+    ],
+    "tipos": {
+      "id": "integer",
+      "sesion_id": "integer",
+      "rol": "text",
+      "contenido": "text",
+      "agente": "text",
+      "datos": "jsonb",
+      "creado_en": "timestamp without time zone"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {},
+    "referenciada_por": {},
+    "tiene_empresa_id": false,
+    "filas": 0,
+    "comentario": null
+  },
+  "mensajes_chat": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "sesion_id",
+      "rol",
+      "agente",
+      "contenido",
+      "datos",
+      "creado_en",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "bigint",
+      "sesion_id": "uuid",
+      "rol": "character varying",
+      "agente": "character varying",
+      "contenido": "text",
+      "datos": "jsonb",
+      "creado_en": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "mensajes_chat.empresa_id = empresas.id",
+      "sesion_id": "mensajes_chat.sesion_id = sesiones_chat.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 1131,
+    "comentario": null
+  },
+  "monedas": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "codigo",
+      "nombre",
+      "simbolo",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "codigo": "character varying",
+      "nombre": "character varying",
+      "simbolo": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "monedas.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "movimientos": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "cuenta_id",
+      "debe",
+      "haber",
+      "saldo",
+      "fecha",
+      "stock_min",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "cuenta_id": "integer",
+      "debe": "numeric",
+      "haber": "numeric",
+      "saldo": "numeric",
+      "fecha": "timestamp without time zone",
+      "stock_min": "integer",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {},
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 200,
+    "comentario": null
+  },
+  "notas_credito": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "factura_id",
+      "fecha",
+      "motivo",
+      "monto",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "factura_id": "integer",
+      "fecha": "date",
+      "motivo": "text",
+      "monto": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "notas_credito.empresa_id = empresas.id",
+      "factura_id": "notas_credito.factura_id = facturas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "notas_debito": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "factura_id",
+      "fecha",
+      "motivo",
+      "monto",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "factura_id": "integer",
+      "fecha": "date",
+      "motivo": "text",
+      "monto": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "notas_debito.empresa_id = empresas.id",
+      "factura_id": "notas_debito.factura_id = facturas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "oportunidades": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "cliente_id",
+      "descripcion",
+      "monto_estimado",
+      "estado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "cliente_id": "integer",
+      "descripcion": "text",
+      "monto_estimado": "numeric",
+      "estado": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "cliente_id": "oportunidades.cliente_id = clientes.id",
+      "empresa_id": "oportunidades.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 200,
+    "comentario": null
+  },
+  "pagos": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "factura_id",
+      "fecha",
+      "metodo_pago",
+      "monto",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal",
+      "total"
+    ],
+    "tipos": {
+      "id": "integer",
+      "factura_id": "integer",
+      "fecha": "timestamp without time zone",
+      "metodo_pago": "character varying",
+      "monto": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric",
+      "total": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "pagos.empresa_id = empresas.id",
+      "factura_id": "pagos.factura_id = facturas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 1004,
+    "comentario": null
+  },
+  "planillas": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "empleado_id",
+      "periodo",
+      "sueldo",
+      "descuentos",
+      "neto",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empleado_id": "integer",
+      "periodo": "character varying",
+      "sueldo": "numeric",
+      "descuentos": "numeric",
+      "neto": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empleado_id": "planillas.empleado_id = empleados.id",
+      "empresa_id": "planillas.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 5,
+    "comentario": null
+  },
+  "productos": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "precio",
+      "costo",
+      "stock",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "text",
+      "precio": "numeric",
+      "costo": "numeric",
+      "stock": "integer",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "productos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "compra_detalle": "compra_detalle.producto_id = productos.id",
+      "factura_detalle": "factura_detalle.producto_id = productos.id",
+      "factura_items": "factura_items.producto_id = productos.id",
+      "kardex": "kardex.producto_id = productos.id",
+      "lotes": "lotes.producto_id = productos.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 215,
+    "comentario": null
+  },
+  "proveedores": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "documento_identidad",
+      "contacto_email",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "documento",
+      "email",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "text",
+      "documento": "text",
+      "email": "text",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "proveedores.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "compras": "compras.proveedor_id = proveedores.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 56,
+    "comentario": null
+  },
+  "proyectos": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "nombre",
+      "descripcion",
+      "estado",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "nombre": "character varying",
+      "descripcion": "text",
+      "estado": "character varying",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "proyectos.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "tareas": "tareas.proyecto_id = proyectos.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 100,
+    "comentario": null
+  },
+  "roles": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "roles.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "usuario_roles": "usuario_roles.rol_id = roles.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 1,
+    "comentario": null
+  },
+  "sesiones": {
+    "tipo": "maestra",
+    "entidades": [],
+    "columnas": [
+      "id",
+      "usuario_id",
+      "titulo",
+      "creado_en"
+    ],
+    "tipos": {
+      "id": "integer",
+      "usuario_id": "integer",
+      "titulo": "text",
+      "creado_en": "timestamp without time zone"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {},
+    "referenciada_por": {},
+    "tiene_empresa_id": false,
+    "filas": 0,
+    "comentario": null
+  },
+  "sesiones_chat": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "usuario_id",
+      "titulo",
+      "creado_en",
+      "actualizado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "uuid",
+      "usuario_id": "integer",
+      "titulo": "character varying",
+      "creado_en": "timestamp without time zone",
+      "actualizado": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "sesiones_chat.empresa_id = empresas.id",
+      "usuario_id": "sesiones_chat.usuario_id = usuarios.id"
+    },
+    "referenciada_por": {
+      "mensajes_chat": "mensajes_chat.sesion_id = sesiones_chat.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 224,
+    "comentario": null
+  },
+  "sucursales": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "contacto_telefono",
+      "ubicacion",
+      "monetario",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "empresa_id",
+      "nombre",
+      "direccion",
+      "telefono",
+      "activo",
+      "creado_en",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "empresa_id": "integer",
+      "nombre": "character varying",
+      "direccion": "text",
+      "telefono": "character varying",
+      "activo": "boolean",
+      "creado_en": "timestamp without time zone",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "sucursales.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "almacenes": "almacenes.sucursal_id = sucursales.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "tareas": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "proyecto_id",
+      "titulo",
+      "descripcion",
+      "estado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "proyecto_id": "integer",
+      "titulo": "character varying",
+      "descripcion": "text",
+      "estado": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "tareas.empresa_id = empresas.id",
+      "proyecto_id": "tareas.proyecto_id = proyectos.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 500,
+    "comentario": null
+  },
+  "tickets": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "cliente_id",
+      "asunto",
+      "descripcion",
+      "estado",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "cliente_id": "integer",
+      "asunto": "character varying",
+      "descripcion": "text",
+      "estado": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "tickets.empresa_id = empresas.id",
+      "cliente_id": "tickets.cliente_id = clientes.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 100,
+    "comentario": null
+  },
+  "tipo_cambio": {
+    "tipo": "auxiliar",
+    "entidades": [
+      "monetario",
+      "temporal"
+    ],
+    "columnas": [
+      "id",
+      "fecha",
+      "compra",
+      "venta",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "fecha": "date",
+      "compra": "numeric",
+      "venta": "numeric",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "tipo_cambio.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "unidades_medida": {
+    "tipo": "maestra",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "codigo",
+      "descripcion",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "codigo": "character varying",
+      "descripcion": "character varying",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "unidades_medida.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 0,
+    "comentario": null
+  },
+  "users": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "contacto_email",
+      "monetario"
+    ],
+    "columnas": [
+      "id",
+      "email",
+      "password_hash",
+      "nombre",
+      "rol",
+      "creado_en",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "email": "text",
+      "password_hash": "text",
+      "nombre": "text",
+      "rol": "text",
+      "creado_en": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "users.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 1,
+    "comentario": null
+  },
+  "usuario_roles": {
+    "tipo": "maestra",
+    "entidades": [
+      "monetario"
+    ],
+    "columnas": [
+      "usuario_id",
+      "rol_id",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "usuario_id": "integer",
+      "rol_id": "integer",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [],
+    "relaciones": {
+      "rol_id": "usuario_roles.rol_id = roles.id",
+      "usuario_id": "usuario_roles.usuario_id = usuarios.id",
+      "empresa_id": "usuario_roles.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 1,
+    "comentario": null
+  },
+  "usuarios": {
+    "tipo": "maestra",
+    "entidades": [
+      "persona_o_empresa",
+      "contacto_email",
+      "monetario",
+      "temporal",
+      "estado"
+    ],
+    "columnas": [
+      "id",
+      "nombre",
+      "correo",
+      "password",
+      "activo",
+      "empresa_id",
+      "email",
+      "password_hash",
+      "rol",
+      "estado",
+      "fecha_creacion",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "nombre": "character varying",
+      "correo": "character varying",
+      "password": "character varying",
+      "activo": "boolean",
+      "empresa_id": "integer",
+      "email": "character varying",
+      "password_hash": "text",
+      "rol": "character varying",
+      "estado": "boolean",
+      "fecha_creacion": "timestamp without time zone",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "usuarios.empresa_id = empresas.id"
+    },
+    "referenciada_por": {
+      "sesiones_chat": "sesiones_chat.usuario_id = usuarios.id",
+      "usuario_roles": "usuario_roles.usuario_id = usuarios.id"
+    },
+    "tiene_empresa_id": true,
+    "filas": 3,
+    "comentario": null
+  },
+  "ventas": {
+    "tipo": "transaccional",
+    "entidades": [
+      "monetario",
+      "temporal",
+      "inventario"
+    ],
+    "columnas": [
+      "id",
+      "cliente_id",
+      "producto",
+      "cantidad",
+      "precio",
+      "total",
+      "fecha",
+      "empresa_id",
+      "stock_min",
+      "saldo",
+      "subtotal"
+    ],
+    "tipos": {
+      "id": "integer",
+      "cliente_id": "integer",
+      "producto": "character varying",
+      "cantidad": "integer",
+      "precio": "numeric",
+      "total": "numeric",
+      "fecha": "timestamp without time zone",
+      "empresa_id": "integer",
+      "stock_min": "integer",
+      "saldo": "numeric",
+      "subtotal": "numeric"
+    },
+    "pk": [
+      "id"
+    ],
+    "relaciones": {
+      "empresa_id": "ventas.empresa_id = empresas.id"
+    },
+    "referenciada_por": {},
+    "tiene_empresa_id": true,
+    "filas": 515,
+    "comentario": null
+  }
+}

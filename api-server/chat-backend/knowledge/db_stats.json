@@ -1,0 +1,542 @@
+[
+  {
+    "tabla": "activos_fijos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "guias_remision",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "ia_memory",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "notas_credito",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "categorias",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "sesiones",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "logs_ia",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "centros_costo",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "clientes",
+    "registros": 0,
+    "seq_scan": 313,
+    "idx_scan": 16,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "proyectos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "marcas",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "proveedores",
+    "registros": 0,
+    "seq_scan": 8,
+    "idx_scan": 4,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "productos",
+    "registros": 0,
+    "seq_scan": 312,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "tareas",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "mensajes_chat",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "depreciaciones",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "almacenes",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "asientos_detalle",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "asiento_detalle",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "cache_consultas",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "compras",
+    "registros": 0,
+    "seq_scan": 7,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "feedback_ia",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "configuracion",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "cuentas_contables",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "roles",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "sucursales",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "empleados",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "empresas",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "embeddings_doc",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "usuario_roles",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "notas_debito",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "movimientos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "factura_detalle",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "auditoria",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "unidades_medida",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "compra_detalle",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "oportunidades",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "documentos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "kardex",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "factura_items",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "facturas",
+    "registros": 0,
+    "seq_scan": 904,
+    "idx_scan": 302,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "sesiones_chat",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "usuarios",
+    "registros": 0,
+    "seq_scan": 6,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "monedas",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "tipo_cambio",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "planillas",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "asientos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "documentos_rag",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "bancos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "gastos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "ventas",
+    "registros": 0,
+    "seq_scan": 19,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "asientos_contables",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "mensajes",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "tickets",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "pagos",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "users",
+    "registros": 0,
+    "seq_scan": 6,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "cotizaciones",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "lotes",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "caja",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  },
+  {
+    "tabla": "asistencia",
+    "registros": 0,
+    "seq_scan": 5,
+    "idx_scan": 0,
+    "inserts": 0,
+    "updates": 0,
+    "deletes": 0
+  }
+]

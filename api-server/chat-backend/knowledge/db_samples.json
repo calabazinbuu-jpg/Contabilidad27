@@ -1,0 +1,1326 @@
+{
+  "activos_fijos": [
+    {
+      "id": 1,
+      "empresa_id": 2,
+      "descripcion": "Activo Fijo 1",
+      "valor": "35965.54",
+      "fecha_compra": "2025-10-19T05:00:00.000Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 3,
+      "descripcion": "Activo Fijo 2",
+      "valor": "32890.61",
+      "fecha_compra": "2025-02-19T05:00:00.000Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 4,
+      "descripcion": "Activo Fijo 3",
+      "valor": "45876.85",
+      "fecha_compra": "2025-12-11T05:00:00.000Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "asiento_detalle": [
+    {
+      "id": 2001,
+      "asiento_id": 52,
+      "cuenta_id": 9,
+      "debe": "983.20",
+      "haber": "0.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2002,
+      "asiento_id": 52,
+      "cuenta_id": 7,
+      "debe": "502.16",
+      "haber": "0.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2003,
+      "asiento_id": 52,
+      "cuenta_id": 1,
+      "debe": "199.86",
+      "haber": "0.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "asientos": [
+    {
+      "id": 1,
+      "empresa_id": 1,
+      "fecha": "2026-05-22T05:00:00.000Z",
+      "descripcion": "Asiento contable 1",
+      "saldo": "0",
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 1,
+      "fecha": "2026-04-18T05:00:00.000Z",
+      "descripcion": "Asiento contable 2",
+      "saldo": "0",
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 1,
+      "fecha": "2025-08-07T05:00:00.000Z",
+      "descripcion": "Asiento contable 3",
+      "saldo": "0",
+      "stock_min": 0,
+      "subtotal": "0"
+    }
+  ],
+  "asientos_contables": [
+    {
+      "id": 1,
+      "fecha": "2026-06-12T05:00:00.000Z",
+      "descripcion": "Compra de mercadería",
+      "total_debe": "1000.00",
+      "total_haber": "1000.00",
+      "estado": "BORRADOR",
+      "creado_en": "2026-06-12T22:24:32.323Z"
+    }
+  ],
+  "asientos_detalle": [
+    {
+      "id": 1,
+      "asiento_id": 1,
+      "cuenta": "Mercaderías",
+      "descripcion": "Compra",
+      "debe": "1000.00",
+      "haber": "0.00",
+      "creado_en": "2026-06-12T22:24:41.931Z"
+    },
+    {
+      "id": 2,
+      "asiento_id": 1,
+      "cuenta": "Caja",
+      "descripcion": "Pago",
+      "debe": "0.00",
+      "haber": "1000.00",
+      "creado_en": "2026-06-12T22:24:41.931Z"
+    }
+  ],
+  "auditoria": [
+    {
+      "id": "1",
+      "usuario_id": 2,
+      "tabla": "facturas",
+      "accion": "DELETE",
+      "fecha": "2025-12-12T02:23:15.867Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": "2",
+      "usuario_id": 1,
+      "tabla": "productos",
+      "accion": "INSERT",
+      "fecha": "2025-07-23T02:23:15.867Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": "3",
+      "usuario_id": 2,
+      "tabla": "clientes",
+      "accion": "DELETE",
+      "fecha": "2024-12-27T02:23:15.867Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "caja": [
+    {
+      "id": 1,
+      "empresa_id": 2,
+      "fecha": "2024-05-02T05:00:00.000Z",
+      "concepto": "Movimiento Caja 1",
+      "ingreso": "2947.28",
+      "egreso": "1446.95",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 3,
+      "fecha": "2026-04-05T05:00:00.000Z",
+      "concepto": "Movimiento Caja 2",
+      "ingreso": "3137.54",
+      "egreso": "2292.44",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 4,
+      "fecha": "2024-01-02T05:00:00.000Z",
+      "concepto": "Movimiento Caja 3",
+      "ingreso": "29.92",
+      "egreso": "2890.68",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "Comercial Andina SAS",
+      "documento": "9001112223",
+      "email": "andina@x.com",
+      "telefono": null,
+      "creado_en": "2026-06-11T23:57:05.287Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "nombre": "Distribuciones Norte",
+      "documento": "9002223334",
+      "email": "norte@x.com",
+      "telefono": null,
+      "creado_en": "2026-06-11T23:57:05.287Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "nombre": "TecnoFacil Ltda",
+      "documento": "9003334445",
+      "email": "tecno@x.com",
+      "telefono": null,
+      "creado_en": "2026-06-11T23:57:05.287Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "compra_detalle": [
+    {
+      "id": 1,
+      "compra_id": 2,
+      "producto_id": 2,
+      "cantidad": "21.00",
+      "costo": "1499.00",
+      "subtotal": "2764.22",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0"
+    },
+    {
+      "id": 2,
+      "compra_id": 3,
+      "producto_id": 3,
+      "cantidad": "22.00",
+      "costo": "969.08",
+      "subtotal": "22439.18",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0"
+    },
+    {
+      "id": 3,
+      "compra_id": 4,
+      "producto_id": 4,
+      "cantidad": "15.00",
+      "costo": "1282.31",
+      "subtotal": "2107.06",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0"
+    }
+  ],
+  "compras": [
+    {
+      "id": 42,
+      "proveedor_id": 1,
+      "fecha": "2026-02-05T05:00:00.000Z",
+      "total": "1466000.00",
+      "estado": "pagada",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 43,
+      "proveedor_id": 2,
+      "fecha": "2026-02-02T05:00:00.000Z",
+      "total": "1489000.00",
+      "estado": "pagada",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 44,
+      "proveedor_id": 3,
+      "fecha": "2026-01-30T05:00:00.000Z",
+      "total": "1512000.00",
+      "estado": "pagada",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "cuentas_contables": [
+    {
+      "id": 1,
+      "empresa_id": 2,
+      "codigo": "10001",
+      "nombre": "Cuenta Contable 1",
+      "tipo": "ACTIVO",
+      "saldo": "0",
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 3,
+      "codigo": "10002",
+      "nombre": "Cuenta Contable 2",
+      "tipo": "ACTIVO",
+      "saldo": "0",
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 4,
+      "codigo": "10003",
+      "nombre": "Cuenta Contable 3",
+      "tipo": "ACTIVO",
+      "saldo": "0",
+      "stock_min": 0,
+      "subtotal": "0"
+    }
+  ],
+  "depreciaciones": [
+    {
+      "id": 1,
+      "activo_id": 2,
+      "fecha": "2025-09-16T05:00:00.000Z",
+      "monto": "522.97",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "activo_id": 3,
+      "fecha": "2025-12-19T05:00:00.000Z",
+      "monto": "480.15",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "activo_id": 4,
+      "fecha": "2024-12-05T05:00:00.000Z",
+      "monto": "204.81",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "documentos": [
+    {
+      "id": 1,
+      "empresa_id": 2,
+      "nombre": "Documento 1",
+      "ruta": "/documentos/doc_1.pdf",
+      "fecha": "2024-08-29T02:23:09.757Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 3,
+      "nombre": "Documento 2",
+      "ruta": "/documentos/doc_2.pdf",
+      "fecha": "2025-02-01T02:23:09.757Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 4,
+      "nombre": "Documento 3",
+      "ruta": "/documentos/doc_3.pdf",
+      "fecha": "2026-02-25T02:23:09.757Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "empleados": [
+    {
+      "id": 1,
+      "empresa_id": 1,
+      "nombres": "Luis",
+      "apellidos": "Garcia",
+      "dni": "70000001",
+      "cargo": "Contador",
+      "sueldo": "3500.00",
+      "fecha_ingreso": "2024-01-01T05:00:00.000Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 1,
+      "nombres": "Miguel",
+      "apellidos": "Torres",
+      "dni": "70000002",
+      "cargo": "Vendedor",
+      "sueldo": "2200.00",
+      "fecha_ingreso": "2024-03-01T05:00:00.000Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 2,
+      "nombres": "Jose",
+      "apellidos": "Perez",
+      "dni": "70000003",
+      "cargo": "Administrador",
+      "sueldo": "4500.00",
+      "fecha_ingreso": "2025-01-01T05:00:00.000Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "empresas": [
+    {
+      "id": 1,
+      "nombre": "Mi Empresa SAC",
+      "ruc": "20123456789",
+      "moneda": "USD",
+      "creado_en": "2026-06-10T21:55:20.138Z",
+      "razon_social": null,
+      "nombre_comercial": null,
+      "direccion": null,
+      "telefono": null,
+      "email": null,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "nombre": null,
+      "ruc": "20123456789",
+      "moneda": "USD",
+      "creado_en": "2026-06-12T01:56:47.172Z",
+      "razon_social": "Mi Empresa SAC",
+      "nombre_comercial": "Mi Empresa",
+      "direccion": null,
+      "telefono": null,
+      "email": null,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "nombre": null,
+      "ruc": "20123456789",
+      "moneda": "USD",
+      "creado_en": "2026-06-12T02:00:07.372Z",
+      "razon_social": "EMPRESA DEMO SAC",
+      "nombre_comercial": "EMPRESA DEMO",
+      "direccion": null,
+      "telefono": null,
+      "email": null,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "factura_detalle": [
+    {
+      "id": 1,
+      "factura_id": 2,
+      "producto_id": 2,
+      "cantidad": "11.00",
+      "precio": "774.43",
+      "subtotal": "17943.88",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "nombre": ""
+    },
+    {
+      "id": 2,
+      "factura_id": 3,
+      "producto_id": 3,
+      "cantidad": "11.00",
+      "precio": "1413.49",
+      "subtotal": "5232.19",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "nombre": ""
+    },
+    {
+      "id": 3,
+      "factura_id": 4,
+      "producto_id": 4,
+      "cantidad": "1.00",
+      "precio": "1497.24",
+      "subtotal": "6758.90",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "nombre": ""
+    }
+  ],
+  "factura_items": [
+    {
+      "id": 1,
+      "factura_id": 1,
+      "producto_id": 3,
+      "cantidad": "2.00",
+      "precio": "89999.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "factura_id": 2,
+      "producto_id": 5,
+      "cantidad": "3.00",
+      "precio": "99998.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "factura_id": 3,
+      "producto_id": 2,
+      "cantidad": "4.00",
+      "precio": "109997.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "facturas": [
+    {
+      "id": 13,
+      "numero": "F-0013",
+      "cliente_id": 4,
+      "fecha": "2026-05-29T05:00:00.000Z",
+      "total": "378750.00",
+      "estado": "pendiente",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0",
+      "cantidad": 0,
+      "costo": "0.00"
+    },
+    {
+      "id": 14,
+      "numero": "F-0014",
+      "cliente_id": 5,
+      "fecha": "2026-05-28T05:00:00.000Z",
+      "total": "392500.00",
+      "estado": "anulada",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0",
+      "cantidad": 0,
+      "costo": "0.00"
+    },
+    {
+      "id": 15,
+      "numero": "F-0015",
+      "cliente_id": 1,
+      "fecha": "2026-05-27T05:00:00.000Z",
+      "total": "406250.00",
+      "estado": "pagada",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0",
+      "cantidad": 0,
+      "costo": "0.00"
+    }
+  ],
+  "gastos": [
+    {
+      "id": 1,
+      "fecha": "2026-06-06T05:00:00.000Z",
+      "categoria": "Renta",
+      "descripcion": "Oficina mensual",
+      "monto": "2800000.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "fecha": "2026-05-30T05:00:00.000Z",
+      "categoria": "Servicios",
+      "descripcion": "Energia",
+      "monto": "420000.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "fecha": "2026-05-24T05:00:00.000Z",
+      "categoria": "Servicios",
+      "descripcion": "Internet",
+      "monto": "180000.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "ia_memory": [
+    {
+      "id": 1,
+      "pregunta": "Pregunta automática 1",
+      "respuesta": "Respuesta automática 1",
+      "created_at": "2025-08-25T02:10:08.673Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "pregunta": "Pregunta automática 2",
+      "respuesta": "Respuesta automática 2",
+      "created_at": "2026-03-12T02:10:08.673Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "pregunta": "Pregunta automática 3",
+      "respuesta": "Respuesta automática 3",
+      "created_at": "2025-04-03T02:10:08.673Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "kardex": [
+    {
+      "id": 1,
+      "producto_id": 2,
+      "fecha": "2024-12-06T05:00:00.000Z",
+      "tipo_movimiento": "ENTRADA",
+      "cantidad": "36.26",
+      "saldo": "279.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "producto_id": 3,
+      "fecha": "2025-12-28T05:00:00.000Z",
+      "tipo_movimiento": "SALIDA",
+      "cantidad": "5.91",
+      "saldo": "466.58",
+      "empresa_id": null,
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "producto_id": 4,
+      "fecha": "2024-06-16T05:00:00.000Z",
+      "tipo_movimiento": "ENTRADA",
+      "cantidad": "16.98",
+      "saldo": "157.45",
+      "empresa_id": null,
+      "stock_min": 0,
+      "subtotal": "0"
+    }
+  ],
+  "logs_ia": [
+    {
+      "id": 1,
+      "pregunta": "¿Cuánto vendí este mes?",
+      "respuesta": null,
+      "usuario_id": 1,
+      "created_at": "2026-06-10T19:31:15.335Z",
+      "latencia_ms": 19,
+      "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+      "intent": "error",
+      "agente": "ventas",
+      "sql_generado": null,
+      "filas": 0,
+      "modo_ia": "offline",
+      "error": null,
+      "creado_en": "2026-06-10T19:31:15.335Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "pregunta": "¿Cómo voy respecto al mes pasado?",
+      "respuesta": null,
+      "usuario_id": 1,
+      "created_at": "2026-06-10T19:33:21.625Z",
+      "latencia_ms": 62,
+      "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+      "intent": "error",
+      "agente": "reportes",
+      "sql_generado": null,
+      "filas": 0,
+      "modo_ia": "offline",
+      "error": null,
+      "creado_en": "2026-06-10T19:33:21.625Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "pregunta": "¿Qué cliente me compra más?",
+      "respuesta": null,
+      "usuario_id": 1,
+      "created_at": "2026-06-10T19:33:24.434Z",
+      "latencia_ms": 40,
+      "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+      "intent": "ranking_clientes_top",
+      "agente": "clientes",
+      "sql_generado": null,
+      "filas": 4,
+      "modo_ia": "offline",
+      "error": null,
+      "creado_en": "2026-06-10T19:33:24.434Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "lotes": [
+    {
+      "id": 1,
+      "producto_id": 2,
+      "lote": "LOT-1",
+      "fecha_vencimiento": "2028-08-26T05:00:00.000Z",
+      "stock": "117.37",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "producto_id": 3,
+      "lote": "LOT-2",
+      "fecha_vencimiento": "2027-08-26T05:00:00.000Z",
+      "stock": "235.29",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "producto_id": 4,
+      "lote": "LOT-3",
+      "fecha_vencimiento": "2027-12-09T05:00:00.000Z",
+      "stock": "24.81",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "mensajes_chat": [
+    {
+      "id": "1",
+      "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+      "rol": "user",
+      "agente": null,
+      "contenido": "¿Cuánto vendí este mes?",
+      "datos": null,
+      "creado_en": "2026-06-10T19:31:15.319Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": "2",
+      "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+      "rol": "assistant",
+      "agente": "ventas",
+      "contenido": "❌ no existe la columna «empresa_id»",
+      "datos": null,
+      "creado_en": "2026-06-10T19:31:15.332Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": "3",
+      "sesion_id": "8e33d9bc-e0ba-4428-8034-235d235e15e2",
+      "rol": "user",
+      "agente": null,
+      "contenido": "¿Cómo voy respecto al mes pasado?",
+      "datos": null,
+      "creado_en": "2026-06-10T19:33:21.562Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "movimientos": [
+    {
+      "id": 1,
+      "empresa_id": 1,
+      "cuenta_id": 2,
+      "debe": "767.89",
+      "haber": "682.06",
+      "saldo": "0",
+      "fecha": "2025-12-31T02:34:32.581Z",
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 1,
+      "cuenta_id": 3,
+      "debe": "596.05",
+      "haber": "423.93",
+      "saldo": "0",
+      "fecha": "2026-04-27T02:34:32.581Z",
+      "stock_min": 0,
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 1,
+      "cuenta_id": 4,
+      "debe": "25.27",
+      "haber": "802.42",
+      "saldo": "0",
+      "fecha": "2026-02-14T02:34:32.581Z",
+      "stock_min": 0,
+      "subtotal": "0"
+    }
+  ],
+  "oportunidades": [
+    {
+      "id": 1,
+      "cliente_id": 2,
+      "descripcion": "Negocio potencial 1",
+      "monto_estimado": "10528.82",
+      "estado": "ABIERTA",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "cliente_id": 3,
+      "descripcion": "Negocio potencial 2",
+      "monto_estimado": "13416.92",
+      "estado": "GANADA",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "cliente_id": 4,
+      "descripcion": "Negocio potencial 3",
+      "monto_estimado": "7558.98",
+      "estado": "ABIERTA",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "pagos": [
+    {
+      "id": 18,
+      "factura_id": 15,
+      "fecha": "2025-04-08T05:00:00.000Z",
+      "metodo_pago": "YAPE",
+      "monto": "11611.46",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0",
+      "total": "0.00"
+    },
+    {
+      "id": 19,
+      "factura_id": 16,
+      "fecha": "2025-01-04T05:00:00.000Z",
+      "metodo_pago": "YAPE",
+      "monto": "6526.11",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0",
+      "total": "0.00"
+    },
+    {
+      "id": 20,
+      "factura_id": 17,
+      "fecha": "2024-12-04T05:00:00.000Z",
+      "metodo_pago": "YAPE",
+      "monto": "4238.10",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0",
+      "total": "0.00"
+    }
+  ],
+  "planillas": [
+    {
+      "id": 1,
+      "empleado_id": 1,
+      "periodo": "2024-01",
+      "sueldo": "3500.00",
+      "descuentos": "250.00",
+      "neto": "3250.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empleado_id": 1,
+      "periodo": "2024-02",
+      "sueldo": "3500.00",
+      "descuentos": "250.00",
+      "neto": "3250.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empleado_id": 2,
+      "periodo": "2024-03",
+      "sueldo": "2200.00",
+      "descuentos": "150.00",
+      "neto": "2050.00",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Laptop Pro 14",
+      "precio": "4500000.00",
+      "costo": "3200000.00",
+      "stock": 15,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "nombre": "Mouse Inalambrico",
+      "precio": "85000.00",
+      "costo": "40000.00",
+      "stock": 120,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "nombre": "Monitor 27",
+      "precio": "1200000.00",
+      "costo": "800000.00",
+      "stock": 30,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "proveedores": [
+    {
+      "id": 1,
+      "nombre": "Insumos Pro",
+      "documento": "8001112223",
+      "email": null,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "nombre": "Logistica Express",
+      "documento": "8002223334",
+      "email": null,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "nombre": "Papeleria Central",
+      "documento": "8003334445",
+      "email": null,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "proyectos": [
+    {
+      "id": 1,
+      "empresa_id": 2,
+      "nombre": "Proyecto 1",
+      "descripcion": "Proyecto generado automáticamente",
+      "estado": "EN PROCESO",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "empresa_id": 3,
+      "nombre": "Proyecto 2",
+      "descripcion": "Proyecto generado automáticamente",
+      "estado": "PENDIENTE",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "empresa_id": 4,
+      "nombre": "Proyecto 3",
+      "descripcion": "Proyecto generado automáticamente",
+      "estado": "PENDIENTE",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "nombre": "admin",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "sesiones_chat": [
+    {
+      "id": "ebdccce4-9a2d-47b3-a98d-eaeed1394a7f",
+      "usuario_id": 1,
+      "titulo": "¿Cuánto vendí este mes?",
+      "creado_en": "2026-06-10T21:32:21.306Z",
+      "actualizado": "2026-06-10T21:33:13.145Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": "a2b391da-3f56-4383-a52d-a4944c42e753",
+      "usuario_id": 1,
+      "titulo": "dame la lista de productos",
+      "creado_en": "2026-06-11T00:12:19.858Z",
+      "actualizado": "2026-06-11T00:12:37.519Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": "67368c8f-5872-4734-a87c-ec249df9bf80",
+      "usuario_id": 1,
+      "titulo": "que productos tengo registrados",
+      "creado_en": "2026-06-10T21:37:16.291Z",
+      "actualizado": "2026-06-10T21:37:16.318Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "tareas": [
+    {
+      "id": 1,
+      "proyecto_id": 2,
+      "titulo": "Tarea 1",
+      "descripcion": "Descripción tarea 1",
+      "estado": "COMPLETADA",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "proyecto_id": 3,
+      "titulo": "Tarea 2",
+      "descripcion": "Descripción tarea 2",
+      "estado": "COMPLETADA",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "proyecto_id": 4,
+      "titulo": "Tarea 3",
+      "descripcion": "Descripción tarea 3",
+      "estado": "COMPLETADA",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "tickets": [
+    {
+      "id": 1,
+      "cliente_id": 2,
+      "asunto": "Ticket #1",
+      "descripcion": "Consulta automática",
+      "estado": "EN PROCESO",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "cliente_id": 3,
+      "asunto": "Ticket #2",
+      "descripcion": "Consulta automática",
+      "estado": "EN PROCESO",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "cliente_id": 4,
+      "asunto": "Ticket #3",
+      "descripcion": "Consulta automática",
+      "estado": "EN PROCESO",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@demo.com",
+      "password_hash": "$2a$10$9Nx9KUH060Hg54h27yeDJOX1kbbqNO7m9TzIruA7x3h1t.rzs.0Au",
+      "nombre": "Administrador",
+      "rol": "admin",
+      "creado_en": "2026-06-11T23:57:05.287Z",
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "usuario_roles": [
+    {
+      "usuario_id": 1,
+      "rol_id": 1,
+      "empresa_id": null,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Administrador",
+      "correo": "admin@empresa.com",
+      "password": "demo",
+      "activo": true,
+      "empresa_id": 1,
+      "email": null,
+      "password_hash": null,
+      "rol": null,
+      "estado": true,
+      "fecha_creacion": "2026-06-12T01:58:19.807Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "nombre": "Administrador",
+      "correo": null,
+      "password": null,
+      "activo": true,
+      "empresa_id": 1,
+      "email": "admin@empresa.com",
+      "password_hash": "123456",
+      "rol": "admin",
+      "estado": true,
+      "fecha_creacion": "2026-06-12T01:58:32.079Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "nombre": "Admin",
+      "correo": "admin@saas.com",
+      "password": "$2b$10$placeholder",
+      "activo": true,
+      "empresa_id": null,
+      "email": null,
+      "password_hash": null,
+      "rol": null,
+      "estado": true,
+      "fecha_creacion": "2026-06-13T01:11:40.644Z",
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ],
+  "ventas": [
+    {
+      "id": 1,
+      "cliente_id": 1,
+      "producto": "Cerveza Corona",
+      "cantidad": 4,
+      "precio": "15.00",
+      "total": "60.00",
+      "fecha": "2026-06-09T16:23:32.492Z",
+      "empresa_id": 1,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 2,
+      "cliente_id": 2,
+      "producto": "Whisky Black Label",
+      "cantidad": 1,
+      "precio": "250.00",
+      "total": "250.00",
+      "fecha": "2026-06-09T16:23:32.492Z",
+      "empresa_id": 1,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    },
+    {
+      "id": 3,
+      "cliente_id": 1,
+      "producto": "Pizza Familiar",
+      "cantidad": 1,
+      "precio": "60.00",
+      "total": "60.00",
+      "fecha": "2026-06-09T16:23:32.492Z",
+      "empresa_id": 1,
+      "stock_min": 0,
+      "saldo": "0",
+      "subtotal": "0"
+    }
+  ]
+}

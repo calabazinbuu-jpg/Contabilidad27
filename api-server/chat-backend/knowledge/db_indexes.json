@@ -1,0 +1,388 @@
+{
+  "activos_fijos": [
+    {
+      "nombre": "activos_fijos_pkey",
+      "def": "CREATE UNIQUE INDEX activos_fijos_pkey ON public.activos_fijos USING btree (id)"
+    }
+  ],
+  "almacenes": [
+    {
+      "nombre": "almacenes_pkey",
+      "def": "CREATE UNIQUE INDEX almacenes_pkey ON public.almacenes USING btree (id)"
+    }
+  ],
+  "asiento_detalle": [
+    {
+      "nombre": "asiento_detalle_pkey",
+      "def": "CREATE UNIQUE INDEX asiento_detalle_pkey ON public.asiento_detalle USING btree (id)"
+    }
+  ],
+  "asientos": [
+    {
+      "nombre": "asientos_pkey",
+      "def": "CREATE UNIQUE INDEX asientos_pkey ON public.asientos USING btree (id)"
+    }
+  ],
+  "asientos_contables": [
+    {
+      "nombre": "asientos_contables_pkey",
+      "def": "CREATE UNIQUE INDEX asientos_contables_pkey ON public.asientos_contables USING btree (id)"
+    }
+  ],
+  "asientos_detalle": [
+    {
+      "nombre": "asientos_detalle_pkey",
+      "def": "CREATE UNIQUE INDEX asientos_detalle_pkey ON public.asientos_detalle USING btree (id)"
+    },
+    {
+      "nombre": "idx_asientos_detalle_asiento_id",
+      "def": "CREATE INDEX idx_asientos_detalle_asiento_id ON public.asientos_detalle USING btree (asiento_id)"
+    }
+  ],
+  "asistencia": [
+    {
+      "nombre": "asistencia_pkey",
+      "def": "CREATE UNIQUE INDEX asistencia_pkey ON public.asistencia USING btree (id)"
+    }
+  ],
+  "auditoria": [
+    {
+      "nombre": "auditoria_pkey",
+      "def": "CREATE UNIQUE INDEX auditoria_pkey ON public.auditoria USING btree (id)"
+    }
+  ],
+  "bancos": [
+    {
+      "nombre": "bancos_pkey",
+      "def": "CREATE UNIQUE INDEX bancos_pkey ON public.bancos USING btree (id)"
+    }
+  ],
+  "cache_consultas": [
+    {
+      "nombre": "cache_consultas_pkey",
+      "def": "CREATE UNIQUE INDEX cache_consultas_pkey ON public.cache_consultas USING btree (clave)"
+    }
+  ],
+  "caja": [
+    {
+      "nombre": "caja_pkey",
+      "def": "CREATE UNIQUE INDEX caja_pkey ON public.caja USING btree (id)"
+    }
+  ],
+  "categorias": [
+    {
+      "nombre": "categorias_pkey",
+      "def": "CREATE UNIQUE INDEX categorias_pkey ON public.categorias USING btree (id)"
+    }
+  ],
+  "centros_costo": [
+    {
+      "nombre": "centros_costo_pkey",
+      "def": "CREATE UNIQUE INDEX centros_costo_pkey ON public.centros_costo USING btree (id)"
+    }
+  ],
+  "clientes": [
+    {
+      "nombre": "clientes_pkey",
+      "def": "CREATE UNIQUE INDEX clientes_pkey ON public.clientes USING btree (id)"
+    }
+  ],
+  "compra_detalle": [
+    {
+      "nombre": "compra_detalle_pkey",
+      "def": "CREATE UNIQUE INDEX compra_detalle_pkey ON public.compra_detalle USING btree (id)"
+    }
+  ],
+  "compras": [
+    {
+      "nombre": "compras_fecha_idx",
+      "def": "CREATE INDEX compras_fecha_idx ON public.compras USING btree (fecha)"
+    },
+    {
+      "nombre": "compras_pkey",
+      "def": "CREATE UNIQUE INDEX compras_pkey ON public.compras USING btree (id)"
+    }
+  ],
+  "configuracion": [
+    {
+      "nombre": "configuracion_pkey",
+      "def": "CREATE UNIQUE INDEX configuracion_pkey ON public.configuracion USING btree (id)"
+    }
+  ],
+  "cotizaciones": [
+    {
+      "nombre": "cotizaciones_pkey",
+      "def": "CREATE UNIQUE INDEX cotizaciones_pkey ON public.cotizaciones USING btree (id)"
+    }
+  ],
+  "cuentas_contables": [
+    {
+      "nombre": "cuentas_contables_pkey",
+      "def": "CREATE UNIQUE INDEX cuentas_contables_pkey ON public.cuentas_contables USING btree (id)"
+    }
+  ],
+  "depreciaciones": [
+    {
+      "nombre": "depreciaciones_pkey",
+      "def": "CREATE UNIQUE INDEX depreciaciones_pkey ON public.depreciaciones USING btree (id)"
+    }
+  ],
+  "documentos": [
+    {
+      "nombre": "documentos_pkey",
+      "def": "CREATE UNIQUE INDEX documentos_pkey ON public.documentos USING btree (id)"
+    }
+  ],
+  "documentos_rag": [
+    {
+      "nombre": "documentos_rag_pkey",
+      "def": "CREATE UNIQUE INDEX documentos_rag_pkey ON public.documentos_rag USING btree (id)"
+    }
+  ],
+  "embeddings_doc": [
+    {
+      "nombre": "embeddings_doc_pkey",
+      "def": "CREATE UNIQUE INDEX embeddings_doc_pkey ON public.embeddings_doc USING btree (id)"
+    }
+  ],
+  "empleados": [
+    {
+      "nombre": "empleados_pkey",
+      "def": "CREATE UNIQUE INDEX empleados_pkey ON public.empleados USING btree (id)"
+    }
+  ],
+  "empresas": [
+    {
+      "nombre": "empresas_pkey",
+      "def": "CREATE UNIQUE INDEX empresas_pkey ON public.empresas USING btree (id)"
+    }
+  ],
+  "factura_detalle": [
+    {
+      "nombre": "factura_detalle_pkey",
+      "def": "CREATE UNIQUE INDEX factura_detalle_pkey ON public.factura_detalle USING btree (id)"
+    }
+  ],
+  "factura_items": [
+    {
+      "nombre": "factura_items_pkey",
+      "def": "CREATE UNIQUE INDEX factura_items_pkey ON public.factura_items USING btree (id)"
+    }
+  ],
+  "facturas": [
+    {
+      "nombre": "facturas_cliente_id_idx",
+      "def": "CREATE INDEX facturas_cliente_id_idx ON public.facturas USING btree (cliente_id)"
+    },
+    {
+      "nombre": "facturas_estado_idx",
+      "def": "CREATE INDEX facturas_estado_idx ON public.facturas USING btree (estado)"
+    },
+    {
+      "nombre": "facturas_fecha_idx",
+      "def": "CREATE INDEX facturas_fecha_idx ON public.facturas USING btree (fecha)"
+    },
+    {
+      "nombre": "facturas_pkey",
+      "def": "CREATE UNIQUE INDEX facturas_pkey ON public.facturas USING btree (id)"
+    }
+  ],
+  "feedback_ia": [
+    {
+      "nombre": "feedback_ia_pkey",
+      "def": "CREATE UNIQUE INDEX feedback_ia_pkey ON public.feedback_ia USING btree (id)"
+    }
+  ],
+  "gastos": [
+    {
+      "nombre": "gastos_fecha_idx",
+      "def": "CREATE INDEX gastos_fecha_idx ON public.gastos USING btree (fecha)"
+    },
+    {
+      "nombre": "gastos_pkey",
+      "def": "CREATE UNIQUE INDEX gastos_pkey ON public.gastos USING btree (id)"
+    }
+  ],
+  "guias_remision": [
+    {
+      "nombre": "guias_remision_pkey",
+      "def": "CREATE UNIQUE INDEX guias_remision_pkey ON public.guias_remision USING btree (id)"
+    }
+  ],
+  "ia_memory": [
+    {
+      "nombre": "ia_memory_pkey",
+      "def": "CREATE UNIQUE INDEX ia_memory_pkey ON public.ia_memory USING btree (id)"
+    }
+  ],
+  "kardex": [
+    {
+      "nombre": "kardex_pkey",
+      "def": "CREATE UNIQUE INDEX kardex_pkey ON public.kardex USING btree (id)"
+    }
+  ],
+  "logs_ia": [
+    {
+      "nombre": "logs_ia_pkey",
+      "def": "CREATE UNIQUE INDEX logs_ia_pkey ON public.logs_ia USING btree (id)"
+    }
+  ],
+  "lotes": [
+    {
+      "nombre": "lotes_pkey",
+      "def": "CREATE UNIQUE INDEX lotes_pkey ON public.lotes USING btree (id)"
+    }
+  ],
+  "marcas": [
+    {
+      "nombre": "marcas_pkey",
+      "def": "CREATE UNIQUE INDEX marcas_pkey ON public.marcas USING btree (id)"
+    }
+  ],
+  "mensajes": [
+    {
+      "nombre": "mensajes_pkey",
+      "def": "CREATE UNIQUE INDEX mensajes_pkey ON public.mensajes USING btree (id)"
+    }
+  ],
+  "mensajes_chat": [
+    {
+      "nombre": "mensajes_chat_pkey",
+      "def": "CREATE UNIQUE INDEX mensajes_chat_pkey ON public.mensajes_chat USING btree (id)"
+    }
+  ],
+  "monedas": [
+    {
+      "nombre": "monedas_pkey",
+      "def": "CREATE UNIQUE INDEX monedas_pkey ON public.monedas USING btree (id)"
+    }
+  ],
+  "movimientos": [
+    {
+      "nombre": "movimientos_pkey",
+      "def": "CREATE UNIQUE INDEX movimientos_pkey ON public.movimientos USING btree (id)"
+    }
+  ],
+  "notas_credito": [
+    {
+      "nombre": "notas_credito_pkey",
+      "def": "CREATE UNIQUE INDEX notas_credito_pkey ON public.notas_credito USING btree (id)"
+    }
+  ],
+  "notas_debito": [
+    {
+      "nombre": "notas_debito_pkey",
+      "def": "CREATE UNIQUE INDEX notas_debito_pkey ON public.notas_debito USING btree (id)"
+    }
+  ],
+  "oportunidades": [
+    {
+      "nombre": "oportunidades_pkey",
+      "def": "CREATE UNIQUE INDEX oportunidades_pkey ON public.oportunidades USING btree (id)"
+    }
+  ],
+  "pagos": [
+    {
+      "nombre": "pagos_pkey",
+      "def": "CREATE UNIQUE INDEX pagos_pkey ON public.pagos USING btree (id)"
+    }
+  ],
+  "planillas": [
+    {
+      "nombre": "planillas_pkey",
+      "def": "CREATE UNIQUE INDEX planillas_pkey ON public.planillas USING btree (id)"
+    }
+  ],
+  "productos": [
+    {
+      "nombre": "productos_pkey",
+      "def": "CREATE UNIQUE INDEX productos_pkey ON public.productos USING btree (id)"
+    }
+  ],
+  "proveedores": [
+    {
+      "nombre": "proveedores_pkey",
+      "def": "CREATE UNIQUE INDEX proveedores_pkey ON public.proveedores USING btree (id)"
+    }
+  ],
+  "proyectos": [
+    {
+      "nombre": "proyectos_pkey",
+      "def": "CREATE UNIQUE INDEX proyectos_pkey ON public.proyectos USING btree (id)"
+    }
+  ],
+  "roles": [
+    {
+      "nombre": "roles_pkey",
+      "def": "CREATE UNIQUE INDEX roles_pkey ON public.roles USING btree (id)"
+    }
+  ],
+  "sesiones": [
+    {
+      "nombre": "sesiones_pkey",
+      "def": "CREATE UNIQUE INDEX sesiones_pkey ON public.sesiones USING btree (id)"
+    }
+  ],
+  "sesiones_chat": [
+    {
+      "nombre": "sesiones_chat_pkey",
+      "def": "CREATE UNIQUE INDEX sesiones_chat_pkey ON public.sesiones_chat USING btree (id)"
+    }
+  ],
+  "sucursales": [
+    {
+      "nombre": "sucursales_pkey",
+      "def": "CREATE UNIQUE INDEX sucursales_pkey ON public.sucursales USING btree (id)"
+    }
+  ],
+  "tareas": [
+    {
+      "nombre": "tareas_pkey",
+      "def": "CREATE UNIQUE INDEX tareas_pkey ON public.tareas USING btree (id)"
+    }
+  ],
+  "tickets": [
+    {
+      "nombre": "tickets_pkey",
+      "def": "CREATE UNIQUE INDEX tickets_pkey ON public.tickets USING btree (id)"
+    }
+  ],
+  "tipo_cambio": [
+    {
+      "nombre": "tipo_cambio_pkey",
+      "def": "CREATE UNIQUE INDEX tipo_cambio_pkey ON public.tipo_cambio USING btree (id)"
+    }
+  ],
+  "unidades_medida": [
+    {
+      "nombre": "unidades_medida_pkey",
+      "def": "CREATE UNIQUE INDEX unidades_medida_pkey ON public.unidades_medida USING btree (id)"
+    }
+  ],
+  "users": [
+    {
+      "nombre": "users_email_key",
+      "def": "CREATE UNIQUE INDEX users_email_key ON public.users USING btree (email)"
+    },
+    {
+      "nombre": "users_pkey",
+      "def": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (id)"
+    }
+  ],
+  "usuarios": [
+    {
+      "nombre": "usuarios_correo_key",
+      "def": "CREATE UNIQUE INDEX usuarios_correo_key ON public.usuarios USING btree (correo)"
+    },
+    {
+      "nombre": "usuarios_pkey",
+      "def": "CREATE UNIQUE INDEX usuarios_pkey ON public.usuarios USING btree (id)"
+    }
+  ],
+  "ventas": [
+    {
+      "nombre": "ventas_pkey",
+      "def": "CREATE UNIQUE INDEX ventas_pkey ON public.ventas USING btree (id)"
+    }
+  ]
+}

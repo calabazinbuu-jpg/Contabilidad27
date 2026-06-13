@@ -1,0 +1,16 @@
+module.exports = {
+  financial:    require("./financial.agent"),
+  smart:        require("./smart.agent"),
+  charla:       require("./charla.agent"),
+  calc:         require("./calc.agent"),
+  ventas:       require("./ventas.agent"),
+  compras:      require("./compras.agent"),
+  inventario:   require("./inventario.agent"),
+  clientes:     require("./clientes.agent"),
+  proveedores:  require("./proveedores.agent"),
+  facturacion:  require("./facturacion.agent"),
+  contabilidad: require("./contabilidad.agent"),
+  tesoreria:    require("./tesoreria.agent"),
+  reportes:     require("./reportes.agent"),
+  soporte:      require("./soporte.agent"),
+};

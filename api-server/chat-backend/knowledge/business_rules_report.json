@@ -1,0 +1,37 @@
+{
+  "duplicados_id": [],
+  "duplicados_firma": [],
+  "fusiones": [
+    {
+      "id": "dias_inventario",
+      "motivo": "id repetido, intenciones fusionadas"
+    },
+    {
+      "id": "crecimiento_ventas",
+      "motivo": "id repetido, intenciones fusionadas"
+    },
+    {
+      "id": "ventas_por_vendedor",
+      "motivo": "id repetido, intenciones fusionadas"
+    },
+    {
+      "id": "vendedor_top",
+      "fusionado_con": "mejor_vendedor",
+      "motivo": "firma equivalente"
+    },
+    {
+      "id": "vendedor_bajo",
+      "fusionado_con": "peor_vendedor",
+      "motivo": "firma equivalente"
+    }
+  ],
+  "total_origen": 274,
+  "total_final": 269,
+  "por_categoria": {
+    "ventas": 50,
+    "contabilidad": 75,
+    "inventario": 48,
+    "compras": 50,
+    "facturacion": 46
+  }
+}
